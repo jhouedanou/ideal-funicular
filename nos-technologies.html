@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nos Technologies - E-Digital</title>
+    <!--================= Favicon =================-->
+    <link rel="shortcut icon" type="image/x-icon" href="fav-icone.png">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Playfair+Display:ital,wght@0,700;1,700&family=Caveat:wght@700&family=Oswald:wght@700&family=Dancing+Script:wght@700&family=Unbounded:wght@700&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <!--================= Magnific Popup CSS =================-->
+    <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css">
+    <!--================= Magnific Popup CSS =================-->
+    <link rel="stylesheet" href="assets/css/vendor/fontawesome-5.css">
+    <link rel="stylesheet" href="assets/css/vendor/all.min.css">
+    <!--================= Base CSS =================-->
+    <link rel="stylesheet" href="assets/css/vendor/magnific-popup.css">
+    <!--================= Inline CSS =================-->
+    <link rel="stylesheet" href="assets/css/vendor/plyr.css">
+    <!--================= Splitting CSS =================-->
+    <link rel="stylesheet" href="assets/css/vendor/splitting.css">
+    <!--================= Fontello CSS =================-->
+    <link rel="stylesheet" href="assets/css/vendor/socicon.css">
+    <!--================= Widgets CSS =================-->
+    <link rel="stylesheet" href="assets/css/vendor/swiper.min.css">
+    <!--================= Widgets CSS =================-->
+    <link rel="stylesheet" href="assets/fonts/custom-font.css">
+    <!--================= Style CSS =================-->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        /* Force allow scrolling on everything */
+        html, body {
+            height: auto !important;
+            overflow: visible !important;
+            overflow-x: hidden !important;
+            display: block !important;
+            position: relative !important;
+        }
+        .ms-main, .ms-page-content {
+            height: auto !important;
+            overflow: visible !important;
+            position: relative !important;
+            display: block !important;
+        }
+        /* Style for social buttons in footer */
+        .social-btn-custom .ms-btn__text {
+            color: #000 !important;
+            transition: color 0.3s ease !important;
+        }
+        .social-btn-custom:hover .ms-btn__text {
+            color: #fff !important;
+        }
+        /* Remove underline from footer menu */
+        .footer-nav-area li a {
+            text-decoration: none !important;
+            border-bottom: none !important;
+        }
+        .footer-nav-area li a::after {
+            display: none !important;
+        }
+        /* Standardize H3 tags to 18px */
+        h3 {
+            font-size: 18px !important;
+        }
+        /* Fix author icon size */
+        .post-header--author img {
+            width: 40px !important;
+            height: 40px !important;
+            object-fit: contain !important;
+            border-radius: 50% !important;
+        }
+        /* Reset any fixed positioning that might be added by locomotive */
+        [data-scroll-container] {
+            position: relative !important;
+            transform: none !important;
+        }
+        /* Active menu highlight */
+        .menu-item.active a span {
+            border-bottom: 2px solid #ff0000 !important;
+            padding-bottom: 5px;
+        }
+        .ms-hero-internal {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('assets/images/ChatGPT Image 23 mars 2026, 16_40_14.png') no-repeat center center;
+            background-size: cover;
+            padding: 150px 0 100px;
+            text-align: center;
+        }
+        .ms-hero-title {
+            color: #fff !important;
+            font-size: 60px !important;
+            font-weight: 700 !important;
+            margin-bottom: 20px !important;
+        }
+        .ms-hero-subtitle {
+            color: #9e9e9e !important;
+            font-size: 20px !important;
+        }
+        .tech-card {
+            background: #fff;
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .tech-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        .tech-card img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            margin-bottom: 25px;
+        }
+        .tech-card h3 {
+            margin-bottom: 15px;
+            color: #000;
+        }
+        .tech-card p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .breadcrumb {
+            background: transparent;
+            padding: 0;
+            margin-bottom: 20px;
+            justify-content: center;
+            list-style: none;
+            display: flex;
+        }
+        .breadcrumb-item + .breadcrumb-item::before {
+            content: "/";
+            color: #9e9e9e;
+            padding: 0 10px;
+        }
+        .breadcrumb-item a {
+            color: #9e9e9e;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .breadcrumb-item a:hover {
+            color: #fff;
+        }
+        .breadcrumb-item.active {
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body data-theme="light" data-menu="fixed" data-footer-effect="on" data-footer-corners="on">
+    <!--================= Header One Start =================-->
+    <!--================= Sticky Menu Start Here =================-->
+    <div id="top" class="home"></div>
+    <div class="main-header js-main-header auto-hide-header ms-nb--transparent full-width ms-nb--white menu-center" id="ms-header">
+        <div class="main-header__layout top">
+            <div class="main-header__inner">
+                <div class="main-header__logo">
+                    <div class="logo-dark">
+                        <a href="index.html">
+                            <img src="Logo  E DIGITAL copie.png" alt="E-digital - Agence Web & Mobile">
+                        </a>
+                    </div>
+                    <div class="logo-light">
+                        <a href="index.html">
+                            <img src="Logo  E DIGITAL copie.png" alt="E-digital - Agence Web & Mobile">
+                        </a>
+                    </div>
+                </div>
+                <nav class="main-header__nav js-main-header__nav main-header__default" id="main-header-nav">
+                    <ul id="primary-menu-default" class="navbar-nav">
+                        <li class="menu-item"><a href="index.html"><span>Accueil</span></a></li>
+                        <li class="menu-item active"><a href="nos-technologies.html"><span>Nos Technologies</span></a></li>
+                        <li class="menu-item menu-item-has-children">
+                            <a href="#" title="Services"><span>Services</span></a>
+                            <ul class="sub-menu">
+                                <li class="menu-item"><a href="service-creation-web.html">Création Solution Numérique</a></li>
+                                <li class="menu-item"><a href="service-visibilite-seo.html">Visibilité</a></li>
+                                <li class="menu-item"><a href="service-visibilite-google-ads.html">Publicité Google et Meta</a></li>
+                                
+                                <li class="menu-item"><a href="service-app-metier.html">Application Métier</a></li>
+                                <li class="menu-item"><a href="service-branding.html">Branding & Design</a></li>
+                                <li class="menu-item"><a href="service-maintenance.html">Maintenance & Support</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu-item"><a href="nos-projets.html"><span>Nos Projets</span></a></li>
+                        <li class="menu-item"><a href="blog.html"><span>Blog</span></a></li>
+                        <li class="menu-item"><a href="contact.html"><span>Contact</span></a></li>
+                    </ul>
+                </nav>
+
+                <div class="main-header__widgets">
+                    <div class="main-header--widgets">
+                        <div class="ms_theme_mode ms-h_w">
+                            <div class="ms_tm--inner">
+                                <div class="theme-toggle" id="theme-toggle">
+                                    <input type="checkbox" id="switcher" class="check" checked="">
+                                    <svg class="sun-and-moon" aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
+                                        <mask class="moon" id="moon-mask">
+                                            <rect x="0" y="0" width="100%" height="100%" fill="white"></rect>
+                                            <circle cx="24" cy="10" r="6" fill="black"></circle>
+                                        </mask>
+                                        <circle class="sun" cx="12" cy="12" r="6" mask="url(#moon-mask)" fill="currentColor"></circle>
+                                        <g class="sun-beams" stroke="currentColor">
+                                            <line x1="12" y1="1" x2="12" y2="3"></line>
+                                            <line x1="12" y1="21" x2="12" y2="23"></line>
+                                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                                            <line x1="1" y1="12" x2="3" y2="12"></line>
+                                            <line x1="21" y1="12" x2="23" y2="12"></line>
+                                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                                        </g>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="header__search-icon ms-h_w">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z" stroke="#4F5663" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                </path>
+                                <path d="M21 21L16.65 16.65" stroke="#4F5663" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                        </div>
+
+                        <div class="header__search-modal data-scroll-section">
+
+                            <button class="header__search--close-btn">
+                                <svg class="icon icon--sm" viewBox="0 0 24 24">
+                                    <title>Fermer la recherche</title>
+                                    <g fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <line x1="3" y1="3" x2="21" y2="21"></line>
+                                        <line x1="21" y1="3" x2="3" y2="21"></line>
+                                    </g>
+                                </svg>
+                            </button>
+
+                            <div class="header__search--inner">
+                                <form role="search" method="get" class="searchform" action="#">
+                                    <div class="ms-search-widget">
+                                        <input type="search" placeholder="Rechercher..." value="" name="s" class="search-field" required>
+                                        <button aria-label="Search" class="ms-search--btn" type="submit"></button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="main-header__nav-trigger js-main-header__nav-trigger menu-default" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="main-header-nav">
+                    <i class="main-header__nav-trigger-icon" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <!--================= Header End Here =================-->
+
+    <main class="ms-main">
+        <div class="ms-page-content">
+            <!--================= Banner Area Start =================-->
+            <section class="ms-hero-internal">
+                <div class="container">
+                    <div class="ms-hc">
+                        <div class="ms-hc--inner">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="index.html">Accueil</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Nos Technologies</li>
+                                </ol>
+                            </nav>
+                            <h1 class="ms-hero-title">Nos Technologies</h1>
+                            <p class="ms-hero-subtitle">Nous maîtrisons les outils les plus performants pour donner vie à vos projets les plus ambitieux.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!--================= Banner Area End =================-->
+
+            <!--================= Tech Grid Start =================-->
+            <div class="services-area-2 pt-100 pb-100">
+                <div class="container">
+                    <div class="row">
+                        <!-- Flutter -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="tech-card">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" alt="Flutter">
+                                <h3>Flutter</h3>
+                                <p>Développement mobile multiplateforme haute performance pour iOS et Android avec un code unique.</p>
+                            </div>
+                        </div>
+                        <!-- React Native -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="tech-card">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React Native">
+                                <h3>React Native</h3>
+                                <p>Applications mobiles natives puissantes utilisant la flexibilité et la rapidité de React.</p>
+                            </div>
+                        </div>
+                        <!-- WordPress -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="tech-card">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-plain.svg" alt="WordPress">
+                                <h3>WordPress</h3>
+                                <p>Création de sites vitrines et blogs dynamiques, optimisés pour un référencement naturel maximal.</p>
+                            </div>
+                        </div>
+                        <!-- Prestashop -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="tech-card">
+                                <img src="assets/images/portfolio/blog-ecommerce.png" alt="Prestashop"> <!-- Placeholder for Prestashop icon -->
+                                <h3>Prestashop</h3>
+                                <p>Solutions e-commerce robustes et évolutives pour gérer vos ventes en ligne en toute simplicité.</p>
+                            </div>
+                        </div>
+                        <!-- Laravel / PHP -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="tech-card">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-plain.svg" alt="Laravel">
+                                <h3>Laravel</h3>
+                                <p>Développement de plateformes web complexes et de logiciels métiers sécurisés sur mesure.</p>
+                            </div>
+                        </div>
+                        <!-- Python / AI -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="tech-card">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python & AI">
+                                <h3>Python & IA</h3>
+                                <p>Automatisation intelligente et intégration de solutions d'intelligence artificielle avancées.</p>
+                            </div>
+                        </div>
+                        <!-- React / Next.js -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="tech-card">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" alt="Next.js">
+                                <h3>Next.js</h3>
+                                <p>Interfaces utilisateur ultra-rapides et optimisées pour le SEO avec les dernières innovations React.</p>
+                            </div>
+                        </div>
+                        <!-- Tailwind CSS -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="tech-card">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original-wordmark.svg" alt="Tailwind CSS">
+                                <h3>Tailwind CSS</h3>
+                                <p>Design moderne, réactif et épuré pour une expérience utilisateur exceptionnelle sur tous les écrans.</p>
+                            </div>
+                        </div>
+                        <!-- Node.js -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="tech-card">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js">
+                                <h3>Node.js</h3>
+                                <p>Backend temps réel ultra-rapide pour des applications web modernes et scalables.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--================= Tech Grid End =================-->
+        </div>
+    </main>
+
+    <!--================= Footer Area Start Here =================-->
+    <footer class="ms-footer ms-footer--template">
+        <div class="container footer-container" data-parallax="on">
+            <div class="footer-inner">
+                <div class="footer-title text-center">
+                    <h2>Un projet ? Construisons-le ensemble !</h2>
+                    <a class="ms-sl" role="button" data-transition="no" data-style="no" href="mailto:com1@e-digital.fr">
+                        <span class="ms-btn__icon link ms-btn__icon--left">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="88" height="88" viewBox="0 0 88 88" fill="none">
+                            <path d="M79 64H32.3333C19.4455 64 9 53.4352 9 40.4V5" stroke="#747474" stroke-width="8"
+                                stroke-linecap="round" stroke-linejoin="round"></path>
+                            <path d="M60 44L79 63.5001L60 83" stroke="#747474" stroke-width="8" stroke-linecap="round"
+                                stroke-linejoin="round"></path>
+                        </svg>
+                    </span>
+                        com1@e-digital.fr
+                    </a>
+                </div>
+
+                <div class="footer-info text-center mt-5 mb-5" style="color: #747474; font-size: 1.1rem;">
+                    <div class="row justify-content-center">
+                        <div class="col-md-12 mb-4">
+                            <p style="font-weight: 700; color: #000; text-transform: uppercase; font-size: 0.9rem; margin-bottom: 10px;">Siège Social - Paris</p>
+                            <p>23 rue du départ - 75014 Paris</p>
+                            <p>01 84 25 16 81 | com1@e-digital.fr</p>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+                <div class="mentions-legales-footer" style="border-top: 1px solid rgba(128,128,128,0.15); margin-top: 40px; padding-top: 24px; text-align: center; font-size: 0.75rem; color: #888; line-height: 1.8;">
+                    <p>
+                        <strong>Mentions légales</strong> — SARL Group Consulting Inter &bull; Siège social : 23 rue du départ, 75014 Paris, France<br>
+                        Tél. : 09 70 469 000 / 01 84 25 16 81 &bull; SIRET : 52862107100026 &ndash; RCS Paris &bull; TVA intracommunautaire : FR40528621071<br>
+                        Agence : 78280 Guyancourt
+                    </p>
+                </div>
+                <div class="footer-bottom-area">
+                    <ul class="footer-nav-area">
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="nos-technologies.html">Nos Technologies</a></li>
+                        <li><a href="nos-projets.html">Nos Projets</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                    <div class="copyright-area">
+                        <div class="inner">
+                            <div class="logo-icon">
+                                <img src="fav-icone.png" alt="E-digital" style="width: 40px; height: auto;">
+                            </div>
+                            <div class="content">
+                                <p class="top">2024 © E-DIGITAL - TOUS DROITS RÉSERVÉS</p>
+                                <p class="bottom"> Paris (75) & Guyancourt (78) <br> 01 84 25 16 81 </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="social-area">
+                        <ul class="area-inner">
+                            <li>
+                                <a class="btn btn-default btn--sm btn--primary social-btn-custom" role="button" href="https://www.facebook.com/profile.php?id=100068093956984" target="_blank">
+                                    <div class="ms-btn__text">Facebook</div>
+                                </a>
+                            </li>
+                            
+                            
+            <li>
+                                <a class="btn btn-default btn--sm btn--primary social-btn-custom" role="button" href="https://www.linkedin.com/company/e-digital-fr/?viewAsMember=true" target="_blank">
+                                    <div class="ms-btn__text">LinkedIn</div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!--================= Script Start Here =================-->
+    <a class="back-to-top js-back-to-top" data-scroll-to href="#top">
+        <div class="ms-btt--text">Retour en haut</div>
+        <div class="ms-btt--inner">
+            <svg class="ms-btt-i" enable-background="new 0 0 96 96" height="96px" id="arrow_up" version="1.1" viewBox="0 0 96 96" width="96px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <path d="M52,84V21.656l21.457,21.456c1.561,1.562,4.095,1.562,5.656,0.001c1.562-1.562,1.562-4.096,0-5.658L50.829,9.172l0,0  c-0.186-0.186-0.391-0.352-0.609-0.498c-0.101-0.067-0.21-0.114-0.315-0.172c-0.124-0.066-0.242-0.142-0.373-0.195  c-0.135-0.057-0.275-0.089-0.415-0.129c-0.111-0.033-0.216-0.076-0.331-0.099C48.527,8.027,48.264,8,48.001,8l0,0  c-0.003,0-0.006,0.001-0.009,0.001c-0.259,0.001-0.519,0.027-0.774,0.078c-0.12,0.024-0.231,0.069-0.349,0.104  c-0.133,0.039-0.268,0.069-0.397,0.123c-0.139,0.058-0.265,0.136-0.396,0.208c-0.098,0.054-0.198,0.097-0.292,0.159  c-0.221,0.146-0.427,0.314-0.614,0.501L16.889,37.456c-1.562,1.562-1.562,4.095-0.001,5.657c1.562,1.562,4.094,1.562,5.658,0  L44,21.657V84c0,2.209,1.791,4,4,4S52,86.209,52,84z" />
+            </svg>
+        </div>
+    </a>
+
+    <!--================= jquery latest version =================-->
+    <script src="assets/js/vendor/jquery.min.js"></script>
+    <!--================= fslightbox JS =================-->
+    <script src="assets/js/vendor/fslightbox.js"></script>
+    <!--================= Gsap JS =================-->
+    <script src="assets/js/vendor/gsap.min.js"></script>
+    <!--================= Isotop pkgd JS =================-->
+    <script src="assets/js/vendor/isotope.pkgd.min.js"></script>
+    <!--================= Isotop pkgd JS =================-->
+    <script src="assets/js/vendor/imagesloaded.pkgd.min.js"></script>
+    <!--================= Jarallax Video JS =================-->
+    <script src="assets/js/vendor/jarallax-video.min.js"></script>
+    <!--================= Jarallax JS =================-->
+    <script src="assets/js/vendor/jarallax.min.js"></script>
+    <!--================= Gallery JS =================-->
+    <script src="assets/js/vendor/jquery.justifiedGallery.min.js"></script>
+    <!--================= Miodernizr JS =================-->
+    <script src="assets/js/vendor/modernizr.js"></script>
+    <!--================= Splitting JS =================-->
+    <script src="assets/js/vendor/splitting.min.js"></script>
+    <!--================= Splitting JS =================-->
+    <script src="assets/js/vendor/splittext.js"></script>
+    <!--================= ScrollMagic JS =================-->
+    <script src="assets/js/vendor/scrollmagic.js"></script>
+    <!--================= ScrollMagic JS =================-->
+    <script src="assets/js/vendor/animate-scrollmagic.js"></script>
+    <!--================= ScrollMagic JS =================-->
+    <script src="assets/js/vendor/magnific-popup.js"></script>
+    <!--================= Plyr JS =================-->
+    <script src="assets/js/vendor/plyr.js"></script>
+    <!--================= Plyr JS =================-->
+    <script src="assets/js/vendor/scrolltrigger.min.js"></script>
+    <!--================= Swiper Bundle JS =================-->
+    <script src="assets/js/vendor/swiper-bundle.min.js"></script>
+    <!--================= Bootstrap JS =================-->
+    <script src="assets/js/vendor/bootstrap.min.js"></script>
+    <!--================= Video JS =================-->
+    <script src="assets/js/vendor/video-background.js"></script>
+    <!--================= Main JS =================-->
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>
