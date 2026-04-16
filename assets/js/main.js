@@ -188,31 +188,26 @@
         // Check if smooth scroll should be enabled
         var data_scroll = document.body.getAttribute('data-smooth-scroll');
         var smscroll = data_scroll === 'on';
-    
-        // Initialize LocomotiveScroll with proper options
-        const locoScroll = new LocomotiveScroll({
-            lenisOptions: {
-                wrapper: window,
-                content: document.documentElement,
-                lerp: 0.08,
-                duration: 1.4,
-                orientation: 'vertical',
-                gestureOrientation: 'vertical',
-                smoothWheel: smscroll,
-                smoothTouch: true,
-                wheelMultiplier: 1.2,
-                touchMultiplier: 2,
-                normalizeWheel: true,
+
+        if (smscroll && typeof Lenis !== 'undefined') {
+            const lenis = new Lenis({
+                duration: 1.2,
                 easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-            },
-            autoStart: false,
-            scrollCallback: onScroll,
-        });
-    
-        // Start LocomotiveScroll after a slight delay
-        requestAnimationFrame(() => {
-            locoScroll.start();
-        });
+                smoothWheel: true,
+                smoothTouch: false,
+                wheelMultiplier: 1,
+                touchMultiplier: 2,
+            });
+
+            function raf(time) {
+                lenis.raf(time);
+                requestAnimationFrame(raf);
+            }
+            requestAnimationFrame(raf);
+
+            // Expose lenis globally if needed
+            window.lenis = lenis;
+        }
     });
     function onScroll($scope) {
         
