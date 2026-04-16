@@ -188,26 +188,51 @@
         // Check if smooth scroll should be enabled
         var data_scroll = document.body.getAttribute('data-smooth-scroll');
         var smscroll = data_scroll === 'on';
-
-        if (smscroll && typeof Lenis !== 'undefined') {
-            const lenis = new Lenis({
-                duration: 1.2,
-                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-                smoothWheel: true,
+    
+        // Initialize LocomotiveScroll with custom RAF ticker for smooth macOS performance
+        const locoScroll = new LocomotiveScroll({
+            lenisOptions: {
+                wrapper: window,
+                content: document.documentElement,
+                lerp: 0.1,
+                duration: 0.8,
+                orientation: 'vertical',
+                gestureOrientation: 'vertical',
+                smoothWheel: smscroll,
                 smoothTouch: false,
                 wheelMultiplier: 1,
                 touchMultiplier: 2,
-            });
+            },
+            autoStart: false,
+            scrollCallback: onScroll,
+            initCustomTicker: function(render) {
+                function tick(time) {
+                    render();
+                    requestAnimationFrame(tick);
+                }
+                requestAnimationFrame(tick);
+            },
+            destroyCustomTicker: function(render) {
+                // handled by cancelAnimationFrame internally
+            },
+        });
 
-            function raf(time) {
-                lenis.raf(time);
-                requestAnimationFrame(raf);
+        // Override the internal _onRender to use proper rAF timestamp
+        var originalOnRender = locoScroll._onRenderBind;
+        locoScroll._onRenderBind = function() {
+            if (locoScroll.lenisInstance) {
+                locoScroll.lenisInstance.raf(performance.now());
             }
-            requestAnimationFrame(raf);
+            if (locoScroll.coreInstance) {
+                locoScroll.coreInstance.onRender({
+                    currentScroll: locoScroll.lenisInstance.scroll,
+                    smooth: locoScroll.lenisInstance.isSmooth
+                });
+            }
+        };
 
-            // Expose lenis globally if needed
-            window.lenis = lenis;
-        }
+        locoScroll.start();
+        window.locoScroll = locoScroll;
     });
     function onScroll($scope) {
         
