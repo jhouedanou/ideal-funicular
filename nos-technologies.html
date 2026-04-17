@@ -70,11 +70,6 @@
             object-fit: contain !important;
             border-radius: 50% !important;
         }
-        /* Reset any fixed positioning that might be added by locomotive */
-        [data-scroll-container] {
-            position: relative !important;
-            transform: none !important;
-        }
         /* Active menu highlight */
         .menu-item.active a span {
             border-bottom: 2px solid #ff0000 !important;
@@ -155,7 +150,7 @@
     </style>
 </head>
 
-<body data-smooth-scroll="on" data-theme="light" data-menu="fixed" data-footer-effect="on" data-footer-corners="on">
+<body data-theme="light" data-menu="fixed" data-footer-effect="on" data-footer-corners="on">
     <!--================= Header One Start =================-->
     <!--================= Sticky Menu Start Here =================-->
     <div id="top" class="home"></div>
@@ -179,7 +174,7 @@
                         <li class="menu-item"><a href="index.html"><span>Accueil</span></a></li>
                         <li class="menu-item active"><a href="nos-technologies.html"><span>Nos Technologies</span></a></li>
                         <li class="menu-item menu-item-has-children">
-                            <a href="#" title="Services"><span>Services</span></a>
+                            <a href="services.html" title="Services"><span>Services</span></a>
                             <ul class="sub-menu">
                                 <li class="menu-item"><a href="service-creation-web.html">Création Solution Numérique</a></li>
                                 <li class="menu-item"><a href="service-visibilite-seo.html">Visibilité</a></li>
@@ -323,7 +318,7 @@
                         <!-- Laravel / PHP -->
                         <div class="col-lg-4 col-md-6">
                             <div class="tech-card">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-plain.svg" alt="Laravel">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg" alt="Laravel">
                                 <h3>Laravel</h3>
                                 <p>Développement de plateformes web complexes et de logiciels métiers sécurisés sur mesure.</p>
                             </div>
@@ -347,7 +342,7 @@
                         <!-- Tailwind CSS -->
                         <div class="col-lg-4 col-md-6">
                             <div class="tech-card">
-                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original-wordmark.svg" alt="Tailwind CSS">
+                                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" alt="Tailwind CSS">
                                 <h3>Tailwind CSS</h3>
                                 <p>Design moderne, réactif et épuré pour une expérience utilisateur exceptionnelle sur tous les écrans.</p>
                             </div>
@@ -493,7 +488,7 @@
     <!--================= Video JS =================-->
     <script src="assets/js/vendor/video-background.js"></script>
     <!--================= Main JS =================-->
-    <script src="assets/js/vendor/locomotive-scroll.min.js"></script>
+    <script src="assets/js/vendor/lenis.min.js"></script>
     <script src="assets/js/main.js"></script>
 </body>
 

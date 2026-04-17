@@ -713,7 +713,7 @@ html {
 }
 
 body {
-  overscroll-behavior: none;
+  overscroll-behavior: auto;
 }
 
 dfn, cite, em, i {

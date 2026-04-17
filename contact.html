@@ -487,7 +487,7 @@
     </style>
 </head>
 
-<body data-smooth-scroll="on" data-theme="light" data-menu="fixed" data-footer-effect="on" data-footer-corners="on">
+<body data-theme="light" data-menu="fixed" data-footer-effect="on" data-footer-corners="on">
     <div id="top" class="home"></div>
     <!--================= Header Start =================-->
     <div class="main-header js-main-header auto-hide-header ms-nb--transparent full-width ms-nb--white menu-center" id="ms-header">
@@ -510,7 +510,7 @@
                         <li class="menu-item"><a href="index.html"><span>Accueil</span></a></li>
                         <li class="menu-item"><a href="nos-technologies.html"><span>Nos Technologies</span></a></li>
                         <li class="menu-item menu-item-has-children">
-                            <a href="#" title="Services"><span>Services</span></a>
+                            <a href="services.html" title="Services"><span>Services</span></a>
                             <ul class="sub-menu">
                                 <li class="menu-item"><a href="service-creation-web.html">Création Solution Numérique</a></li>
                                 <li class="menu-item"><a href="service-visibilite-seo.html">Visibilité</a></li>
@@ -966,7 +966,7 @@
     <!--================= Video JS =================-->
     <script src="assets/js/vendor/video-background.js"></script>
     <!--================= Main JS =================-->
-    <script src="assets/js/vendor/locomotive-scroll.min.js"></script>
+    <script src="assets/js/vendor/lenis.min.js"></script>
     <script src="assets/js/main.js"></script>
     <script>
         // Force hide loader bar after page load
@@ -1082,10 +1082,30 @@
             e.preventDefault();
             if (!msValidateStep(3)) return;
 
-            // Simulation envoi (à connecter au backend)
-            this.style.display = 'none';
-            document.querySelector('.ms-step-progress').style.display = 'none';
-            document.getElementById('msFormSuccess').classList.add('visible');
+            var form = this;
+            var btn = form.querySelector('.ms-btn-submit');
+            if (btn) { btn.disabled = true; btn.textContent = 'Envoi en cours…'; }
+
+            var formData = new FormData(form);
+            formData.append('form_type', 'contact');
+
+            fetch('api/send.php', { method: 'POST', body: formData })
+                .then(function(r) { return r.json().catch(function() { return { success: false, message: 'Réponse serveur invalide.' }; }); })
+                .then(function(res) {
+                    if (res && res.success) {
+                        form.style.display = 'none';
+                        var bar = document.querySelector('.ms-step-progress');
+                        if (bar) bar.style.display = 'none';
+                        document.getElementById('msFormSuccess').classList.add('visible');
+                    } else {
+                        alert((res && res.message) || 'Erreur lors de l’envoi.');
+                        if (btn) { btn.disabled = false; btn.textContent = 'Envoyer ma demande ✓'; }
+                    }
+                })
+                .catch(function() {
+                    alert('Erreur réseau. Merci de réessayer.');
+                    if (btn) { btn.disabled = false; btn.textContent = 'Envoyer ma demande ✓'; }
+                });
         });
 
     })();

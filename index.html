@@ -93,12 +93,6 @@
             height: 100vh !important;
         }
 
-        /* Reset any fixed positioning that might be added by locomotive */
-        [data-scroll-container] {
-            position: relative !important;
-            transform: none !important;
-        }
-
         /* Slider visuals */
         .banner-horizental .swiper-container-h .swiper-wrapper .swiper-slide .slider-inner {
             background: #000;
@@ -172,7 +166,7 @@
     </style>
 </head>
 
-<body data-theme="light" data-menu="fixed" data-footer-effect="on" data-footer-corners="on" data-smooth-scroll="on">
+<body data-theme="light" data-menu="fixed" data-footer-effect="on" data-footer-corners="on">
     <!--================= Header One Start =================-->
     <!--================= Sticky Menu Start Here =================-->
     <div id="top" class="home"></div>
@@ -197,7 +191,7 @@
                         <li class="menu-item"><a href="index.html"><span>Accueil</span></a></li>
                         <li class="menu-item"><a href="nos-technologies.html"><span>Nos Technologies</span></a></li>
                         <li class="menu-item menu-item-has-children">
-                            <a href="#" title="Services"><span>Services</span></a>
+                            <a href="services.html" title="Services"><span>Services</span></a>
                             <ul class="sub-menu">
                                 <li class="menu-item"><a href="service-creation-web.html">Création Solution Numérique</a></li>
                                 <li class="menu-item"><a href="service-visibilite-seo.html">Visibilité</a></li>
@@ -362,7 +356,7 @@
 
                     <div class="swiper-slide">
                         <div class="slider-inner">
-                            <video autoplay="" loop="" muted="" style="filter: brightness(0.4);">
+                            <video autoplay loop muted playsinline preload="auto" style="filter: brightness(0.4);">
                                 <source
                                     src="assets/images/slider/freepik_create-a-video_seedance_720p_16-9_24fps_3921.mp4"
                                     type="video/mp4">
@@ -791,7 +785,8 @@
                         <h2 class="heading-title">Newsletter</h2>
                         <div class="form-area">
                             <form id="mc4wp-form-1" class="mc4wp-form mc4wp-form-116" method="post" data-id="116"
-                                data-name="Newsletter E-digital">
+                                data-name="Newsletter E-digital" action="api/send.php">
+                                <input type="hidden" name="form_type" value="newsletter">
                                 <div class="mc4wp-form-fields">
                                     <div class="ms-mc4wp--wrap">
                                         <p>Abonnez-vous pour recevoir nos idées inspirantes,<br> l'actualité de nos
@@ -835,7 +830,7 @@
                                 <div
                                     class="overlay left grid-item-p custom-ratio col-md-4 portfolios has-post-thumbnail">
                                     <div class="item--inner">
-                                        <a href="project-single.html" aria-label="Mélange de style et de savoir-faire">
+                                        <a href="projet.html" aria-label="Mélange de style et de savoir-faire">
                                             <div class="ms-p-arrow">
                                                 <svg class="ms-btt-arrow" enable-background="new 0 0 96 96"
                                                     height="96px" version="1.1" viewBox="0 0 96 96" width="96px"
@@ -862,7 +857,7 @@
                                 <div
                                     class="overlay left grid-item-p custom-ratio col-md-4 portfolios has-post-thumbnail">
                                     <div class="item--inner">
-                                        <a href="project-single.html" aria-label="Réalités abstraites">
+                                        <a href="projet.html" aria-label="Réalités abstraites">
                                             <div class="ms-p-arrow">
                                                 <svg class="ms-btt-arrow" enable-background="new 0 0 96 96"
                                                     height="96px" version="1.1" viewBox="0 0 96 96" width="96px"
@@ -889,7 +884,7 @@
                                 <div
                                     class="overlay left grid-item-p custom-ratio col-md-4 portfolios has-post-thumbnail">
                                     <div class="item--inner">
-                                        <a href="project-single.html" aria-label="Palette de la nature">
+                                        <a href="projet.html" aria-label="Palette de la nature">
                                             <div class="ms-p-arrow">
                                                 <svg class="ms-btt-arrow" enable-background="new 0 0 96 96"
                                                     height="96px" version="1.1" viewBox="0 0 96 96" width="96px"
@@ -916,7 +911,7 @@
                                 <div
                                     class="overlay left grid-item-p custom-ratio col-md-4 portfolios has-post-thumbnail">
                                     <div class="item--inner">
-                                        <a href="project-single.html" aria-label="Portraits de passion">
+                                        <a href="projet.html" aria-label="Portraits de passion">
                                             <div class="ms-p-arrow">
                                                 <svg class="ms-btt-arrow" enable-background="new 0 0 96 96"
                                                     height="96px" version="1.1" viewBox="0 0 96 96" width="96px"
@@ -943,7 +938,7 @@
                                 <div
                                     class="overlay left grid-item-p custom-ratio col-md-4 portfolios has-post-thumbnail">
                                     <div class="item--inner">
-                                        <a href="project-single.html" aria-label="Visions cinématographiques">
+                                        <a href="projet.html" aria-label="Visions cinématographiques">
                                             <div class="ms-p-arrow">
                                                 <svg class="ms-btt-arrow" enable-background="new 0 0 96 96"
                                                     height="96px" version="1.1" viewBox="0 0 96 96" width="96px"
@@ -970,7 +965,7 @@
                                 <div
                                     class="overlay left grid-item-p custom-ratio col-md-4 portfolios has-post-thumbnail">
                                     <div class="item--inner">
-                                        <a href="project-single.html" aria-label="Symétrie graphique">
+                                        <a href="projet.html" aria-label="Symétrie graphique">
                                             <div class="ms-p-arrow">
                                                 <svg class="ms-btt-arrow" enable-background="new 0 0 96 96"
                                                     height="96px" version="1.1" viewBox="0 0 96 96" width="96px"
@@ -1252,7 +1247,7 @@
                 </div>
                 <div class="ms-hc">
                     <div class="ms-hc--inner">
-                        <h2 class="ms-hero-title">Créateurs d\'expériences<br> digitales depuis 2003</h2>
+                        <h2 class="ms-hero-title">Créateurs d'expériences<br> digitales depuis 2003</h2>
                     </div>
                 </div>
             </section>
@@ -1289,8 +1284,7 @@
                                             </div>
                                             <div class="post-meta-cont">
                                                 <div class="post-category">
-                                                    <a href="category.html" rel="category tag">Fashion</a>,&nbsp;
-                                                    <a href="category.html" rel="category tag">Technology</a>
+                                                    <a href="blog.html" rel="category tag">Technology</a>
                                                 </div>
                                                 <div class="post-header">
                                                     <a class="post-title" href="#">
@@ -1596,7 +1590,7 @@
     <!--================= ScrollMagic JS =================-->
     <script src="assets/js/vendor/magnific-popup.js"></script>
     <!--================= Locomotive JS =================-->
-    <script src="assets/js/vendor/locomotive-scroll.min.js"></script>
+    <script src="assets/js/vendor/lenis.min.js"></script>
     <!-- <script src="assets/js/vendor/effect-material.min.js"></script> -->
     <!-- <script src="assets/js/vendor/triple-slider.js"></script> -->
     <!--================= Plyr JS =================-->

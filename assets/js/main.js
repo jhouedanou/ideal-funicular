@@ -55,6 +55,27 @@
                 el: ".swiper-pagination",
                 type: "progressbar"
             },          
+            on: {
+                init: function () {
+                    // Lance les vidéos des slides dès l'init du swiper
+                    this.el.querySelectorAll('video').forEach(function (v) {
+                        v.muted = true;
+                        v.play().catch(function () {});
+                    });
+                },
+                slideChangeTransitionEnd: function () {
+                    // Rejoue la vidéo du slide actif (au cas où elle aurait été mise en pause)
+                    var active = this.slides[this.activeIndex];
+                    if (active) {
+                        var v = active.querySelector('video');
+                        if (v) {
+                            v.muted = true;
+                            v.currentTime = 0;
+                            v.play().catch(function () {});
+                        }
+                    }
+                }
+            }
             
         });
         var swiper = new Swiper(".aboutSlider", {
@@ -188,51 +209,89 @@
         // Check if smooth scroll should be enabled
         var data_scroll = document.body.getAttribute('data-smooth-scroll');
         var smscroll = data_scroll === 'on';
-    
-        // Initialize LocomotiveScroll with custom RAF ticker for smooth macOS performance
-        const locoScroll = new LocomotiveScroll({
-            lenisOptions: {
-                wrapper: window,
-                content: document.documentElement,
-                lerp: 0.1,
-                duration: 0.8,
-                orientation: 'vertical',
-                gestureOrientation: 'vertical',
-                smoothWheel: smscroll,
+
+        // ----- Smooth scroll via Lenis synchronized with GSAP ticker -----
+        // This replaces LocomotiveScroll. Animations (GSAP/ScrollTrigger/ScrollMagic)
+        // keep working because Lenis updates the NATIVE window scroll.
+        if (smscroll && typeof Lenis !== 'undefined') {
+            var lenis = new Lenis({
+                duration: 1.2,
+                easing: function (t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
+                smoothWheel: true,
                 smoothTouch: false,
                 wheelMultiplier: 1,
                 touchMultiplier: 2,
-            },
-            autoStart: false,
-            scrollCallback: onScroll,
-            initCustomTicker: function(render) {
-                function tick(time) {
-                    render();
-                    requestAnimationFrame(tick);
-                }
-                requestAnimationFrame(tick);
-            },
-            destroyCustomTicker: function(render) {
-                // handled by cancelAnimationFrame internally
-            },
-        });
+            });
 
-        // Override the internal _onRender to use proper rAF timestamp
-        var originalOnRender = locoScroll._onRenderBind;
-        locoScroll._onRenderBind = function() {
-            if (locoScroll.lenisInstance) {
-                locoScroll.lenisInstance.raf(performance.now());
+            // Keep ScrollTrigger in sync with Lenis
+            if (typeof ScrollTrigger !== 'undefined') {
+                lenis.on('scroll', ScrollTrigger.update);
             }
-            if (locoScroll.coreInstance) {
-                locoScroll.coreInstance.onRender({
-                    currentScroll: locoScroll.lenisInstance.scroll,
-                    smooth: locoScroll.lenisInstance.isSmooth
+
+            // Drive Lenis from GSAP's ticker (single RAF loop, no macOS stutter)
+            if (typeof gsap !== 'undefined') {
+                gsap.ticker.add(function (time) {
+                    lenis.raf(time * 1000);
                 });
+                gsap.ticker.lagSmoothing(0);
+            } else {
+                // Fallback if GSAP not present
+                function rafLoop(time) {
+                    lenis.raf(time);
+                    requestAnimationFrame(rafLoop);
+                }
+                requestAnimationFrame(rafLoop);
             }
-        };
 
-        locoScroll.start();
-        window.locoScroll = locoScroll;
+            // Smooth scroll for anchor links (including data-scroll-to)
+            document.querySelectorAll('a[href^="#"], [data-scroll-to]').forEach(function (el) {
+                el.addEventListener('click', function (e) {
+                    var href = el.getAttribute('href') || el.getAttribute('data-scroll-to-href');
+                    if (!href || href === '#' || href === '#0') return;
+                    var target = href === '#top' ? 0 : document.querySelector(href);
+                    if (target === 0 || target) {
+                        e.preventDefault();
+                        lenis.scrollTo(target, { offset: 0 });
+                    }
+                });
+            });
+
+            // Expose globally
+            window.lenis = lenis;
+        }
+
+        // Fire scroll-init logic (btt button visibility, header state, etc.)
+        onScroll();
+
+        // ----- Newsletter AJAX submit ------------------------------------
+        var nlForm = document.getElementById('mc4wp-form-1');
+        if (nlForm) {
+            nlForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                var fd = new FormData(nlForm);
+                if (!fd.get('form_type')) fd.append('form_type', 'newsletter');
+                var btn = nlForm.querySelector('button[type="submit"]');
+                if (btn) btn.disabled = true;
+
+                fetch(nlForm.getAttribute('action') || 'api/send.php', {
+                    method: 'POST',
+                    body: fd,
+                })
+                    .then(function (r) { return r.json().catch(function () { return { success: false, message: 'Erreur serveur.' }; }); })
+                    .then(function (res) {
+                        if (res && res.success) {
+                            nlForm.innerHTML = '<p style="color:#fff;text-align:center;padding:20px;">✓ ' + (res.message || 'Merci pour votre inscription !') + '</p>';
+                        } else {
+                            alert((res && res.message) || 'Erreur lors de l’inscription.');
+                            if (btn) btn.disabled = false;
+                        }
+                    })
+                    .catch(function () {
+                        alert('Erreur réseau. Merci de réessayer.');
+                        if (btn) btn.disabled = false;
+                    });
+            });
+        }
     });
     function onScroll($scope) {
         
