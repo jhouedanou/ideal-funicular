@@ -176,6 +176,13 @@ add_shortcode( 'edigital_contact_form', 'edigital_contact_form_shortcode' );
 require_once get_template_directory() . '/inc/template-tags.php';
 
 /**
+ * Inclusion du registre ACF regénéré automatiquement
+ */
+if ( file_exists( get_template_directory() . '/inc/acf-registry.php' ) ) {
+    require_once get_template_directory() . '/inc/acf-registry.php';
+}
+
+/**
  * Après activation du thème, si un menu « edigital-primary » existe (créé par
  * l'import SQL), on l'assigne automatiquement à l'emplacement « primary » si
  * aucun menu n'y est déjà associé.
@@ -193,3 +200,45 @@ function edigital_auto_assign_menu() {
 	}
 }
 add_action( 'after_switch_theme', 'edigital_auto_assign_menu' );
+
+/**
+ * Register Custom Post Type: Projets
+ */
+function edigital_register_cpt_projet() {
+     = array(
+        'name'                  => _x( 'Projets', 'Post Type General Name', 'edigital' ),
+        'singular_name'         => _x( 'Projet', 'Post Type Singular Name', 'edigital' ),
+        'menu_name'             => __( 'Projets', 'edigital' ),
+        'name_admin_bar'        => __( 'Projet', 'edigital' ),
+        'all_items'             => __( 'Tous les projets', 'edigital' ),
+        'add_new_item'          => __( 'Ajouter un nouveau projet', 'edigital' ),
+        'add_new'               => __( 'Ajouter', 'edigital' ),
+        'new_item'              => __( 'Nouveau projet', 'edigital' ),
+        'edit_item'             => __( 'Modifier le projet', 'edigital' ),
+        'update_item'           => __( 'Mettre à jour le projet', 'edigital' ),
+        'view_item'             => __( 'Voir le projet', 'edigital' ),
+        'search_items'          => __( 'Rechercher un projet', 'edigital' ),
+    );
+     = array(
+        'label'                 => __( 'Projet', 'edigital' ),
+        'description'           => __( 'Portfolio de nos projets', 'edigital' ),
+        'labels'                => ,
+        'supports'              => array( 'title', 'editor', 'thumbnail', 'excerpt' ),
+        'hierarchical'          => false,
+        'public'                => true,
+        'show_ui'               => true,
+        'show_in_menu'          => true,
+        'menu_position'         => 5,
+        'menu_icon'             => 'dashicons-portfolio',
+        'show_in_admin_bar'     => true,
+        'show_in_nav_menus'     => true,
+        'can_export'            => true,
+        'has_archive'           => 'nos-projets',
+        'exclude_from_search'   => false,
+        'publicly_queryable'    => true,
+        'capability_type'       => 'post',
+        'show_in_rest'          => true,
+    );
+    register_post_type( 'projet',  );
+}
+add_action( 'init', 'edigital_register_cpt_projet', 0 );

@@ -10,7 +10,7 @@
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="shortcut icon" type="image/x-icon" href="<?php echo esc_url( get_template_directory_uri() . '/../fav-icone.png' ); ?>">
+	<link rel="shortcut icon" type="image/x-icon" href="<?php echo esc_url( get_template_directory_uri() . '/assets/images/fav-icone.png' ); ?>">
 	<?php wp_head(); ?>
 </head>
 <body <?php body_class( 'ms-body' ); ?> data-theme="light" data-menu="fixed" data-footer-effect="on" data-footer-corners="on">

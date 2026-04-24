@@ -29,6 +29,8 @@ from pathlib import Path
 
 from bs4 import BeautifulSoup
 
+import acf_magic
+
 ROOT = Path(__file__).resolve().parents[2]
 THEME = ROOT / "wp-theme-edigital"
 TEMPLATES_DIR = THEME / "templates"
@@ -52,6 +54,9 @@ PAGES = [
     {"slug": "nos-projets",                     "title": "Nos Projets",                                  "source": "nos-projets.html",                     "menu_order": 11},
     {"slug": "blog",                            "title": "Blog",                                         "source": "blog.html",                            "menu_order": 12, "blog_page": True},
     {"slug": "contact",                         "title": "Contact",                                      "source": "contact.html",                         "menu_order": 13},
+    {"slug": "projet",                          "title": "Projet Single",                                "source": "projet.html",                          "menu_order": 14},
+    {"slug": "blog-single",                     "title": "Blog Single",                                  "source": "blog-single.html",                     "menu_order": 15},
+    {"slug": "blog-list",                       "title": "Blog List",                                    "source": "blog-list.html",                       "menu_order": 16},
 ]
 
 # Liens HTML statiques → URLs WordPress. Toute ancre href="X.html" sera remplacée.
@@ -69,16 +74,16 @@ PAGE_URL_MAP = {
     "nos-projets.html":                     "/nos-projets/",
     "blog.html":                            "/blog/",
     "contact.html":                         "/contact/",
-    # Pages dont on n'a pas de version WP -> on garde un lien de fallback (ex. projet).
-    "projet.html":                          "/nos-projets/",
-    "blog-single.html":                     "/blog/",
-    "blog-list.html":                       "/blog/",
+    # Pages générées nouvellement ajoutées
+    "projet.html":                          "/projet/",
+    "blog-single.html":                     "/blog-single/",
+    "blog-list.html":                       "/blog-list/",
 }
 
 # Marqueurs délimitant les zones dans le HTML source.
 HEADER_START_RE = re.compile(r'<div[^>]*id="top"', re.IGNORECASE)
 CONTENT_START_RE = re.compile(
-    r'(<div[^>]*class="[^"]*ms-page-content[^"]*"|<section[^>]*class="[^"]*banner-horizental[^"]*"|<section[^>]*id="hero")',
+    r'(<main\b[^>]*>)',
     re.IGNORECASE,
 )
 FOOTER_START_RE = re.compile(r'<footer[^>]*class="[^"]*ms-footer', re.IGNORECASE)
@@ -185,6 +190,17 @@ def extract_unique_content(source_file: str) -> str:
     return rewrite_urls(content.strip())
 
 
+STYLE_RE = re.compile(r'<style[^>]*>(.*?)</style>', re.DOTALL | re.IGNORECASE)
+
+def extract_head_styles(source_file: str) -> str:
+    """Extrait le CSS contenu dans les blocs <style> du <head> de la page source."""
+    src = read(ROOT / source_file)
+    m_main = CONTENT_START_RE.search(src)
+    head_zone = src[:m_main.start()] if m_main else src
+    css_blocks = [m.group(1).strip() for m in STYLE_RE.finditer(head_zone)]
+    return "\n".join(b for b in css_blocks if b)
+
+
 # ---------------------------------------------------------------------------
 # Génération des fichiers PHP
 # ---------------------------------------------------------------------------
@@ -219,6 +235,11 @@ PAGE_TEMPLATE_PHP = """<?php
  * Généré automatiquement par sql/build-theme.py — ne pas éditer directement.
  */
 if ( ! defined( 'ABSPATH' ) ) { exit; }
+
+// Injection des styles du <head> de la page statique d'origine.
+add_action( 'wp_enqueue_scripts', function() {
+    wp_add_inline_style( 'edigital-style', '{inline_css}' );
+}, 20 );
 
 get_header();
 ?>
@@ -456,28 +477,68 @@ def main():
     for i, spec in enumerate(PAGES):
         slug_to_id[spec["slug"]] = next_id + i
 
-    for i, spec in enumerate(PAGES):
-        content = extract_unique_content(spec["source"])
-        template_rel = f"templates/page-{spec['slug']}.php"
-        php = PAGE_TEMPLATE_PHP.replace("{title}", spec["title"]) \
-                               .replace("{source}", spec["source"]) \
-                               .replace("{content}", content)
-        write(TEMPLATES_DIR / f"page-{spec['slug']}.php", php)
+    all_acf_fields = {}
 
-        parent_id = slug_to_id.get(spec.get("parent_slug"), 0)
-        pages_with_ids.append({
-            "id": slug_to_id[spec["slug"]],
-            "slug": spec["slug"],
-            "title": spec["title"],
-            "source": spec["source"],
-            "template": template_rel,
-            "parent_id": parent_id,
-            "menu_order": spec["menu_order"],
-            "front": spec.get("front", False),
-            "blog_page": spec.get("blog_page", False),
-        })
+    # Modèles PHP (Standard vs Single CPT)
+    PAGE_TEMPLATE_PHP = """<?php
+/**
+ * Template Name: E-Digital — {title}
+ */
+if ( ! defined( 'ABSPATH' ) ) { exit; }
+add_action( 'wp_enqueue_scripts', function() { wp_add_inline_style( 'edigital-style', '{inline_css}' ); }, 20 );
+get_header();
+?>
+{content}
+<?php get_footer(); """
+
+    SINGLE_TEMPLATE_PHP = """<?php
+/**
+ * Single Post Template: {title}
+ */
+if ( ! defined( 'ABSPATH' ) ) { exit; }
+add_action( 'wp_enqueue_scripts', function() { wp_add_inline_style( 'edigital-style', '{inline_css}' ); }, 20 );
+get_header();
+?>
+{content}
+<?php get_footer(); """
+
+    for i, spec in enumerate(PAGES):
+        raw_content = extract_unique_content(spec["source"])
+        content, fields = acf_magic.acfify_html(raw_content, f"page_{spec['slug']}")
+        all_acf_fields[f"page-{spec['slug']}.php"] = fields
+        inline_css = extract_head_styles(spec["source"])
+        inline_css_escaped = inline_css.replace("\\", "\\\\").replace("'", "\\'")
+
+        if spec["slug"] == "projet":
+            php = SINGLE_TEMPLATE_PHP.replace("{title}", spec["title"]).replace("{inline_css}", inline_css_escaped).replace("{content}", content)
+            write(THEME / "single-projet.php", php)
+        elif spec["slug"] == "blog-single":
+            php = SINGLE_TEMPLATE_PHP.replace("{title}", spec["title"]).replace("{inline_css}", inline_css_escaped).replace("{content}", content)
+            write(THEME / "single.php", php)
+        else:
+            php = PAGE_TEMPLATE_PHP.replace("{title}", spec["title"]).replace("{inline_css}", inline_css_escaped).replace("{content}", content)
+            write(TEMPLATES_DIR / f"page-{spec['slug']}.php", php)
+
+        # Build DB records if applicable
+        if spec["slug"] not in ["projet", "blog-single", "blog-list"]:
+            parent_id = slug_to_id.get(spec.get("parent_slug"), 0)
+            template_rel = f"templates/page-{spec['slug']}.php"
+            pages_with_ids.append({
+                "id": slug_to_id[spec["slug"]],
+                "slug": spec["slug"],
+                "title": spec["title"],
+                "parent_id": parent_id,
+                "template": template_rel,
+                "menu_item": bool(spec.get("menu_order")),
+                "menu_order": spec.get("menu_order", 0),
+                "is_front": spec.get("front", False),
+                "blog_page": spec.get("blog_page", False),
+            })
 
     # SQL
+    print("[build-theme] Génération du ficher ACF (inc/acf-registry.php) ...")
+    write(THEME / "inc" / "acf-registry.php", acf_magic.generate_acf_php(all_acf_fields))
+
     print("[build-theme] Génération du SQL ...")
     write(OUT_SQL, build_sql(pages_with_ids))
 

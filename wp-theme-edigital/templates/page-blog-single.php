@@ -1,9 +1,15 @@
 <?php
 /**
- * Single Post Template: Blog Single
+ * Template Name: E-Digital — Blog Single
+ *
+ * Template de page fidèle au HTML d'origine (blog-single.html).
+ * Généré automatiquement par sql/build-theme.py — ne pas éditer directement.
  */
 if ( ! defined( 'ABSPATH' ) ) { exit; }
-add_action( 'wp_enqueue_scripts', function() { wp_add_inline_style( 'edigital-style', '/* Active menu highlight */
+
+// Injection des styles du <head> de la page statique d'origine.
+add_action( 'wp_enqueue_scripts', function() {
+    wp_add_inline_style( 'edigital-style', '/* Active menu highlight */
         .menu-item.active a span {
             border-bottom: 2px solid #ff0000 !important;
             padding-bottom: 5px;
@@ -95,7 +101,9 @@ add_action( 'wp_enqueue_scripts', function() { wp_add_inline_style( 'edigital-st
         }
         .footer-nav-area li a::after {
             display: none !important;
-        }' ); }, 20 );
+        }' );
+}, 20 );
+
 get_header();
 ?>
 <main class="ms-main ms-single-post" data-scroll-section="">
@@ -162,4 +170,5 @@ get_header();
 </nav>
 </main>
 <!--================= Footer Area Start Here =================-->
-<?php get_footer(); 
+<?php
+get_footer();

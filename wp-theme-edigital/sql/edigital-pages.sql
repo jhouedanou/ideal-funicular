@@ -45,8 +45,6 @@ INSERT INTO wp_postmeta (post_id, meta_key, meta_value) VALUES (10012, '_wp_page
 INSERT INTO wp_posts (ID, post_author, post_date, post_date_gmt, post_content, post_title, post_excerpt, post_status, comment_status, ping_status, post_password, post_name, to_ping, pinged, post_modified, post_modified_gmt, post_content_filtered, post_parent, guid, menu_order, post_type, post_mime_type, comment_count) VALUES (10013, 1, NOW(), UTC_TIMESTAMP(), '<!-- wp:paragraph --><p><em>Le rendu visuel de cette page est fourni par le template <code>templates/page-contact.php</code>. Modifier la structure se fait directement dans le fichier PHP du thème.</em></p><!-- /wp:paragraph -->', 'Contact', '', 'publish', 'closed', 'closed', '', 'contact', '', '', NOW(), UTC_TIMESTAMP(), '', 0, '', 13, 'page', '', 0);
 INSERT INTO wp_postmeta (post_id, meta_key, meta_value) VALUES (10013, '_wp_page_template', 'templates/page-contact.php');
 
-INSERT INTO wp_options (option_name, option_value, autoload) VALUES ('show_on_front', 'page', 'yes') ON DUPLICATE KEY UPDATE option_value='page';
-INSERT INTO wp_options (option_name, option_value, autoload) VALUES ('page_on_front', '10001', 'yes') ON DUPLICATE KEY UPDATE option_value='10001';
 INSERT INTO wp_options (option_name, option_value, autoload) VALUES ('page_for_posts', '10012', 'yes') ON DUPLICATE KEY UPDATE option_value='10012';
 
 -- Menu principal E-Digital.
