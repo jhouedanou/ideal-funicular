@@ -45,6 +45,11 @@ function edigital_setup() {
 		array( 'name' => __( 'Gris', 'edigital' ),  'slug' => 'gris',  'color' => '#6b6b6b' ),
 	) );
 
+	// Support Elementor & Elementor Pro.
+	add_theme_support( 'elementor' );
+	add_theme_support( 'elementor-pro' );
+	add_theme_support( 'post-thumbnails' );
+
 	register_nav_menus( array(
 		'primary' => __( 'Menu principal', 'edigital' ),
 		'footer'  => __( 'Menu pied de page', 'edigital' ),
@@ -242,3 +247,133 @@ function edigital_register_cpt_projet() {
     register_post_type( 'projet', $args );
 }
 add_action( 'init', 'edigital_register_cpt_projet', 0 );
+
+/**
+ * ---------------------------------------------------------------------------
+ * Compatibilité Elementor
+ * ---------------------------------------------------------------------------
+ *
+ * Le thème est 100% éditable via Elementor sur toutes les pages.
+ *
+ * Emplacements disponibles (templates de page) :
+ *   - "Elementor Canvas"     (elementor-canvas.php)     → page 100% vierge,
+ *                                                         pas de header/footer
+ *                                                         du thème. Idéal pour
+ *                                                         landing pages ou
+ *                                                         éditions totales avec
+ *                                                         Elementor Pro (Theme
+ *                                                         Builder).
+ *   - "Elementor Full Width" (elementor-full-width.php) → header + footer du
+ *                                                         thème, contenu sans
+ *                                                         container / sidebar.
+ *   - Templates par défaut (templates/page-*.php)       → fidélité HTML statique.
+ */
+
+/**
+ * Déclare les emplacements Elementor Pro Theme Builder (header / footer).
+ */
+function edigital_register_elementor_locations( $elementor_theme_manager ) {
+	$elementor_theme_manager->register_all_core_location();
+}
+add_action( 'elementor/theme/register_locations', 'edigital_register_elementor_locations' );
+
+/**
+ * Bascule automatiquement les pages éditées via Elementor sur un template
+ * compatible (elementor-full-width.php), qui appelle the_content() — sinon
+ * Elementor affiche l'erreur « Sorry, the content area was not found ».
+ *
+ * Les templates fidèles du HTML statique (templates/page-*.php) ne rendent
+ * pas the_content(), donc quand une page passe en mode Elementor on doit
+ * forcer un template qui rend le contenu. L'utilisateur peut toujours
+ * sélectionner manuellement « Elementor Canvas » depuis l'admin pour un
+ * rendu 100% vierge ; dans ce cas on respecte son choix.
+ */
+function edigital_elementor_force_template( $template ) {
+	if ( ! function_exists( 'is_singular' ) || ! is_singular() ) {
+		return $template;
+	}
+	if ( ! class_exists( '\Elementor\Plugin' ) ) {
+		return $template;
+	}
+
+	$post_id = get_queried_object_id();
+	if ( ! $post_id ) {
+		return $template;
+	}
+
+	// On route vers un template compatible dans deux cas :
+	//   1. On est DANS l'éditeur Elementor (preview ou action=elementor) — il faut
+	//      un template avec the_content() pour qu'Elementor puisse s'injecter.
+	//   2. Côté front, la page a du contenu Elementor réel (_elementor_data
+	//      non vide). Le simple marqueur _elementor_edit_mode=builder ne suffit
+	//      pas : Elementor le pose dès qu'on clique "Éditer" même si on n'a
+	//      rien sauvegardé.
+	$is_preview  = isset( $_GET['elementor-preview'] );
+	$is_edit_req = isset( $_GET['action'] ) && 'elementor' === $_GET['action'];
+	$has_content = false;
+	if ( ! $is_preview && ! $is_edit_req ) {
+		$data = get_post_meta( $post_id, '_elementor_data', true );
+		if ( is_string( $data ) && '' !== trim( $data ) && '[]' !== trim( $data ) ) {
+			$has_content = true;
+		}
+	}
+
+	if ( ! $is_preview && ! $is_edit_req && ! $has_content ) {
+		return $template;
+	}
+
+	// Si l'utilisateur a explicitement choisi un template Elementor -> on respecte.
+	$chosen = get_page_template_slug( $post_id );
+	if ( $chosen && false !== strpos( $chosen, 'elementor' ) ) {
+		return $template;
+	}
+
+	// Sinon, on force le template Elementor Full Width.
+	$forced = locate_template( 'elementor-full-width.php' );
+	if ( $forced ) {
+		return $forced;
+	}
+	return $template;
+}
+add_filter( 'template_include', 'edigital_elementor_force_template', 99 );
+
+/**
+ * Ajoute un bouton « Éditer avec Elementor » dans la barre d'admin.
+ * Désactive les actions incompatibles du Customizer pour les pages gérées par
+ * Elementor (utile quand on ajoute le Theme Builder).
+ */
+function edigital_elementor_body_class( $classes ) {
+	if ( ! defined( 'ELEMENTOR_VERSION' ) ) {
+		return $classes;
+	}
+	if ( is_singular() ) {
+		$classes[] = 'edigital-elementor-compatible';
+	}
+	return $classes;
+}
+add_filter( 'body_class', 'edigital_elementor_body_class' );
+
+/**
+ * Enregistre les assets E-Digital comme dépendances des widgets Elementor
+ * custom éventuels. Cela permet à un développeur d'étendre Elementor en
+ * réutilisant les styles Mokko.
+ */
+function edigital_elementor_enqueue_frontend_assets() {
+	if ( ! defined( 'ELEMENTOR_VERSION' ) ) {
+		return;
+	}
+	// Les assets sont déjà chargés via edigital_enqueue_assets(). On ne fait
+	// qu'exposer le handle pour les widgets custom.
+}
+add_action( 'elementor/frontend/before_enqueue_scripts', 'edigital_elementor_enqueue_frontend_assets' );
+
+/**
+ * Augmente la limite mémoire recommandée par Elementor (affiché dans System Info).
+ */
+function edigital_elementor_requirements() {
+	if ( function_exists( 'wp_raise_memory_limit' ) ) {
+		wp_raise_memory_limit( 'admin' );
+	}
+}
+add_action( 'admin_init', 'edigital_elementor_requirements' );
+

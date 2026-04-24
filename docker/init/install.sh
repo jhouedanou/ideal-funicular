@@ -46,6 +46,23 @@ fi
 echo "[edigital] Activation du thème E-Digital ..."
 wp theme activate edigital --path=/var/www/html
 
+# Plugins indispensables. Variable EDIGITAL_PLUGINS (CSV) personnalisable.
+PLUGINS="${EDIGITAL_PLUGINS:-elementor,advanced-custom-fields}"
+echo "[edigital] Installation/activation des plugins : $PLUGINS"
+OLD_IFS=$IFS
+IFS=','
+for plug in $PLUGINS; do
+  plug=$(echo "$plug" | tr -d ' ')
+  [ -z "$plug" ] && continue
+  if ! wp plugin is-installed "$plug" --path=/var/www/html >/dev/null 2>&1; then
+    echo "[edigital]   → installation de $plug"
+    wp plugin install "$plug" --activate --path=/var/www/html || echo "[edigital]   !! échec $plug (on continue)"
+  else
+    wp plugin activate "$plug" --path=/var/www/html || true
+  fi
+done
+IFS=$OLD_IFS
+
 if [ -f "$MARKER" ]; then
   echo "[edigital] Contenu déjà importé (marker présent) — skip SQL import."
 else
