@@ -149,8 +149,8 @@ get_header();
 <h1 class="ms-sc--t" data-splitting="">Participe à la<br/>croissance</h1>
 <p class="ms-sc--text"><?php $acf_val = get_field('des_tpe_et_pme'); echo $acf_val ? esc_html($acf_val) : 'des TPE et PME'; ?></p>
 <div class="ms-cont__btn">
-<a "="" )="" );="" ?="" class="btn btn-mokko btn--lg btn--primary" href="<?php echo esc_url( home_url( " services="">"&gt;
-                                            <div class="ms-btn__text"> Accéder à nos services</div>
+<a class="btn btn-mokko btn--lg btn--primary" href="<?php echo esc_url( home_url( '/services/' ) ); ?>">
+<div class="ms-btn__text"> Accéder à nos services</div>
 </a>
 </div>
 <div class="ms-slider--overlay"></div>
@@ -166,8 +166,8 @@ get_header();
 <h1 class="ms-sc--t" data-splitting="">L'Agence<br/>E-digital</h1>
 <p class="ms-sc--text"><?php $acf_val = get_field('budget_ma_tris_pour_cms'); echo $acf_val ? esc_html($acf_val) : 'Budget maîtrisé pour CMS, CRM, ERP, Prestashop'; ?></p>
 <div class="ms-cont__btn">
-<a "="" )="" );="" ?="" class="btn btn-mokko btn--lg btn--primary" href="<?php echo esc_url( home_url( " services="">"&gt;
-                                            <div class="ms-btn__text"> Nos solutions</div>
+<a class="btn btn-mokko btn--lg btn--primary" href="<?php echo esc_url( home_url( '/services/' ) ); ?>">
+<div class="ms-btn__text"> Nos solutions</div>
 </a>
 </div>
 <div class="ms-slider--overlay"></div>
@@ -183,8 +183,8 @@ get_header();
 <h1 class="ms-sc--t" data-splitting="">L'Agence<br/>E-digital</h1>
 <p class="ms-sc--text"><?php $acf_val = get_field('budget_ma_tris_pour_cms_1'); echo $acf_val ? esc_html($acf_val) : 'Budget maîtrisé pour CMS, CRM, ERP, Prestashop'; ?></p>
 <div class="ms-cont__btn">
-<a "="" )="" );="" ?="" class="btn btn-mokko btn--lg btn--primary" href="<?php echo esc_url( home_url( " services="">"&gt;
-                                            <div class="ms-btn__text"> Nos solutions</div>
+<a class="btn btn-mokko btn--lg btn--primary" href="<?php echo esc_url( home_url( '/services/' ) ); ?>">
+<div class="ms-btn__text"> Nos solutions</div>
 </a>
 </div>
 <div class="ms-slider--overlay"></div>
@@ -284,8 +284,8 @@ get_header();
 <div class="portfolio-feed ms-p--d row">
 <div class="below left grid-item-p custom-ratio col-md-4 portfolios">
 <div class="item--inner">
-<a "="" )="" );="" ?="" href="<?php echo esc_url( home_url( " service-creation-web="" services="">" aria-label="Conception Web sur Mesure"&gt;
-                                    <div class="ms-p-arrow">
+<a aria-label="Conception Web sur Mesure" href="<?php echo esc_url( home_url( '/services/service-creation-web/' ) ); ?>">
+<div class="ms-p-arrow">
 <svg class="ms-btt-arrow" enable-background="new 0 0 96 96" height="96px" version="1.1" viewbox="0 0 96 96" width="96px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <path d="M52,84V21.656l21.457,21.456c1.561,1.562,4.095,1.562,5.656,0.001c1.562-1.562,1.562-4.096,0-5.658L50.829,9.172l0,0  c-0.186-0.186-0.391-0.352-0.609-0.498c-0.101-0.067-0.21-0.114-0.315-0.172c-0.124-0.066-0.242-0.142-0.373-0.195  c-0.135-0.057-0.275-0.089-0.415-0.129c-0.111-0.033-0.216-0.076-0.331-0.099C48.527,8.027,48.264,8,48.001,8l0,0  c-0.003,0-0.006,0.001-0.009,0.001c-0.259,0.001-0.519,0.027-0.774,0.078c-0.12,0.024-0.231,0.069-0.349,0.104  c-0.133,0.039-0.268,0.069-0.397,0.123c-0.139,0.058-0.265,0.136-0.396,0.208c-0.098,0.054-0.198,0.097-0.292,0.159  c-0.221,0.146-0.427,0.314-0.614,0.501L16.889,37.456c-1.562,1.562-1.562,4.095-0.001,5.657c1.562,1.562,4.094,1.562,5.658,0  L44,21.657V84c0,2.209,1.791,4,4,4S52,86.209,52,84z">
 </path>
@@ -305,8 +305,8 @@ get_header();
 </div>
 <div class="below left grid-item-p custom-ratio col-md-4 portfolios">
 <div class="item--inner">
-<a "="" )="" );="" ?="" href="<?php echo esc_url( home_url( " service-app-metier="" services="">" aria-label="Applications Mobiles"&gt;
-                                    <div class="ms-p-arrow">
+<a aria-label="Applications Mobiles" href="<?php echo esc_url( home_url( '/services/service-app-metier/' ) ); ?>">
+<div class="ms-p-arrow">
 <svg class="ms-btt-arrow" enable-background="new 0 0 96 96" height="96px" version="1.1" viewbox="0 0 96 96" width="96px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <path d="M52,84V21.656l21.457,21.456c1.561,1.562,4.095,1.562,5.656,0.001c1.562-1.562,1.562-4.096,0-5.658L50.829,9.172l0,0  c-0.186-0.186-0.391-0.352-0.609-0.498c-0.101-0.067-0.21-0.114-0.315-0.172c-0.124-0.066-0.242-0.142-0.373-0.195  c-0.135-0.057-0.275-0.089-0.415-0.129c-0.111-0.033-0.216-0.076-0.331-0.099C48.527,8.027,48.264,8,48.001,8l0,0  c-0.003,0-0.006,0.001-0.009,0.001c-0.259,0.001-0.519,0.027-0.774,0.078c-0.12,0.024-0.231,0.069-0.349,0.104  c-0.133,0.039-0.268,0.069-0.397,0.123c-0.139,0.058-0.265,0.136-0.396,0.208c-0.098,0.054-0.198,0.097-0.292,0.159  c-0.221,0.146-0.427,0.314-0.614,0.501L16.889,37.456c-1.562,1.562-1.562,4.095-0.001,5.657c1.562,1.562,4.094,1.562,5.658,0  L44,21.657V84c0,2.209,1.791,4,4,4S52,86.209,52,84z">
 </path>
@@ -326,8 +326,8 @@ get_header();
 </div>
 <div class="below left grid-item-p custom-ratio col-md-4 portfolios">
 <div class="item--inner">
-<a "="" )="" );="" ?="" href="<?php echo esc_url( home_url( " service-app-metier="" services="">" aria-label="Logiciels Métier"&gt;
-                                    <div class="ms-p-arrow">
+<a aria-label="Logiciels Métier" href="<?php echo esc_url( home_url( '/services/service-app-metier/' ) ); ?>">
+<div class="ms-p-arrow">
 <svg class="ms-btt-arrow" enable-background="new 0 0 96 96" height="96px" version="1.1" viewbox="0 0 96 96" width="96px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <path d="M52,84V21.656l21.457,21.456c1.561,1.562,4.095,1.562,5.656,0.001c1.562-1.562,1.562-4.096,0-5.658L50.829,9.172l0,0  c-0.186-0.186-0.391-0.352-0.609-0.498c-0.101-0.067-0.21-0.114-0.315-0.172c-0.124-0.066-0.242-0.142-0.373-0.195  c-0.135-0.057-0.275-0.089-0.415-0.129c-0.111-0.033-0.216-0.076-0.331-0.099C48.527,8.027,48.264,8,48.001,8l0,0  c-0.003,0-0.006,0.001-0.009,0.001c-0.259,0.001-0.519,0.027-0.774,0.078c-0.12,0.024-0.231,0.069-0.349,0.104  c-0.133,0.039-0.268,0.069-0.397,0.123c-0.139,0.058-0.265,0.136-0.396,0.208c-0.098,0.054-0.198,0.097-0.292,0.159  c-0.221,0.146-0.427,0.314-0.614,0.501L16.889,37.456c-1.562,1.562-1.562,4.095-0.001,5.657c1.562,1.562,4.094,1.562,5.658,0  L44,21.657V84c0,2.209,1.791,4,4,4S52,86.209,52,84z">
 </path>
@@ -349,8 +349,8 @@ get_header();
 </div>
 </div>
 <div class="btn-wrap">
-<a "="" )="" );="" ?="" class="btn btn-mokko btn--md" href="<?php echo esc_url( home_url( " nos-projets="" role="button">"&gt;
-                        <div class="ms-btn--label">
+<a class="btn btn-mokko btn--md" href="<?php echo esc_url( home_url( '/nos-projets/' ) ); ?>" role="button">
+<div class="ms-btn--label">
 <div class="ms-btn__text">Voir tous les projets</div>
 <div class="ms-btn__border"></div>
 </div>
@@ -570,8 +570,8 @@ get_header();
 </article>
 </div>
 <div class="btn-wrap">
-<a "="" )="" );="" ?="" blog="" class="btn btn-mokko btn--md" href="<?php echo esc_url( home_url( " role="button">"&gt;
-                            <div class="ms-btn--label">
+<a class="btn btn-mokko btn--md" href="<?php echo esc_url( home_url( '/blog/' ) ); ?>" role="button">
+<div class="ms-btn--label">
 <div class="ms-btn__text">Toutes les actualités</div>
 <div class="ms-btn__border"></div>
 </div>
@@ -621,8 +621,8 @@ get_header();
 <div class="portfolio-feed ms-p--d row p-0">
 <div class="overlay left grid-item-p custom-ratio col-md-4 portfolios has-post-thumbnail">
 <div class="item--inner">
-<a "="" )="" );="" ?="" href="<?php echo esc_url( home_url( " projet="">" aria-label="Mélange de style et de savoir-faire"&gt;
-                                            <div class="ms-p-arrow">
+<a aria-label="Mélange de style et de savoir-faire" href="<?php echo esc_url( home_url( '/projet/' ) ); ?>">
+<div class="ms-p-arrow">
 <svg class="ms-btt-arrow" enable-background="new 0 0 96 96" height="96px" version="1.1" viewbox="0 0 96 96" width="96px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <path d="M52,84V21.656l21.457,21.456c1.561,1.562,4.095,1.562,5.656,0.001c1.562-1.562,1.562-4.096,0-5.658L50.829,9.172l0,0  c-0.186-0.186-0.391-0.352-0.609-0.498c-0.101-0.067-0.21-0.114-0.315-0.172c-0.124-0.066-0.242-0.142-0.373-0.195  c-0.135-0.057-0.275-0.089-0.415-0.129c-0.111-0.033-0.216-0.076-0.331-0.099C48.527,8.027,48.264,8,48.001,8l0,0  c-0.003,0-0.006,0.001-0.009,0.001c-0.259,0.001-0.519,0.027-0.774,0.078c-0.12,0.024-0.231,0.069-0.349,0.104  c-0.133,0.039-0.268,0.069-0.397,0.123c-0.139,0.058-0.265,0.136-0.396,0.208c-0.098,0.054-0.198,0.097-0.292,0.159  c-0.221,0.146-0.427,0.314-0.614,0.501L16.889,37.456c-1.562,1.562-1.562,4.095-0.001,5.657c1.562,1.562,4.094,1.562,5.658,0  L44,21.657V84c0,2.209,1.791,4,4,4S52,86.209,52,84z">
 </path>
@@ -642,8 +642,8 @@ get_header();
 </div>
 <div class="overlay left grid-item-p custom-ratio col-md-4 portfolios has-post-thumbnail">
 <div class="item--inner">
-<a "="" )="" );="" ?="" href="<?php echo esc_url( home_url( " projet="">" aria-label="Réalités abstraites"&gt;
-                                            <div class="ms-p-arrow">
+<a aria-label="Réalités abstraites" href="<?php echo esc_url( home_url( '/projet/' ) ); ?>">
+<div class="ms-p-arrow">
 <svg class="ms-btt-arrow" enable-background="new 0 0 96 96" height="96px" version="1.1" viewbox="0 0 96 96" width="96px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <path d="M52,84V21.656l21.457,21.456c1.561,1.562,4.095,1.562,5.656,0.001c1.562-1.562,1.562-4.096,0-5.658L50.829,9.172l0,0  c-0.186-0.186-0.391-0.352-0.609-0.498c-0.101-0.067-0.21-0.114-0.315-0.172c-0.124-0.066-0.242-0.142-0.373-0.195  c-0.135-0.057-0.275-0.089-0.415-0.129c-0.111-0.033-0.216-0.076-0.331-0.099C48.527,8.027,48.264,8,48.001,8l0,0  c-0.003,0-0.006,0.001-0.009,0.001c-0.259,0.001-0.519,0.027-0.774,0.078c-0.12,0.024-0.231,0.069-0.349,0.104  c-0.133,0.039-0.268,0.069-0.397,0.123c-0.139,0.058-0.265,0.136-0.396,0.208c-0.098,0.054-0.198,0.097-0.292,0.159  c-0.221,0.146-0.427,0.314-0.614,0.501L16.889,37.456c-1.562,1.562-1.562,4.095-0.001,5.657c1.562,1.562,4.094,1.562,5.658,0  L44,21.657V84c0,2.209,1.791,4,4,4S52,86.209,52,84z">
 </path>
@@ -663,8 +663,8 @@ get_header();
 </div>
 <div class="overlay left grid-item-p custom-ratio col-md-4 portfolios has-post-thumbnail">
 <div class="item--inner">
-<a "="" )="" );="" ?="" href="<?php echo esc_url( home_url( " projet="">" aria-label="Palette de la nature"&gt;
-                                            <div class="ms-p-arrow">
+<a aria-label="Palette de la nature" href="<?php echo esc_url( home_url( '/projet/' ) ); ?>">
+<div class="ms-p-arrow">
 <svg class="ms-btt-arrow" enable-background="new 0 0 96 96" height="96px" version="1.1" viewbox="0 0 96 96" width="96px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <path d="M52,84V21.656l21.457,21.456c1.561,1.562,4.095,1.562,5.656,0.001c1.562-1.562,1.562-4.096,0-5.658L50.829,9.172l0,0  c-0.186-0.186-0.391-0.352-0.609-0.498c-0.101-0.067-0.21-0.114-0.315-0.172c-0.124-0.066-0.242-0.142-0.373-0.195  c-0.135-0.057-0.275-0.089-0.415-0.129c-0.111-0.033-0.216-0.076-0.331-0.099C48.527,8.027,48.264,8,48.001,8l0,0  c-0.003,0-0.006,0.001-0.009,0.001c-0.259,0.001-0.519,0.027-0.774,0.078c-0.12,0.024-0.231,0.069-0.349,0.104  c-0.133,0.039-0.268,0.069-0.397,0.123c-0.139,0.058-0.265,0.136-0.396,0.208c-0.098,0.054-0.198,0.097-0.292,0.159  c-0.221,0.146-0.427,0.314-0.614,0.501L16.889,37.456c-1.562,1.562-1.562,4.095-0.001,5.657c1.562,1.562,4.094,1.562,5.658,0  L44,21.657V84c0,2.209,1.791,4,4,4S52,86.209,52,84z">
 </path>
@@ -684,8 +684,8 @@ get_header();
 </div>
 <div class="overlay left grid-item-p custom-ratio col-md-4 portfolios has-post-thumbnail">
 <div class="item--inner">
-<a "="" )="" );="" ?="" href="<?php echo esc_url( home_url( " projet="">" aria-label="Portraits de passion"&gt;
-                                            <div class="ms-p-arrow">
+<a aria-label="Portraits de passion" href="<?php echo esc_url( home_url( '/projet/' ) ); ?>">
+<div class="ms-p-arrow">
 <svg class="ms-btt-arrow" enable-background="new 0 0 96 96" height="96px" version="1.1" viewbox="0 0 96 96" width="96px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <path d="M52,84V21.656l21.457,21.456c1.561,1.562,4.095,1.562,5.656,0.001c1.562-1.562,1.562-4.096,0-5.658L50.829,9.172l0,0  c-0.186-0.186-0.391-0.352-0.609-0.498c-0.101-0.067-0.21-0.114-0.315-0.172c-0.124-0.066-0.242-0.142-0.373-0.195  c-0.135-0.057-0.275-0.089-0.415-0.129c-0.111-0.033-0.216-0.076-0.331-0.099C48.527,8.027,48.264,8,48.001,8l0,0  c-0.003,0-0.006,0.001-0.009,0.001c-0.259,0.001-0.519,0.027-0.774,0.078c-0.12,0.024-0.231,0.069-0.349,0.104  c-0.133,0.039-0.268,0.069-0.397,0.123c-0.139,0.058-0.265,0.136-0.396,0.208c-0.098,0.054-0.198,0.097-0.292,0.159  c-0.221,0.146-0.427,0.314-0.614,0.501L16.889,37.456c-1.562,1.562-1.562,4.095-0.001,5.657c1.562,1.562,4.094,1.562,5.658,0  L44,21.657V84c0,2.209,1.791,4,4,4S52,86.209,52,84z">
 </path>
@@ -705,8 +705,8 @@ get_header();
 </div>
 <div class="overlay left grid-item-p custom-ratio col-md-4 portfolios has-post-thumbnail">
 <div class="item--inner">
-<a "="" )="" );="" ?="" href="<?php echo esc_url( home_url( " projet="">" aria-label="Visions cinématographiques"&gt;
-                                            <div class="ms-p-arrow">
+<a aria-label="Visions cinématographiques" href="<?php echo esc_url( home_url( '/projet/' ) ); ?>">
+<div class="ms-p-arrow">
 <svg class="ms-btt-arrow" enable-background="new 0 0 96 96" height="96px" version="1.1" viewbox="0 0 96 96" width="96px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <path d="M52,84V21.656l21.457,21.456c1.561,1.562,4.095,1.562,5.656,0.001c1.562-1.562,1.562-4.096,0-5.658L50.829,9.172l0,0  c-0.186-0.186-0.391-0.352-0.609-0.498c-0.101-0.067-0.21-0.114-0.315-0.172c-0.124-0.066-0.242-0.142-0.373-0.195  c-0.135-0.057-0.275-0.089-0.415-0.129c-0.111-0.033-0.216-0.076-0.331-0.099C48.527,8.027,48.264,8,48.001,8l0,0  c-0.003,0-0.006,0.001-0.009,0.001c-0.259,0.001-0.519,0.027-0.774,0.078c-0.12,0.024-0.231,0.069-0.349,0.104  c-0.133,0.039-0.268,0.069-0.397,0.123c-0.139,0.058-0.265,0.136-0.396,0.208c-0.098,0.054-0.198,0.097-0.292,0.159  c-0.221,0.146-0.427,0.314-0.614,0.501L16.889,37.456c-1.562,1.562-1.562,4.095-0.001,5.657c1.562,1.562,4.094,1.562,5.658,0  L44,21.657V84c0,2.209,1.791,4,4,4S52,86.209,52,84z">
 </path>
@@ -726,8 +726,8 @@ get_header();
 </div>
 <div class="overlay left grid-item-p custom-ratio col-md-4 portfolios has-post-thumbnail">
 <div class="item--inner">
-<a "="" )="" );="" ?="" href="<?php echo esc_url( home_url( " projet="">" aria-label="Symétrie graphique"&gt;
-                                            <div class="ms-p-arrow">
+<a aria-label="Symétrie graphique" href="<?php echo esc_url( home_url( '/projet/' ) ); ?>">
+<div class="ms-p-arrow">
 <svg class="ms-btt-arrow" enable-background="new 0 0 96 96" height="96px" version="1.1" viewbox="0 0 96 96" width="96px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <path d="M52,84V21.656l21.457,21.456c1.561,1.562,4.095,1.562,5.656,0.001c1.562-1.562,1.562-4.096,0-5.658L50.829,9.172l0,0  c-0.186-0.186-0.391-0.352-0.609-0.498c-0.101-0.067-0.21-0.114-0.315-0.172c-0.124-0.066-0.242-0.142-0.373-0.195  c-0.135-0.057-0.275-0.089-0.415-0.129c-0.111-0.033-0.216-0.076-0.331-0.099C48.527,8.027,48.264,8,48.001,8l0,0  c-0.003,0-0.006,0.001-0.009,0.001c-0.259,0.001-0.519,0.027-0.774,0.078c-0.12,0.024-0.231,0.069-0.349,0.104  c-0.133,0.039-0.268,0.069-0.397,0.123c-0.139,0.058-0.265,0.136-0.396,0.208c-0.098,0.054-0.198,0.097-0.292,0.159  c-0.221,0.146-0.427,0.314-0.614,0.501L16.889,37.456c-1.562,1.562-1.562,4.095-0.001,5.657c1.562,1.562,4.094,1.562,5.658,0  L44,21.657V84c0,2.209,1.791,4,4,4S52,86.209,52,84z">
 </path>
@@ -750,8 +750,7 @@ get_header();
 <div class="portfolio-button-area d-flex align-items-center justify-content-start">
 <p><?php $acf_val = get_field('d_couvrez_nos_derni_res_r'); echo $acf_val ? esc_html($acf_val) : 'Découvrez nos dernières réalisations'; ?></p>
 <img alt="" class="attachment-full size-full wp-image-4746" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/portfolio/arrow-right.svg" width="24"/>
-<a "="" )="" );="" ?="" class="ms-sl" href="<?php echo esc_url( home_url( " nos-projets="" role="button"><?php $acf_val = get_field('texte'); echo $acf_val ? esc_html($acf_val) : '"&gt;
-                                    Voir Tous Les Projets'; ?></a>
+<a class="ms-sl" href="<?php echo esc_url( home_url( '/nos-projets/' ) ); ?>" role="button"><?php $acf_val = get_field('voir_tous_les_projets'); echo $acf_val ? esc_html($acf_val) : 'Voir Tous Les Projets'; ?></a>
 </div>
 </div>
 </div>
@@ -902,8 +901,7 @@ get_header();
 <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: #e31414; margin-right: 10px;"></i> Optimisé SEO</li>
 <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: #e31414; margin-right: 10px;"></i> Responsive Design</li>
 </ul>
-<a "="" )="" );="" ?="" contact="" href="<?php echo esc_url( home_url( "><?php $acf_val = get_field('class_btn_btn_sm_btn'); echo $acf_val ? wp_kses_post($acf_val) : '" class="btn btn--sm btn--primary"
-                                    style="text-align: center; display: block; color: #fff !important;"&gt;Demander un
+<a class="btn btn--sm btn--primary" href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" style="text-align: center; display: block; color: #fff !important;"><?php $acf_val = get_field('demander_un'); echo $acf_val ? esc_html($acf_val) : 'Demander un
                                     Devis'; ?></a>
 </div>
 <!-- Site E-commerce -->
@@ -920,8 +918,7 @@ get_header();
 <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: #e31414; margin-right: 10px;"></i> PrestaShop / WooCommerce
                                     </li>
 </ul>
-<a "="" )="" );="" ?="" contact="" href="<?php echo esc_url( home_url( "><?php $acf_val = get_field('class_btn_btn_sm_btn_1'); echo $acf_val ? wp_kses_post($acf_val) : '" class="btn btn--sm btn--primary"
-                                    style="text-align: center; display: block; background: #e31414; border: none; color: #fff !important;"&gt;Demander
+<a class="btn btn--sm btn--primary" href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" style="text-align: center; display: block; background: #e31414; border: none; color: #fff !important;"><?php $acf_val = get_field('demander'); echo $acf_val ? esc_html($acf_val) : 'Demander
                                     un Devis'; ?></a>
 </div>
 <!-- App Mobile -->
@@ -937,8 +934,7 @@ get_header();
 <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: #e31414; margin-right: 10px;"></i> UX / UI Premium</li>
 <li style="margin-bottom: 10px;"><i class="fas fa-check" style="color: #e31414; margin-right: 10px;"></i> Notification Push</li>
 </ul>
-<a "="" )="" );="" ?="" contact="" href="<?php echo esc_url( home_url( "><?php $acf_val = get_field('class_btn_btn_sm_btn_2'); echo $acf_val ? wp_kses_post($acf_val) : '" class="btn btn--sm btn--primary"
-                                    style="text-align: center; display: block; color: #fff !important;"&gt;Demander un
+<a class="btn btn--sm btn--primary" href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" style="text-align: center; display: block; color: #fff !important;"><?php $acf_val = get_field('demander_un_1'); echo $acf_val ? esc_html($acf_val) : 'Demander un
                                     Devis'; ?></a>
 </div>
 </div>
@@ -981,8 +977,7 @@ get_header();
 <div class="ms-posts--wrap">
 <div class="row ms-posts--card">
 <article class="grid-item col-sm-12 col-md-6 col-lg-6 post has-post-thumbnail">
-<a "="" )="" );="" ?="" blog-single="" href="<?php echo esc_url( home_url( "><?php $acf_val = get_field('texte_1'); echo $acf_val ? wp_kses_post($acf_val) : '"
-                                            aria-label="Visualizing Data: A Deep Dive into AI"&gt;'; ?></a>
+<a aria-label="Visualizing Data: A Deep Dive into AI" href="<?php echo esc_url( home_url( '/blog-single/' ) ); ?>"></a>
 <figure class="ms-posts--card__media">
 <img alt="Développement d'applications mobiles" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/portfolio/blog-mobile.png"/>
 </figure>
@@ -998,7 +993,7 @@ get_header();
 </div>
 <div class="post-meta-cont">
 <div class="post-category">
-<a "="" )="" );="" ?="" blog="" href="<?php echo esc_url( home_url( "><?php $acf_val = get_field('rel_category_tag_tech'); echo $acf_val ? esc_html($acf_val) : '" rel="category tag"&gt;Technology'; ?></a>
+<a href="<?php echo esc_url( home_url( '/blog/' ) ); ?>" rel="category tag"><?php $acf_val = get_field('technology'); echo $acf_val ? esc_html($acf_val) : 'Technology'; ?></a>
 </div>
 <div class="post-header">
 <a class="post-title" href="#">
@@ -1010,7 +1005,7 @@ get_header();
 </div>
 </article>
 <article class="grid-item col-sm-12 col-md-6 col-lg-6 post has-post-thumbnail">
-<a "="" )="" );="" ?="" blog-single="" href="<?php echo esc_url( home_url( "><?php $acf_val = get_field('aria_label_why_ai_is_p'); echo $acf_val ? esc_html($acf_val) : '" aria-label="Why AI Is Perspective"&gt;'; ?></a>
+<a aria-label="Why AI Is Perspective" href="<?php echo esc_url( home_url( '/blog-single/' ) ); ?>"></a>
 <figure class="ms-posts--card__media">
 <img alt="Agence Marketing des Médias Sociaux" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/portfolio/blog-marketing.png"/>
 </figure>
@@ -1037,7 +1032,7 @@ get_header();
 </div>
 </article>
 <article class="grid-item col-sm-12 col-md-6 col-lg-6 post has-post-thumbnail">
-<a "="" )="" );="" ?="" blog-single="" href="<?php echo esc_url( home_url( "><?php $acf_val = get_field('aria_label_a_day_in_th'); echo $acf_val ? esc_html($acf_val) : '" aria-label="A Day in the Life of a Photographer"&gt;'; ?></a>
+<a aria-label="A Day in the Life of a Photographer" href="<?php echo esc_url( home_url( '/blog-single/' ) ); ?>"></a>
 <figure class="ms-posts--card__media">
 <img alt="Création de Site Internet" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/portfolio/blog-design.png"/>
 </figure>
@@ -1065,7 +1060,7 @@ get_header();
 </div>
 </article>
 <article class="grid-item col-sm-12 col-md-6 col-lg-6 post has-post-thumbnail">
-<a "="" )="" );="" ?="" blog-single="" href="<?php echo esc_url( home_url( "><?php $acf_val = get_field('aria_label_my_take_on'); echo $acf_val ? esc_html($acf_val) : '" aria-label="My Take on the Future of AI"&gt;'; ?></a>
+<a aria-label="My Take on the Future of AI" href="<?php echo esc_url( home_url( '/blog-single/' ) ); ?>"></a>
 <figure class="ms-posts--card__media">
 <img alt="Création Application Spécifique" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/portfolio/blog-software.png"/>
 </figure>
@@ -1095,8 +1090,7 @@ get_header();
 <div class="blog-button-area d-flex align-items-center justify-content-start">
 <p><?php $acf_val = get_field('d_couvrez_toutes_nos_r_al'); echo $acf_val ? esc_html($acf_val) : 'Découvrez toutes nos réalisations'; ?></p>
 <img alt="" class="attachment-full size-full wp-image-4746" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/portfolio/arrow-right.svg" width="24"/>
-<a "="" )="" );="" ?="" class="ms-sl" href="<?php echo esc_url( home_url( " nos-projets="" role="button"><?php $acf_val = get_field('texte_2'); echo $acf_val ? esc_html($acf_val) : '"&gt;
-                                        Voir tous les projets'; ?></a>
+<a class="ms-sl" href="<?php echo esc_url( home_url( '/nos-projets/' ) ); ?>" role="button"><?php $acf_val = get_field('voir_tous_les_projets_1'); echo $acf_val ? esc_html($acf_val) : 'Voir tous les projets'; ?></a>
 </div>
 </div>
 </div>

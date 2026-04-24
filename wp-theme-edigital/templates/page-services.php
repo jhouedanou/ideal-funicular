@@ -75,7 +75,7 @@ get_header();
 <div class="ms-hc--inner">
 <nav aria-label="breadcrumb">
 <ol class="breadcrumb">
-<li class="breadcrumb-item"><a "="" )="" );="" ?="" href="<?php echo esc_url( home_url( "><?php $acf_val = get_field('accueil'); echo $acf_val ? esc_html($acf_val) : '"&gt;Accueil'; ?></a></li>
+<li class="breadcrumb-item"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php $acf_val = get_field('accueil'); echo $acf_val ? esc_html($acf_val) : 'Accueil'; ?></a></li>
 <li aria-current="page" class="breadcrumb-item active">Nos Services</li>
 </ol>
 </nav>
@@ -96,8 +96,8 @@ get_header();
 <!-- Service 1: Création Web -->
 <div class="col-md-4 col-sm-6 mb-5">
 <article class="service-card" style="transition: transform 0.3s ease;">
-<a "="" )="" );="" ?="" href="<?php echo esc_url( home_url( " service-creation-web="" services="">" style="text-decoration: none; display: block;"&gt;
-                                        <figure style="border-radius: 20px; overflow: hidden; margin-bottom: 25px;">
+<a href="<?php echo esc_url( home_url( '/services/service-creation-web/' ) ); ?>" style="text-decoration: none; display: block;">
+<figure style="border-radius: 20px; overflow: hidden; margin-bottom: 25px;">
 <img alt="Solution Numérique" onmouseout="this.style.transform='scale(1)'" onmouseover="this.style.transform='scale(1.05)'" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/service-web-hero.jpg" style="width: 100%; aspect-ratio: 4/5; object-fit: cover; transition: transform 0.5s ease;"/>
 </figure>
 <div class="service-card-content">
@@ -110,8 +110,8 @@ get_header();
 <!-- Service 2: Visibilité -->
 <div class="col-md-4 col-sm-6 mb-5">
 <article class="service-card" style="transition: transform 0.3s ease;">
-<a "="" )="" );="" ?="" href="<?php echo esc_url( home_url( " service-visibilite-seo="" services="">" style="text-decoration: none; display: block;"&gt;
-                                        <figure style="border-radius: 20px; overflow: hidden; margin-bottom: 25px;">
+<a href="<?php echo esc_url( home_url( '/services/service-visibilite-seo/' ) ); ?>" style="text-decoration: none; display: block;">
+<figure style="border-radius: 20px; overflow: hidden; margin-bottom: 25px;">
 <img alt="Audit Visibilité" onmouseout="this.style.transform='scale(1)'" onmouseover="this.style.transform='scale(1.05)'" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/hero-visibilite.png" style="width: 100%; aspect-ratio: 4/5; object-fit: cover; transition: transform 0.5s ease;"/>
 </figure>
 <div class="service-card-content">
@@ -124,8 +124,8 @@ get_header();
 <!-- Service 3: Publicité -->
 <div class="col-md-4 col-sm-6 mb-5">
 <article class="service-card" style="transition: transform 0.3s ease;">
-<a "="" )="" );="" ?="" href="<?php echo esc_url( home_url( " service-visibilite-google-ads="" services="">" style="text-decoration: none; display: block;"&gt;
-                                        <figure style="border-radius: 20px; overflow: hidden; margin-bottom: 25px;">
+<a href="<?php echo esc_url( home_url( '/services/service-visibilite-google-ads/' ) ); ?>" style="text-decoration: none; display: block;">
+<figure style="border-radius: 20px; overflow: hidden; margin-bottom: 25px;">
 <img alt="Publicité Google et Meta" onmouseout="this.style.transform='scale(1)'" onmouseover="this.style.transform='scale(1.05)'" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/hero-ads.png" style="width: 100%; aspect-ratio: 4/5; object-fit: cover; transition: transform 0.5s ease;"/>
 </figure>
 <div class="service-card-content">
@@ -138,8 +138,8 @@ get_header();
 <!-- Service 4: App Métier -->
 <div class="col-md-4 col-sm-6 mb-5">
 <article class="service-card" style="transition: transform 0.3s ease;">
-<a "="" )="" );="" ?="" href="<?php echo esc_url( home_url( " service-app-metier="" services="">" style="text-decoration: none; display: block;"&gt;
-                                        <figure style="border-radius: 20px; overflow: hidden; margin-bottom: 25px;">
+<a href="<?php echo esc_url( home_url( '/services/service-app-metier/' ) ); ?>" style="text-decoration: none; display: block;">
+<figure style="border-radius: 20px; overflow: hidden; margin-bottom: 25px;">
 <img alt="Application Métier" onmouseout="this.style.transform='scale(1)'" onmouseover="this.style.transform='scale(1.05)'" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/hero-app-metier.png" style="width: 100%; aspect-ratio: 4/5; object-fit: cover; transition: transform 0.5s ease;"/>
 </figure>
 <div class="service-card-content">
@@ -152,8 +152,8 @@ get_header();
 <!-- Service 5: Branding -->
 <div class="col-md-4 col-sm-6 mb-5">
 <article class="service-card" style="transition: transform 0.3s ease;">
-<a "="" )="" );="" ?="" href="<?php echo esc_url( home_url( " service-branding="" services="">" style="text-decoration: none; display: block;"&gt;
-                                        <figure style="border-radius: 20px; overflow: hidden; margin-bottom: 25px;">
+<a href="<?php echo esc_url( home_url( '/services/service-branding/' ) ); ?>" style="text-decoration: none; display: block;">
+<figure style="border-radius: 20px; overflow: hidden; margin-bottom: 25px;">
 <img alt="Branding &amp; Design" onmouseout="this.style.transform='scale(1)'" onmouseover="this.style.transform='scale(1.05)'" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/hero-branding.png" style="width: 100%; aspect-ratio: 4/5; object-fit: cover; transition: transform 0.5s ease;"/>
 </figure>
 <div class="service-card-content">
@@ -166,8 +166,8 @@ get_header();
 <!-- Service 6: Maintenance -->
 <div class="col-md-4 col-sm-6 mb-5">
 <article class="service-card" style="transition: transform 0.3s ease;">
-<a "="" )="" );="" ?="" href="<?php echo esc_url( home_url( " service-maintenance="" services="">" style="text-decoration: none; display: block;"&gt;
-                                        <figure style="border-radius: 20px; overflow: hidden; margin-bottom: 25px;">
+<a href="<?php echo esc_url( home_url( '/services/service-maintenance/' ) ); ?>" style="text-decoration: none; display: block;">
+<figure style="border-radius: 20px; overflow: hidden; margin-bottom: 25px;">
 <img alt="Maintenance &amp; Support" onmouseout="this.style.transform='scale(1)'" onmouseover="this.style.transform='scale(1.05)'" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/hero-maintenance.png" style="width: 100%; aspect-ratio: 4/5; object-fit: cover; transition: transform 0.5s ease;"/>
 </figure>
 <div class="service-card-content">

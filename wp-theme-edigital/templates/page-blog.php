@@ -79,7 +79,7 @@ get_header();
 <div class="ms-hc--inner">
 <nav aria-label="breadcrumb">
 <ol class="breadcrumb">
-<li class="breadcrumb-item"><a "="" )="" );="" ?="" href="<?php echo esc_url( home_url( "><?php $acf_val = get_field('accueil'); echo $acf_val ? esc_html($acf_val) : '"&gt;Accueil'; ?></a></li>
+<li class="breadcrumb-item"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php $acf_val = get_field('accueil'); echo $acf_val ? esc_html($acf_val) : 'Accueil'; ?></a></li>
 <li aria-current="page" class="breadcrumb-item active">Blog</li>
 </ol>
 </nav>
@@ -104,7 +104,7 @@ get_header();
 <li class="mb-20" style="display: flex; gap: 15px; align-items: flex-start;">
 <img alt="" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/portfolio/blog-mobile-dev.png" style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px;"/>
 <div>
-<a "="" )="" );="" ?="" blog-single="" href="<?php echo esc_url( home_url( "><?php $acf_val = get_field('style_text_decoration'); echo $acf_val ? wp_kses_post($acf_val) : '" style="text-decoration: none; color: #000; font-weight: 600; display: block; line-height: 1.2;"&gt;Développement mobile : Les tendances 2024'; ?></a>
+<a href="<?php echo esc_url( home_url( '/blog-single/' ) ); ?>" style="text-decoration: none; color: #000; font-weight: 600; display: block; line-height: 1.2;"><?php $acf_val = get_field('d_veloppement_mobile_le'); echo $acf_val ? esc_html($acf_val) : 'Développement mobile : Les tendances 2024'; ?></a>
 <div style="font-size: 13px; color: #747474; margin-top: 5px; display: flex; align-items: center; gap: 10px;">
 <span><?php $acf_val = get_field('04_07_2024'); echo $acf_val ? esc_html($acf_val) : '04.07.2024'; ?></span>
 <span><i class="far fa-eye"></i> 1.2k vues</span>
@@ -115,7 +115,7 @@ get_header();
 <li class="mb-20" style="display: flex; gap: 15px; align-items: flex-start;">
 <img alt="" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/portfolio/blog-smma.png" style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px;"/>
 <div>
-<a "="" )="" );="" ?="" blog-single="" href="<?php echo esc_url( home_url( "><?php $acf_val = get_field('style_text_decoration_1'); echo $acf_val ? wp_kses_post($acf_val) : '" style="text-decoration: none; color: #000; font-weight: 600; display: block; line-height: 1.2;"&gt;Pourquoi le SMMA est indispensable'; ?></a>
+<a href="<?php echo esc_url( home_url( '/blog-single/' ) ); ?>" style="text-decoration: none; color: #000; font-weight: 600; display: block; line-height: 1.2;"><?php $acf_val = get_field('pourquoi_le_smma_est_indi'); echo $acf_val ? esc_html($acf_val) : 'Pourquoi le SMMA est indispensable'; ?></a>
 <div style="font-size: 13px; color: #747474; margin-top: 5px; display: flex; align-items: center; gap: 10px;">
 <span><?php $acf_val = get_field('27_01_2026'); echo $acf_val ? esc_html($acf_val) : '27.01.2026'; ?></span>
 <span><i class="far fa-eye"></i> 856 vues</span>
@@ -126,7 +126,7 @@ get_header();
 <li class="mb-20" style="display: flex; gap: 15px; align-items: flex-start;">
 <img alt="" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/portfolio/blog-strategy.png" style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px;"/>
 <div>
-<a "="" )="" );="" ?="" blog-single="" href="<?php echo esc_url( home_url( "><?php $acf_val = get_field('style_text_decoration_2'); echo $acf_val ? wp_kses_post($acf_val) : '" style="text-decoration: none; color: #000; font-weight: 600; display: block; line-height: 1.2;"&gt;SEO : Dominer les résultats de recherche'; ?></a>
+<a href="<?php echo esc_url( home_url( '/blog-single/' ) ); ?>" style="text-decoration: none; color: #000; font-weight: 600; display: block; line-height: 1.2;"><?php $acf_val = get_field('seo_dominer_les_r_sulta'); echo $acf_val ? esc_html($acf_val) : 'SEO : Dominer les résultats de recherche'; ?></a>
 <div style="font-size: 13px; color: #747474; margin-top: 5px; display: flex; align-items: center; gap: 10px;">
 <span><?php $acf_val = get_field('05_05_2024'); echo $acf_val ? esc_html($acf_val) : '05.05.2024'; ?></span>
 <span><i class="far fa-eye"></i> 2.4k vues</span>
@@ -152,7 +152,7 @@ get_header();
 <div class="row ms-posts--card">
 <!-- Article 1 -->
 <?php if(have_posts()): while(have_posts()): the_post(); ?><article class="grid-item col-sm-12 col-md-6 post has-post-thumbnail">
-<a "="" )="" );="" ?="" blog-single="" href="<?php the_permalink(); ?>"><?php $acf_val = get_field('aria_label_d_veloppeme'); echo $acf_val ? esc_html($acf_val) : '" aria-label="Développement Mobile"&gt;'; ?></a>
+<a aria-label="Développement Mobile" href="<?php the_permalink(); ?>"></a>
 <figure class="ms-posts--card__media">
 <img alt="Développement Mobile" src="<?php echo get_the_post_thumbnail_url(get_the_ID(), 'full') ?: ''; ?>"/>
 </figure>
@@ -171,8 +171,8 @@ get_header();
 <a href="<?php the_permalink(); ?>"><?php $acf_val = get_field('technologie'); echo $acf_val ? esc_html($acf_val) : 'Technologie'; ?></a>
 </div>
 <div class="post-header">
-<a "="" )="" );="" ?="" blog-single="" class="post-title" href="<?php the_permalink(); ?>">"&gt;
-                                                        <h3><?php the_title(); ?></h3>
+<a class="post-title" href="<?php the_permalink(); ?>">
+<h3><?php the_title(); ?></h3>
 </a>
 </div>
 </div>

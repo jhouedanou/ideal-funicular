@@ -132,8 +132,8 @@ get_header();
 <div class="ms-hc--inner">
 <nav aria-label="breadcrumb">
 <ol class="breadcrumb">
-<li class="breadcrumb-item"><a "="" )="" );="" ?="" href="<?php echo esc_url( home_url( "><?php $acf_val = get_field('accueil'); echo $acf_val ? esc_html($acf_val) : '"&gt;Accueil'; ?></a></li>
-<li class="breadcrumb-item"><a "="" )="" );="" ?="" href="<?php echo esc_url( home_url( " services=""><?php $acf_val = get_field('services'); echo $acf_val ? esc_html($acf_val) : '"&gt;Services'; ?></a></li>
+<li class="breadcrumb-item"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php $acf_val = get_field('accueil'); echo $acf_val ? esc_html($acf_val) : 'Accueil'; ?></a></li>
+<li class="breadcrumb-item"><a href="<?php echo esc_url( home_url( '/services/' ) ); ?>"><?php $acf_val = get_field('services'); echo $acf_val ? esc_html($acf_val) : 'Services'; ?></a></li>
 <li aria-current="page" class="breadcrumb-item active">Visibilité</li>
 </ol>
 </nav>
@@ -210,7 +210,7 @@ get_header();
 <div class="container">
 <h2><?php $acf_val = get_field('pr_t_obtenir_des_r_sult'); echo $acf_val ? esc_html($acf_val) : 'Prêt à obtenir des résultats concrets ?'; ?></h2>
 <p><?php $acf_val = get_field('discutons_ensemble_de_vos'); echo $acf_val ? wp_kses_post($acf_val) : 'Discutons ensemble de vos besoins et construisons la stratégie qui propulsera votre activité.'; ?></p>
-<a "="" )="" );="" ?="" contact="" href="<?php echo esc_url( home_url( "><?php $acf_val = get_field('class_btn_cta_demande'); echo $acf_val ? esc_html($acf_val) : '" class="btn-cta"&gt;Demander un devis gratuit'; ?></a>
+<a class="btn-cta" href="<?php echo esc_url( home_url( '/contact/' ) ); ?>"><?php $acf_val = get_field('demander_un_devis_gratuit'); echo $acf_val ? esc_html($acf_val) : 'Demander un devis gratuit'; ?></a>
 </div>
 </section>
 <!--================= CTA End =================-->

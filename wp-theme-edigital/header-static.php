@@ -13,36 +13,36 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
             <div class="main-header__inner">
                 <div class="main-header__logo">
                     <div class="logo-dark">
-                        <a href="<?php echo esc_url( home_url( "/" ) ); ?>">
+                        <a href="<?php echo esc_url( home_url( '/' ) ); ?>">
                             <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/Logo  E DIGITAL copie.png" alt="E-digital - Agence Web & Mobile">
                         </a>
                     </div>
                     <div class="logo-light">
-                        <a href="<?php echo esc_url( home_url( "/" ) ); ?>">
+                        <a href="<?php echo esc_url( home_url( '/' ) ); ?>">
                             <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/Logo  E DIGITAL copie.png" alt="E-digital - Agence Web & Mobile">
                         </a>
                     </div>
                 </div>
                 <nav class="main-header__nav js-main-header__nav main-header__default" id="main-header-nav">
                     <ul id="primary-menu-default" class="navbar-nav">
-                        <li class="menu-item"><a href="<?php echo esc_url( home_url( "/" ) ); ?>"><span>Accueil</span></a></li>
-                        <li class="menu-item"><a href="<?php echo esc_url( home_url( "/nos-technologies/" ) ); ?>"><span>Nos Technologies</span></a></li>
+                        <li class="menu-item"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><span>Accueil</span></a></li>
+                        <li class="menu-item"><a href="<?php echo esc_url( home_url( '/nos-technologies/' ) ); ?>"><span>Nos Technologies</span></a></li>
                         <li class="menu-item menu-item-has-children">
-                            <a href="<?php echo esc_url( home_url( "/services/" ) ); ?>" title="Services"><span>Services</span></a>
+                            <a href="<?php echo esc_url( home_url( '/services/' ) ); ?>" title="Services"><span>Services</span></a>
                             <ul class="sub-menu">
-                                <li class="menu-item"><a href="<?php echo esc_url( home_url( "/services/service-creation-web/" ) ); ?>">Création Solution Numérique</a></li>
-                                <li class="menu-item"><a href="<?php echo esc_url( home_url( "/services/service-visibilite-seo/" ) ); ?>">Visibilité</a></li>
-                                <li class="menu-item"><a href="<?php echo esc_url( home_url( "/services/service-visibilite-google-ads/" ) ); ?>">Publicité Google et Meta</a>
+                                <li class="menu-item"><a href="<?php echo esc_url( home_url( '/services/service-creation-web/' ) ); ?>">Création Solution Numérique</a></li>
+                                <li class="menu-item"><a href="<?php echo esc_url( home_url( '/services/service-visibilite-seo/' ) ); ?>">Visibilité</a></li>
+                                <li class="menu-item"><a href="<?php echo esc_url( home_url( '/services/service-visibilite-google-ads/' ) ); ?>">Publicité Google et Meta</a>
                                 </li>
                                 
-                                <li class="menu-item"><a href="<?php echo esc_url( home_url( "/services/service-app-metier/" ) ); ?>">Application Métier</a></li>
-                                <li class="menu-item"><a href="<?php echo esc_url( home_url( "/services/service-branding/" ) ); ?>">Branding & Design</a></li>
-                                <li class="menu-item"><a href="<?php echo esc_url( home_url( "/services/service-maintenance/" ) ); ?>">Maintenance & Support</a></li>
+                                <li class="menu-item"><a href="<?php echo esc_url( home_url( '/services/service-app-metier/' ) ); ?>">Application Métier</a></li>
+                                <li class="menu-item"><a href="<?php echo esc_url( home_url( '/services/service-branding/' ) ); ?>">Branding & Design</a></li>
+                                <li class="menu-item"><a href="<?php echo esc_url( home_url( '/services/service-maintenance/' ) ); ?>">Maintenance & Support</a></li>
                             </ul>
                         </li>
-                        <li class="menu-item"><a href="<?php echo esc_url( home_url( "/nos-projets/" ) ); ?>"><span>Nos Projets</span></a></li>
-                        <li class="menu-item"><a href="<?php echo esc_url( home_url( "/blog/" ) ); ?>"><span>Blog</span></a></li>
-                        <li class="menu-item"><a href="<?php echo esc_url( home_url( "/contact/" ) ); ?>"><span>Contact</span></a></li>
+                        <li class="menu-item"><a href="<?php echo esc_url( home_url( '/nos-projets/' ) ); ?>"><span>Nos Projets</span></a></li>
+                        <li class="menu-item"><a href="<?php echo esc_url( home_url( '/blog/' ) ); ?>"><span>Blog</span></a></li>
+                        <li class="menu-item"><a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>"><span>Contact</span></a></li>
                     </ul>
                 </nav>
 

@@ -469,10 +469,9 @@ if( function_exists('acf_add_local_field_group') ):
         )
             ,
         array(
-            'key' => 'field_page_accueil_texte',
-            'label' => '">
-                           ...',
-            'name' => 'texte',
+            'key' => 'field_page_accueil_voir_tous_les_projets',
+            'label' => 'Voir Tous Les Projets',
+            'name' => 'voir_tous_les_projets',
             'type' => 'text',
         )
             ,
@@ -554,10 +553,11 @@ if( function_exists('acf_add_local_field_group') ):
         )
             ,
         array(
-            'key' => 'field_page_accueil_class_btn_btn_sm_btn',
-            'label' => '" class="btn btn--sm btn--prim...',
-            'name' => 'class_btn_btn_sm_btn',
-            'type' => 'wysiwyg',
+            'key' => 'field_page_accueil_demander_un',
+            'label' => 'Demander un
+                  ...',
+            'name' => 'demander_un',
+            'type' => 'text',
         )
             ,
         array(
@@ -575,10 +575,11 @@ if( function_exists('acf_add_local_field_group') ):
         )
             ,
         array(
-            'key' => 'field_page_accueil_class_btn_btn_sm_btn_1',
-            'label' => '" class="btn btn--sm btn--prim...',
-            'name' => 'class_btn_btn_sm_btn_1',
-            'type' => 'wysiwyg',
+            'key' => 'field_page_accueil_demander',
+            'label' => 'Demander
+                     ...',
+            'name' => 'demander',
+            'type' => 'text',
         )
             ,
         array(
@@ -596,10 +597,11 @@ if( function_exists('acf_add_local_field_group') ):
         )
             ,
         array(
-            'key' => 'field_page_accueil_class_btn_btn_sm_btn_2',
-            'label' => '" class="btn btn--sm btn--prim...',
-            'name' => 'class_btn_btn_sm_btn_2',
-            'type' => 'wysiwyg',
+            'key' => 'field_page_accueil_demander_un_1',
+            'label' => 'Demander un
+                  ...',
+            'name' => 'demander_un_1',
+            'type' => 'text',
         )
             ,
         array(
@@ -640,14 +642,6 @@ if( function_exists('acf_add_local_field_group') ):
         )
             ,
         array(
-            'key' => 'field_page_accueil_texte_1',
-            'label' => '"
-                            ...',
-            'name' => 'texte_1',
-            'type' => 'wysiwyg',
-        )
-            ,
-        array(
             'key' => 'field_page_accueil_e_digital_6',
             'label' => 'E-digital',
             'name' => 'e_digital_6',
@@ -662,9 +656,9 @@ if( function_exists('acf_add_local_field_group') ):
         )
             ,
         array(
-            'key' => 'field_page_accueil_rel_category_tag_tech',
-            'label' => '" rel="category tag">Technolog...',
-            'name' => 'rel_category_tag_tech',
+            'key' => 'field_page_accueil_technology',
+            'label' => 'Technology',
+            'name' => 'technology',
             'type' => 'text',
         )
             ,
@@ -673,13 +667,6 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Développement d\'applications m...',
             'name' => 'd_veloppement_d_applicati_1',
             'type' => 'wysiwyg',
-        )
-            ,
-        array(
-            'key' => 'field_page_accueil_aria_label_why_ai_is_p',
-            'label' => '" aria-label="Why AI Is Perspe...',
-            'name' => 'aria_label_why_ai_is_p',
-            'type' => 'text',
         )
             ,
         array(
@@ -711,13 +698,6 @@ if( function_exists('acf_add_local_field_group') ):
         )
             ,
         array(
-            'key' => 'field_page_accueil_aria_label_a_day_in_th',
-            'label' => '" aria-label="A Day in the Lif...',
-            'name' => 'aria_label_a_day_in_th',
-            'type' => 'text',
-        )
-            ,
-        array(
             'key' => 'field_page_accueil_e_digital_8',
             'label' => 'E-digital',
             'name' => 'e_digital_8',
@@ -743,13 +723,6 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Création de Site Internet à Gu...',
             'name' => 'cr_ation_de_site_internet_1',
             'type' => 'wysiwyg',
-        )
-            ,
-        array(
-            'key' => 'field_page_accueil_aria_label_my_take_on',
-            'label' => '" aria-label="My Take on the F...',
-            'name' => 'aria_label_my_take_on',
-            'type' => 'text',
         )
             ,
         array(
@@ -788,10 +761,9 @@ if( function_exists('acf_add_local_field_group') ):
         )
             ,
         array(
-            'key' => 'field_page_accueil_texte_2',
-            'label' => '">
-                           ...',
-            'name' => 'texte_2',
+            'key' => 'field_page_accueil_voir_tous_les_projets_1',
+            'label' => 'Voir tous les projets',
+            'name' => 'voir_tous_les_projets_1',
             'type' => 'text',
         )
             ,
@@ -867,7 +839,7 @@ if( function_exists('acf_add_local_field_group') ):
             
         array(
             'key' => 'field_page_services_accueil',
-            'label' => '">Accueil',
+            'label' => 'Accueil',
             'name' => 'accueil',
             'type' => 'text',
         )
@@ -1076,14 +1048,14 @@ if( function_exists('acf_add_local_field_group') ):
             
         array(
             'key' => 'field_page_service-creation-web_accueil',
-            'label' => '">Accueil',
+            'label' => 'Accueil',
             'name' => 'accueil',
             'type' => 'text',
         )
             ,
         array(
             'key' => 'field_page_service-creation-web_services',
-            'label' => '">Services',
+            'label' => 'Services',
             'name' => 'services',
             'type' => 'text',
         )
@@ -1299,9 +1271,9 @@ if( function_exists('acf_add_local_field_group') ):
         )
             ,
         array(
-            'key' => 'field_page_service-creation-web_class_btn_cta_demande',
-            'label' => '" class="btn-cta">Demander un ...',
-            'name' => 'class_btn_cta_demande',
+            'key' => 'field_page_service-creation-web_demander_un_devis_gratuit',
+            'label' => 'Demander un devis gratuit',
+            'name' => 'demander_un_devis_gratuit',
             'type' => 'text',
         )
             
@@ -1327,14 +1299,14 @@ if( function_exists('acf_add_local_field_group') ):
             
         array(
             'key' => 'field_page_service-mobile-native_accueil',
-            'label' => '">Accueil',
+            'label' => 'Accueil',
             'name' => 'accueil',
             'type' => 'text',
         )
             ,
         array(
             'key' => 'field_page_service-mobile-native_services',
-            'label' => '">Services',
+            'label' => 'Services',
             'name' => 'services',
             'type' => 'text',
         )
@@ -1550,9 +1522,9 @@ if( function_exists('acf_add_local_field_group') ):
         )
             ,
         array(
-            'key' => 'field_page_service-mobile-native_class_btn_cta_demande',
-            'label' => '" class="btn-cta">Demander un ...',
-            'name' => 'class_btn_cta_demande',
+            'key' => 'field_page_service-mobile-native_demander_un_devis_gratuit',
+            'label' => 'Demander un devis gratuit',
+            'name' => 'demander_un_devis_gratuit',
             'type' => 'text',
         )
             
@@ -1578,14 +1550,14 @@ if( function_exists('acf_add_local_field_group') ):
             
         array(
             'key' => 'field_page_service-app-metier_accueil',
-            'label' => '">Accueil',
+            'label' => 'Accueil',
             'name' => 'accueil',
             'type' => 'text',
         )
             ,
         array(
             'key' => 'field_page_service-app-metier_services',
-            'label' => '">Services',
+            'label' => 'Services',
             'name' => 'services',
             'type' => 'text',
         )
@@ -1752,9 +1724,9 @@ if( function_exists('acf_add_local_field_group') ):
         )
             ,
         array(
-            'key' => 'field_page_service-app-metier_class_btn_cta_discute',
-            'label' => '" class="btn-cta">Discuter de ...',
-            'name' => 'class_btn_cta_discute',
+            'key' => 'field_page_service-app-metier_discuter_de_mon_projet_d',
+            'label' => 'Discuter de mon projet d\'appli...',
+            'name' => 'discuter_de_mon_projet_d',
             'type' => 'text',
         )
             
@@ -1780,14 +1752,14 @@ if( function_exists('acf_add_local_field_group') ):
             
         array(
             'key' => 'field_page_service-branding_accueil',
-            'label' => '">Accueil',
+            'label' => 'Accueil',
             'name' => 'accueil',
             'type' => 'text',
         )
             ,
         array(
             'key' => 'field_page_service-branding_services',
-            'label' => '">Services',
+            'label' => 'Services',
             'name' => 'services',
             'type' => 'text',
         )
@@ -1961,9 +1933,9 @@ if( function_exists('acf_add_local_field_group') ):
         )
             ,
         array(
-            'key' => 'field_page_service-branding_class_btn_cta_cliquez',
-            'label' => '" class="btn-cta">Cliquez ici ...',
-            'name' => 'class_btn_cta_cliquez',
+            'key' => 'field_page_service-branding_cliquez_ici_pour_renseign',
+            'label' => 'Cliquez ici pour renseigner le...',
+            'name' => 'cliquez_ici_pour_renseign',
             'type' => 'text',
         )
             
@@ -1989,14 +1961,14 @@ if( function_exists('acf_add_local_field_group') ):
             
         array(
             'key' => 'field_page_service-visibilite-seo_accueil',
-            'label' => '">Accueil',
+            'label' => 'Accueil',
             'name' => 'accueil',
             'type' => 'text',
         )
             ,
         array(
             'key' => 'field_page_service-visibilite-seo_services',
-            'label' => '">Services',
+            'label' => 'Services',
             'name' => 'services',
             'type' => 'text',
         )
@@ -2163,9 +2135,9 @@ if( function_exists('acf_add_local_field_group') ):
         )
             ,
         array(
-            'key' => 'field_page_service-visibilite-seo_class_btn_cta_demande',
-            'label' => '" class="btn-cta">Demander un ...',
-            'name' => 'class_btn_cta_demande',
+            'key' => 'field_page_service-visibilite-seo_demander_un_devis_gratuit',
+            'label' => 'Demander un devis gratuit',
+            'name' => 'demander_un_devis_gratuit',
             'type' => 'text',
         )
             
@@ -2191,14 +2163,14 @@ if( function_exists('acf_add_local_field_group') ):
             
         array(
             'key' => 'field_page_service-visibilite-google-ads_accueil',
-            'label' => '">Accueil',
+            'label' => 'Accueil',
             'name' => 'accueil',
             'type' => 'text',
         )
             ,
         array(
             'key' => 'field_page_service-visibilite-google-ads_services',
-            'label' => '">Services',
+            'label' => 'Services',
             'name' => 'services',
             'type' => 'text',
         )
@@ -2414,9 +2386,9 @@ if( function_exists('acf_add_local_field_group') ):
         )
             ,
         array(
-            'key' => 'field_page_service-visibilite-google-ads_class_btn_cta_d_marre',
-            'label' => '" class="btn-cta">Démarrer vos...',
-            'name' => 'class_btn_cta_d_marre',
+            'key' => 'field_page_service-visibilite-google-ads_d_marrer_vos_campagnes',
+            'label' => 'Démarrer vos campagnes',
+            'name' => 'd_marrer_vos_campagnes',
             'type' => 'text',
         )
             
@@ -2442,14 +2414,14 @@ if( function_exists('acf_add_local_field_group') ):
             
         array(
             'key' => 'field_page_service-maintenance_accueil',
-            'label' => '">Accueil',
+            'label' => 'Accueil',
             'name' => 'accueil',
             'type' => 'text',
         )
             ,
         array(
             'key' => 'field_page_service-maintenance_services',
-            'label' => '">Services',
+            'label' => 'Services',
             'name' => 'services',
             'type' => 'text',
         )
@@ -2616,9 +2588,9 @@ if( function_exists('acf_add_local_field_group') ):
         )
             ,
         array(
-            'key' => 'field_page_service-maintenance_class_btn_cta_cliquez',
-            'label' => '" class="btn-cta">Cliquez ici ...',
-            'name' => 'class_btn_cta_cliquez',
+            'key' => 'field_page_service-maintenance_cliquez_ici_pour_renseign',
+            'label' => 'Cliquez ici pour renseigner le...',
+            'name' => 'cliquez_ici_pour_renseign',
             'type' => 'text',
         )
             
@@ -2644,7 +2616,7 @@ if( function_exists('acf_add_local_field_group') ):
             
         array(
             'key' => 'field_page_nos-technologies_accueil',
-            'label' => '">Accueil',
+            'label' => 'Accueil',
             'name' => 'accueil',
             'type' => 'text',
         )
@@ -2867,7 +2839,7 @@ if( function_exists('acf_add_local_field_group') ):
             
         array(
             'key' => 'field_page_nos-projets_accueil',
-            'label' => '">Accueil',
+            'label' => 'Accueil',
             'name' => 'accueil',
             'type' => 'text',
         )
@@ -3132,7 +3104,7 @@ if( function_exists('acf_add_local_field_group') ):
             
         array(
             'key' => 'field_page_blog_accueil',
-            'label' => '">Accueil',
+            'label' => 'Accueil',
             'name' => 'accueil',
             'type' => 'text',
         )
@@ -3159,10 +3131,10 @@ if( function_exists('acf_add_local_field_group') ):
         )
             ,
         array(
-            'key' => 'field_page_blog_style_text_decoration',
-            'label' => '" style="text-decoration: none...',
-            'name' => 'style_text_decoration',
-            'type' => 'wysiwyg',
+            'key' => 'field_page_blog_d_veloppement_mobile_le',
+            'label' => 'Développement mobile : Les ten...',
+            'name' => 'd_veloppement_mobile_le',
+            'type' => 'text',
         )
             ,
         array(
@@ -3173,10 +3145,10 @@ if( function_exists('acf_add_local_field_group') ):
         )
             ,
         array(
-            'key' => 'field_page_blog_style_text_decoration_1',
-            'label' => '" style="text-decoration: none...',
-            'name' => 'style_text_decoration_1',
-            'type' => 'wysiwyg',
+            'key' => 'field_page_blog_pourquoi_le_smma_est_indi',
+            'label' => 'Pourquoi le SMMA est indispens...',
+            'name' => 'pourquoi_le_smma_est_indi',
+            'type' => 'text',
         )
             ,
         array(
@@ -3187,10 +3159,10 @@ if( function_exists('acf_add_local_field_group') ):
         )
             ,
         array(
-            'key' => 'field_page_blog_style_text_decoration_2',
-            'label' => '" style="text-decoration: none...',
-            'name' => 'style_text_decoration_2',
-            'type' => 'wysiwyg',
+            'key' => 'field_page_blog_seo_dominer_les_r_sulta',
+            'label' => 'SEO : Dominer les résultats de...',
+            'name' => 'seo_dominer_les_r_sulta',
+            'type' => 'text',
         )
             ,
         array(
@@ -3236,13 +3208,6 @@ if( function_exists('acf_add_local_field_group') ):
         )
             ,
         array(
-            'key' => 'field_page_blog_aria_label_d_veloppeme',
-            'label' => '" aria-label="Développement Mo...',
-            'name' => 'aria_label_d_veloppeme',
-            'type' => 'text',
-        )
-            ,
-        array(
             'key' => 'field_page_blog_e_digital',
             'label' => 'E-digital',
             'name' => 'e_digital',
@@ -3267,13 +3232,6 @@ if( function_exists('acf_add_local_field_group') ):
             'key' => 'field_page_blog_d_veloppement_d_applicati',
             'label' => 'Développement d\'applications m...',
             'name' => 'd_veloppement_d_applicati',
-            'type' => 'text',
-        )
-            ,
-        array(
-            'key' => 'field_page_blog_aria_label_marketing_s',
-            'label' => '" aria-label="Marketing Social...',
-            'name' => 'aria_label_marketing_s',
             'type' => 'text',
         )
             ,
@@ -3306,13 +3264,6 @@ if( function_exists('acf_add_local_field_group') ):
         )
             ,
         array(
-            'key' => 'field_page_blog_aria_label_cr_ation_we',
-            'label' => '" aria-label="Création Web">',
-            'name' => 'aria_label_cr_ation_we',
-            'type' => 'text',
-        )
-            ,
-        array(
             'key' => 'field_page_blog_e_digital_2',
             'label' => 'E-digital',
             'name' => 'e_digital_2',
@@ -3337,13 +3288,6 @@ if( function_exists('acf_add_local_field_group') ):
             'key' => 'field_page_blog_cr_ation_de_site_internet',
             'label' => 'Création de Site Internet : Do...',
             'name' => 'cr_ation_de_site_internet',
-            'type' => 'text',
-        )
-            ,
-        array(
-            'key' => 'field_page_blog_aria_label_apps_sp_cif',
-            'label' => '" aria-label="Apps Spécifiques...',
-            'name' => 'aria_label_apps_sp_cif',
             'type' => 'text',
         )
             ,
@@ -3376,13 +3320,6 @@ if( function_exists('acf_add_local_field_group') ):
         )
             ,
         array(
-            'key' => 'field_page_blog_aria_label_e_commerce',
-            'label' => '" aria-label="E-commerce">',
-            'name' => 'aria_label_e_commerce',
-            'type' => 'text',
-        )
-            ,
-        array(
             'key' => 'field_page_blog_e_digital_4',
             'label' => 'E-digital',
             'name' => 'e_digital_4',
@@ -3407,13 +3344,6 @@ if( function_exists('acf_add_local_field_group') ):
             'key' => 'field_page_blog_vendre_en_ligne_les_err',
             'label' => 'Vendre en Ligne : Les Erreurs ...',
             'name' => 'vendre_en_ligne_les_err',
-            'type' => 'text',
-        )
-            ,
-        array(
-            'key' => 'field_page_blog_aria_label_seo_strat_g',
-            'label' => '" aria-label="SEO Stratégie">',
-            'name' => 'aria_label_seo_strat_g',
             'type' => 'text',
         )
             ,

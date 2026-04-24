@@ -52,11 +52,11 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
                 </div>
                 <div class="footer-bottom-area">
                     <ul class="footer-nav-area">
-                        <li><a href="<?php echo esc_url( home_url( "/" ) ); ?>">Accueil</a></li>
-                        <li><a href="<?php echo esc_url( home_url( "/nos-technologies/" ) ); ?>">Nos Technologies</a></li>
-                        <li><a href="<?php echo esc_url( home_url( "/nos-projets/" ) ); ?>">Nos Projets</a></li>
-                        <li><a href="<?php echo esc_url( home_url( "/blog/" ) ); ?>">Blog</a></li>
-                        <li><a href="<?php echo esc_url( home_url( "/contact/" ) ); ?>">Contact</a></li>
+                        <li><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Accueil</a></li>
+                        <li><a href="<?php echo esc_url( home_url( '/nos-technologies/' ) ); ?>">Nos Technologies</a></li>
+                        <li><a href="<?php echo esc_url( home_url( '/nos-projets/' ) ); ?>">Nos Projets</a></li>
+                        <li><a href="<?php echo esc_url( home_url( '/blog/' ) ); ?>">Blog</a></li>
+                        <li><a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>">Contact</a></li>
                     </ul>
                     <div class="copyright-area">
                         <div class="inner">

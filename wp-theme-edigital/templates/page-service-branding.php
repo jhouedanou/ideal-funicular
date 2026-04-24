@@ -132,8 +132,8 @@ get_header();
 <div class="ms-hc--inner">
 <nav aria-label="breadcrumb">
 <ol class="breadcrumb">
-<li class="breadcrumb-item"><a "="" )="" );="" ?="" href="<?php echo esc_url( home_url( "><?php $acf_val = get_field('accueil'); echo $acf_val ? esc_html($acf_val) : '"&gt;Accueil'; ?></a></li>
-<li class="breadcrumb-item"><a "="" )="" );="" ?="" href="<?php echo esc_url( home_url( " services=""><?php $acf_val = get_field('services'); echo $acf_val ? esc_html($acf_val) : '"&gt;Services'; ?></a></li>
+<li class="breadcrumb-item"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php $acf_val = get_field('accueil'); echo $acf_val ? esc_html($acf_val) : 'Accueil'; ?></a></li>
+<li class="breadcrumb-item"><a href="<?php echo esc_url( home_url( '/services/' ) ); ?>"><?php $acf_val = get_field('services'); echo $acf_val ? esc_html($acf_val) : 'Services'; ?></a></li>
 <li aria-current="page" class="breadcrumb-item active">Branding &amp; Design</li>
 </ol>
 </nav>
@@ -211,7 +211,7 @@ get_header();
 <div class="container">
 <h2 style="text-transform: none !important;"><?php $acf_val = get_field('donnez_votre_ambition_l'); echo $acf_val ? esc_html($acf_val) : 'Donnez à votre ambition l\'image qu\'elle mérite'; ?></h2>
 <p><?php $acf_val = get_field('ne_laissez_plus_une_image'); echo $acf_val ? esc_html($acf_val) : 'Ne laissez plus une image médiocre freiner votre développement.'; ?></p>
-<a "="" )="" );="" ?="" contact="" href="<?php echo esc_url( home_url( "><?php $acf_val = get_field('class_btn_cta_cliquez'); echo $acf_val ? esc_html($acf_val) : '" class="btn-cta"&gt;Cliquez ici pour renseigner le formulaire de devis'; ?></a>
+<a class="btn-cta" href="<?php echo esc_url( home_url( '/contact/' ) ); ?>"><?php $acf_val = get_field('cliquez_ici_pour_renseign'); echo $acf_val ? esc_html($acf_val) : 'Cliquez ici pour renseigner le formulaire de devis'; ?></a>
 </div>
 </section>
 <!--================= CTA End =================-->

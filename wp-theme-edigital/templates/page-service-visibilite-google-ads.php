@@ -132,8 +132,8 @@ get_header();
 <div class="ms-hc--inner">
 <nav aria-label="breadcrumb">
 <ol class="breadcrumb">
-<li class="breadcrumb-item"><a "="" )="" );="" ?="" href="<?php echo esc_url( home_url( "><?php $acf_val = get_field('accueil'); echo $acf_val ? esc_html($acf_val) : '"&gt;Accueil'; ?></a></li>
-<li class="breadcrumb-item"><a "="" )="" );="" ?="" href="<?php echo esc_url( home_url( " services=""><?php $acf_val = get_field('services'); echo $acf_val ? esc_html($acf_val) : '"&gt;Services'; ?></a></li>
+<li class="breadcrumb-item"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php $acf_val = get_field('accueil'); echo $acf_val ? esc_html($acf_val) : 'Accueil'; ?></a></li>
+<li class="breadcrumb-item"><a href="<?php echo esc_url( home_url( '/services/' ) ); ?>"><?php $acf_val = get_field('services'); echo $acf_val ? esc_html($acf_val) : 'Services'; ?></a></li>
 <li aria-current="page" class="breadcrumb-item active">Publicité Google et Meta</li>
 </ol>
 </nav>
@@ -228,7 +228,7 @@ get_header();
 <div class="container">
 <h2><?php $acf_val = get_field('pr_t_dominer_votre_marc'); echo $acf_val ? esc_html($acf_val) : 'Prêt à dominer votre marché ?'; ?></h2>
 <p><?php $acf_val = get_field('contactez_nous_pour_d_fin'); echo $acf_val ? wp_kses_post($acf_val) : 'Contactez-nous pour définir votre budget et lancer vos premières campagnes rentables.'; ?></p>
-<a "="" )="" );="" ?="" contact="" href="<?php echo esc_url( home_url( "><?php $acf_val = get_field('class_btn_cta_d_marre'); echo $acf_val ? esc_html($acf_val) : '" class="btn-cta"&gt;Démarrer vos campagnes'; ?></a>
+<a class="btn-cta" href="<?php echo esc_url( home_url( '/contact/' ) ); ?>"><?php $acf_val = get_field('d_marrer_vos_campagnes'); echo $acf_val ? esc_html($acf_val) : 'Démarrer vos campagnes'; ?></a>
 </div>
 </section>
 <!--================= CTA End =================-->

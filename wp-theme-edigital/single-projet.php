@@ -175,8 +175,8 @@ get_header();
 <div class="row align-items-center text-center">
 <div class="col-12">
 <span style="display: block; color: rgba(255,255,255,0.5); font-size: 14px; text-transform: uppercase; tracking: 2px; margin-bottom: 10px;"><?php $acf_val = get_field('projet_suivant'); echo $acf_val ? esc_html($acf_val) : 'Projet Suivant'; ?></span>
-<a "="" )="" );="" ?="" href="<?php echo esc_url( home_url( " nos-projets="">" style="text-decoration: none;"&gt;
-                            <h2 onmouseout="this.style.color='#fff'" onmouseover="this.style.color='#ff0000'" style="color: #fff; font-size: 48px; font-weight: 700; margin: 0; transition: color 0.3s;"><?php $acf_val = get_field('quitus_immobilier'); echo $acf_val ? esc_html($acf_val) : 'Quitus Immobilier'; ?></h2>
+<a href="<?php echo esc_url( home_url( '/nos-projets/' ) ); ?>" style="text-decoration: none;">
+<h2 onmouseout="this.style.color='#fff'" onmouseover="this.style.color='#ff0000'" style="color: #fff; font-size: 48px; font-weight: 700; margin: 0; transition: color 0.3s;"><?php $acf_val = get_field('quitus_immobilier'); echo $acf_val ? esc_html($acf_val) : 'Quitus Immobilier'; ?></h2>
 </a>
 </div>
 </div>

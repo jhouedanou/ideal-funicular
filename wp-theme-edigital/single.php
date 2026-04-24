@@ -147,14 +147,14 @@ get_header();
 <nav class="navigation post-navigation mt-100 mb-100" style="max-width: 800px; margin-left: auto !important; margin-right: auto !important; padding: 0 15px;">
 <div class="nav-links row">
 <div class="nav-previous col-6 text-start">
-<a "="" )="" );="" ?="" blog="" href="<?php echo esc_url( home_url( ">" rel="prev" style="text-decoration: none;"&gt;
-                        <span class="nav-label" style="display: block; color: #747474; font-size: 14px; text-transform: uppercase;"><?php $acf_val = get_field('article_pr_c_dent'); echo $acf_val ? esc_html($acf_val) : 'Article précédent'; ?></span>
+<a href="<?php echo esc_url( home_url( '/blog/' ) ); ?>" rel="prev" style="text-decoration: none;">
+<span class="nav-label" style="display: block; color: #747474; font-size: 14px; text-transform: uppercase;"><?php $acf_val = get_field('article_pr_c_dent'); echo $acf_val ? esc_html($acf_val) : 'Article précédent'; ?></span>
 <h4 class="post-title" style="color: #000; font-weight: 700; font-size: 18px;"><?php $acf_val = get_field('pourquoi_le_smma_est_indi'); echo $acf_val ? esc_html($acf_val) : 'Pourquoi le SMMA est indispensable'; ?></h4>
 </a>
 </div>
 <div class="nav-next col-6 text-end">
-<a "="" )="" );="" ?="" blog="" href="<?php echo esc_url( home_url( ">" rel="next" style="text-decoration: none;"&gt;
-                        <span class="nav-label" style="display: block; color: #747474; font-size: 14px; text-transform: uppercase;"><?php $acf_val = get_field('article_suivant'); echo $acf_val ? esc_html($acf_val) : 'Article suivant'; ?></span>
+<a href="<?php echo esc_url( home_url( '/blog/' ) ); ?>" rel="next" style="text-decoration: none;">
+<span class="nav-label" style="display: block; color: #747474; font-size: 14px; text-transform: uppercase;"><?php $acf_val = get_field('article_suivant'); echo $acf_val ? esc_html($acf_val) : 'Article suivant'; ?></span>
 <h4 class="post-title" style="color: #000; font-weight: 700; font-size: 18px;"><?php $acf_val = get_field('seo_dominer_les_r_sulta'); echo $acf_val ? esc_html($acf_val) : 'SEO : Dominer les résultats'; ?></h4>
 </a>
 </div>

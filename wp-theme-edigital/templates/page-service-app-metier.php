@@ -132,8 +132,8 @@ get_header();
 <div class="ms-hc--inner">
 <nav aria-label="breadcrumb">
 <ol class="breadcrumb">
-<li class="breadcrumb-item"><a "="" )="" );="" ?="" href="<?php echo esc_url( home_url( "><?php $acf_val = get_field('accueil'); echo $acf_val ? esc_html($acf_val) : '"&gt;Accueil'; ?></a></li>
-<li class="breadcrumb-item"><a "="" )="" );="" ?="" href="<?php echo esc_url( home_url( " services=""><?php $acf_val = get_field('services'); echo $acf_val ? esc_html($acf_val) : '"&gt;Services'; ?></a></li>
+<li class="breadcrumb-item"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php $acf_val = get_field('accueil'); echo $acf_val ? esc_html($acf_val) : 'Accueil'; ?></a></li>
+<li class="breadcrumb-item"><a href="<?php echo esc_url( home_url( '/services/' ) ); ?>"><?php $acf_val = get_field('services'); echo $acf_val ? esc_html($acf_val) : 'Services'; ?></a></li>
 <li aria-current="page" class="breadcrumb-item active">Application Métier</li>
 </ol>
 </nav>
@@ -211,7 +211,7 @@ get_header();
 <div class="container">
 <h2 style="text-transform: none !important;"><?php $acf_val = get_field('digitalisez_votre_savoir'); echo $acf_val ? esc_html($acf_val) : 'Digitalisez votre savoir-faire'; ?></h2>
 <p><?php $acf_val = get_field('ne_laissez_pas_des_outils'); echo $acf_val ? wp_kses_post($acf_val) : 'Ne laissez pas des outils obsolètes brider votre développement. Passons à la vitesse supérieure.'; ?></p>
-<a "="" )="" );="" ?="" contact="" href="<?php echo esc_url( home_url( "><?php $acf_val = get_field('class_btn_cta_discute'); echo $acf_val ? esc_html($acf_val) : '" class="btn-cta"&gt;Discuter de mon projet d\'application'; ?></a>
+<a class="btn-cta" href="<?php echo esc_url( home_url( '/contact/' ) ); ?>"><?php $acf_val = get_field('discuter_de_mon_projet_d'); echo $acf_val ? esc_html($acf_val) : 'Discuter de mon projet d\'application'; ?></a>
 </div>
 </section>
 <!--================= CTA End =================-->

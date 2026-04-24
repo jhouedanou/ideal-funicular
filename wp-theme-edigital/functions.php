@@ -205,7 +205,7 @@ add_action( 'after_switch_theme', 'edigital_auto_assign_menu' );
  * Register Custom Post Type: Projets
  */
 function edigital_register_cpt_projet() {
-     = array(
+    $labels = array(
         'name'                  => _x( 'Projets', 'Post Type General Name', 'edigital' ),
         'singular_name'         => _x( 'Projet', 'Post Type Singular Name', 'edigital' ),
         'menu_name'             => __( 'Projets', 'edigital' ),
@@ -219,10 +219,10 @@ function edigital_register_cpt_projet() {
         'view_item'             => __( 'Voir le projet', 'edigital' ),
         'search_items'          => __( 'Rechercher un projet', 'edigital' ),
     );
-     = array(
+    $args = array(
         'label'                 => __( 'Projet', 'edigital' ),
         'description'           => __( 'Portfolio de nos projets', 'edigital' ),
-        'labels'                => ,
+        'labels'                => $labels,
         'supports'              => array( 'title', 'editor', 'thumbnail', 'excerpt' ),
         'hierarchical'          => false,
         'public'                => true,
@@ -239,6 +239,6 @@ function edigital_register_cpt_projet() {
         'capability_type'       => 'post',
         'show_in_rest'          => true,
     );
-    register_post_type( 'projet',  );
+    register_post_type( 'projet', $args );
 }
 add_action( 'init', 'edigital_register_cpt_projet', 0 );

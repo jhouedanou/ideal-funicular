@@ -126,7 +126,7 @@ def rewrite_urls(html_str: str) -> str:
         if target is None:
             # Pas dans la map → on laisse tel quel.
             return m.group(0)
-        return f'{m.group(1)}<?php echo esc_url( home_url( "{target}" ) ); ?>{anchor}{m.group(3)}'
+        return f"{m.group(1)}<?php echo esc_url( home_url( '{target}' ) ); ?>{anchor}{m.group(3)}"
 
     html_str = re.sub(
         r'(href=")([A-Za-z0-9_\-]+\.html(?:#[^"]*)?)(")',
