@@ -1,0 +1,104 @@
+services:
+  db:
+    image: mariadb:11
+    container_name: edigital-db
+    restart: unless-stopped
+    environment:
+      MARIADB_ROOT_PASSWORD: rootpass
+      MARIADB_DATABASE: edigital
+      MARIADB_USER: wpuser
+      MARIADB_PASSWORD: wppass
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  wordpress:
+    image: wordpress:6.5-php8.2-apache
+    container_name: edigital-wp
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8080:80"
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_NAME: edigital
+      WORDPRESS_DB_USER: wpuser
+      WORDPRESS_DB_PASSWORD: wppass
+      WORDPRESS_TABLE_PREFIX: wp_
+      WORDPRESS_DEBUG: 1
+    volumes:
+      - wp_data:/var/www/html
+      - ./wp-theme-edigital:/var/www/html/wp-content/themes/edigital
+
+  wp-install:
+    image: wordpress:cli-php8.2
+    container_name: edigital-wp-install
+    depends_on:
+      wordpress:
+        condition: service_started
+      db:
+        condition: service_healthy
+    user: "33:33"
+    volumes:
+      - wp_data:/var/www/html
+      - ./wp-theme-edigital:/var/www/html/wp-content/themes/edigital
+      - ./docker/init:/docker-init:ro
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_NAME: edigital
+      WORDPRESS_DB_USER: wpuser
+      WORDPRESS_DB_PASSWORD: wppass
+      WORDPRESS_TABLE_PREFIX: wp_
+      WP_URL: http://localhost:8080
+      WP_TITLE: E-Digital
+      WP_ADMIN_USER: admin
+      WP_ADMIN_PASSWORD: admin
+      WP_ADMIN_EMAIL: admin@edigital.local
+    entrypoint: ["/bin/sh", "/docker-init/install.sh"]
+    restart: "no"
+
+  backup:
+    build: ./docker/backup
+    image: edigital-backup:latest
+    container_name: edigital-backup
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_HOST: db
+      DB_NAME: edigital
+      DB_USER: root
+      DB_PASSWORD: rootpass
+      BACKUP_DIR: /backups
+      BACKUP_KEEP: 14          # nombre de dumps conservés
+      BACKUP_INTERVAL: 86400   # 24h entre deux dumps (mode schedule)
+    volumes:
+      - ./docker/backups:/backups
+    # profiles: backup = démon planifié ; sans profile = utilisable via `run --rm`
+    profiles: ["backup"]
+    restart: unless-stopped
+
+  phpmyadmin:
+    image: phpmyadmin:5
+    container_name: edigital-pma
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: db
+      PMA_USER: root
+      PMA_PASSWORD: rootpass
+      UPLOAD_LIMIT: 128M
+
+volumes:
+  db_data:
+  wp_data:

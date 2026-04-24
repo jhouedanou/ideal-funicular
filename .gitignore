@@ -1,3 +1,6 @@
 .claude/
 Old-13 avr/
 *.zip
+docker/volumes/
+.env
+.env.local
