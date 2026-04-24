@@ -70,6 +70,39 @@ get_header();
 <h5><?php $acf_val = get_field('recent_posts'); echo $acf_val ? esc_html($acf_val) : 'Recent Posts'; ?></h5>
 </div>
 <ul>
+<?php
+$recent = new WP_Query( array(
+    'post_type'      => 'post',
+    'post_status'    => 'publish',
+    'posts_per_page' => 5,
+    'orderby'        => 'date',
+    'order'          => 'DESC',
+) );
+if ( $recent->have_posts() ) :
+    while ( $recent->have_posts() ) : $recent->the_post(); ?>
+<li class="recent-post">
+<a href="<?php the_permalink(); ?>">
+<div class="post-image">
+<div class="ms-p-arrow">
+<svg class="ms-btt-arrow" enable-background="new 0 0 96 96" height="96px" version="1.1" viewbox="0 0 96 96" width="96px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<path d="M52,84V21.656l21.457,21.456c1.561,1.562,4.095,1.562,5.656,0.001c1.562-1.562,1.562-4.096,0-5.658L50.829,9.172l0,0  c-0.186-0.186-0.391-0.352-0.609-0.498c-0.101-0.067-0.21-0.114-0.315-0.172c-0.124-0.066-0.242-0.142-0.373-0.195  c-0.135-0.057-0.275-0.089-0.415-0.129c-0.111-0.033-0.216-0.076-0.331-0.099C48.527,8.027,48.264,8,48.001,8l0,0  c-0.003,0-0.006,0.001-0.009,0.001c-0.259,0.001-0.519,0.027-0.774,0.078c-0.12,0.024-0.231,0.069-0.349,0.104  c-0.133,0.039-0.268,0.069-0.397,0.123c-0.139,0.058-0.265,0.136-0.396,0.208c-0.098,0.054-0.198,0.097-0.292,0.159  c-0.221,0.146-0.427,0.314-0.614,0.501L16.889,37.456c-1.562,1.562-1.562,4.095-0.001,5.657c1.562,1.562,4.094,1.562,5.658,0  L44,21.657V84c0,2.209,1.791,4,4,4S52,86.209,52,84z">
+</path>
+</svg>
+</div>
+<?php if ( has_post_thumbnail() ) : ?>
+<img alt="<?php the_title_attribute(); ?>" class="attachment-mokko-recent-post-thumb size-mokko-recent-post-thumb wp-post-image" height="90" src="<?php echo esc_url( get_the_post_thumbnail_url( null, 'thumbnail' ) ); ?>" width="90"/>
+<?php endif; ?>
+</div>
+<div class="recent-post__info">
+<?php the_title(); ?>
+<span class="post-date"><?php echo get_the_date( 'd.m.Y' ); ?></span>
+</div>
+</a>
+</li>
+<?php endwhile; wp_reset_postdata();
+else :
+// fallback articles hardcodés originaux
+?>
 <li class="recent-post">
 <a href="<?php echo esc_url( home_url( '/blog-single/' ) ); ?>">
 <div class="post-image">
@@ -82,8 +115,8 @@ get_header();
 <img alt="Visualizing Data: A Deep Dive into AI" class="attachment-mokko-recent-post-thumb size-mokko-recent-post-thumb wp-post-image" height="90" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/portfolio/07.jpg" width="90"/>
 </div>
 <div class="recent-post__info">
-                                                Visualizing Data: A Deep Dive into AI
-                                                <span class="post-date"><?php $acf_val = get_field('06_01_2024_5'); echo $acf_val ? esc_html($acf_val) : '06.01.2024'; ?></span>
+Visualizing Data: A Deep Dive into AI
+<span class="post-date">06.01.2024</span>
 </div>
 </a>
 </li>
@@ -99,7 +132,7 @@ get_header();
 <img alt="Why AI Is Perspective" class="attachment-mokko-recent-post-thumb size-mokko-recent-post-thumb wp-post-image" height="90" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/portfolio/15.jpg" width="90"/>
 </div>
 <div class="recent-post__info">
-                                                Why AI Is Perspective <span class="post-date"><?php $acf_val = get_field('06_01_2024_6'); echo $acf_val ? esc_html($acf_val) : '06.01.2024'; ?></span>
+Why AI Is Perspective <span class="post-date">06.01.2024</span>
 </div>
 </a>
 </li>
@@ -115,8 +148,8 @@ get_header();
 <img alt="A Day in the Life of a Photographer" class="attachment-mokko-recent-post-thumb size-mokko-recent-post-thumb wp-post-image" height="90" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/portfolio/16.jpg" width="90"/>
 </div>
 <div class="recent-post__info">
-                                                A Day in the Life of a Photographer
-                                                <span class="post-date"><?php $acf_val = get_field('06_01_2024_7'); echo $acf_val ? esc_html($acf_val) : '06.01.2024'; ?></span>
+A Day in the Life of a Photographer
+<span class="post-date">06.01.2024</span>
 </div>
 </a>
 </li>
@@ -132,8 +165,8 @@ get_header();
 <img alt="My Take on the Future of AI" class="attachment-mokko-recent-post-thumb size-mokko-recent-post-thumb wp-post-image" height="90" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/portfolio/13.jpg" width="90"/>
 </div>
 <div class="recent-post__info">
-                                                My Take on the Future of AI
-                                                <span class="post-date"><?php $acf_val = get_field('06_01_2024_8'); echo $acf_val ? esc_html($acf_val) : '06.01.2024'; ?></span>
+My Take on the Future of AI
+<span class="post-date">06.01.2024</span>
 </div>
 </a>
 </li>
@@ -149,10 +182,11 @@ get_header();
 <img alt="Spring Cleaning Your Home – A Comprehensive Guide" class="attachment-mokko-recent-post-thumb size-mokko-recent-post-thumb wp-post-image" height="90" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/portfolio/17.jpg" width="90"/>
 </div>
 <div class="recent-post__info">
-                                                Spring Cleaning Your Home – A Comprehensive Guide <span class="post-date"><?php $acf_val = get_field('06_01_2024_9'); echo $acf_val ? esc_html($acf_val) : '06.01.2024'; ?></span>
+Spring Cleaning Your Home – A Comprehensive Guide <span class="post-date">06.01.2024</span>
 </div>
 </a>
 </li>
+<?php endif; ?>
 </ul>
 </aside>
 <aside class="widget_categories" id="categories-2">

@@ -141,76 +141,72 @@ get_header();
 <div class="banner-horizental">
 <div class="swiper swiper-container-h">
 <div class="swiper-wrapper">
+<?php
+$slides_query = new WP_Query( array(
+    'post_type'      => 'slide',
+    'post_status'    => 'publish',
+    'posts_per_page' => -1,
+    'orderby'        => 'menu_order',
+    'order'          => 'ASC',
+) );
+
+if ( $slides_query->have_posts() ) :
+    while ( $slides_query->have_posts() ) : $slides_query->the_post();
+        $type_media  = get_field( 'slide_type_media' ) ?: 'image';
+        $image       = get_field( 'slide_image' );
+        $video       = get_field( 'slide_video' );
+        $luminosite  = get_field( 'slide_luminosite' );
+        $luminosite  = ( $luminosite !== '' && $luminosite !== false ) ? floatval( $luminosite ) : 0.4;
+        $titre       = get_field( 'slide_titre' ) ?: get_the_title();
+        $sous_titre  = get_field( 'slide_sous_titre' );
+        $btn_texte   = get_field( 'slide_btn_texte' );
+        $btn_lien    = get_field( 'slide_btn_lien' );
+        $brightness  = 'filter: brightness(' . esc_attr( $luminosite ) . ');';
+?>
 <div class="swiper-slide">
 <div class="slider-inner">
-<img alt="E-digital - Agence Digitale Corporate" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/slider/freepik__a-modern-corporate-digital-agency-environment-in-p__12968.png" style="filter: brightness(0.4);"/>
-<div class="ms-slider--cont ms-material-label swiper-material-animate-scale">
-<div class="ms-cont__inner">
-<h1 class="ms-sc--t" data-splitting="">Participe à la<br/>croissance</h1>
-<p class="ms-sc--text"><?php $acf_val = get_field('des_tpe_et_pme'); echo $acf_val ? esc_html($acf_val) : 'des TPE et PME'; ?></p>
-<div class="ms-cont__btn">
-<a class="btn btn-mokko btn--lg btn--primary" href="<?php echo esc_url( home_url( '/services/' ) ); ?>">
-<div class="ms-btn__text"> Accéder à nos services</div>
-</a>
-</div>
-<div class="ms-slider--overlay"></div>
-</div>
-</div>
-</div>
-</div>
-<div class="swiper-slide">
-<div class="slider-inner">
-<img alt="E-digital - Solutions Budget Maîtrisé" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/slider/freepik__a-modern-corporate-tech-environment-focused-on-mob__3922.png" style="filter: brightness(0.4);"/>
-<div class="ms-slider--cont ms-material-label swiper-material-animate-scale">
-<div class="ms-cont__inner">
-<h1 class="ms-sc--t" data-splitting="">L'Agence<br/>E-digital</h1>
-<p class="ms-sc--text"><?php $acf_val = get_field('budget_ma_tris_pour_cms'); echo $acf_val ? esc_html($acf_val) : 'Budget maîtrisé pour CMS, CRM, ERP, Prestashop'; ?></p>
-<div class="ms-cont__btn">
-<a class="btn btn-mokko btn--lg btn--primary" href="<?php echo esc_url( home_url( '/services/' ) ); ?>">
-<div class="ms-btn__text"> Nos solutions</div>
-</a>
-</div>
-<div class="ms-slider--overlay"></div>
-</div>
-</div>
-</div>
-</div>
-<div class="swiper-slide">
-<div class="slider-inner">
-<img alt="E-digital - Intelligence Artificielle" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/slider/ChatGPT Image 22 mars 2026, 17_10_12.png" style="filter: brightness(0.4);"/>
-<div class="ms-slider--cont ms-material-label swiper-material-animate-scale">
-<div class="ms-cont__inner">
-<h1 class="ms-sc--t" data-splitting="">L'Agence<br/>E-digital</h1>
-<p class="ms-sc--text"><?php $acf_val = get_field('budget_ma_tris_pour_cms_1'); echo $acf_val ? esc_html($acf_val) : 'Budget maîtrisé pour CMS, CRM, ERP, Prestashop'; ?></p>
-<div class="ms-cont__btn">
-<a class="btn btn-mokko btn--lg btn--primary" href="<?php echo esc_url( home_url( '/services/' ) ); ?>">
-<div class="ms-btn__text"> Nos solutions</div>
-</a>
-</div>
-<div class="ms-slider--overlay"></div>
-</div>
-</div>
-</div>
-</div>
-<div class="swiper-slide">
-<div class="slider-inner">
-<video autoplay="" loop="" muted="" playsinline="" preload="auto" style="filter: brightness(0.4);">
-<source src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/slider/freepik_create-a-video_seedance_720p_16-9_24fps_3921.mp4" type="video/mp4"/>
+<?php if ( 'video' === $type_media && ! empty( $video['url'] ) ) : ?>
+<video autoplay="" loop="" muted="" playsinline="" preload="auto" style="<?php echo $brightness; ?>">
+<source src="<?php echo esc_url( $video['url'] ); ?>" type="video/mp4"/>
 </video>
+<?php elseif ( ! empty( $image['url'] ) ) : ?>
+<img alt="<?php echo esc_attr( $image['alt'] ?: get_the_title() ); ?>" src="<?php echo esc_url( $image['url'] ); ?>" style="<?php echo $brightness; ?>"/>
+<?php endif; ?>
 <div class="ms-slider--cont ms-material-label swiper-material-animate-scale">
 <div class="ms-cont__inner">
-<h1 class="ms-sc--t" data-splitting="">Des solutions<br/>pour votre succès</h1>
-<p class="ms-sc--text"><?php $acf_val = get_field('conception_et_d_veloppeme'); echo $acf_val ? esc_html($acf_val) : 'Conception et développement web innovant depuis 2003'; ?></p>
+<h1 class="ms-sc--t" data-splitting=""><?php echo wp_kses( $titre, array( 'br' => array() ) ); ?></h1>
+<?php if ( $sous_titre ) : ?>
+<p class="ms-sc--text"><?php echo esc_html( $sous_titre ); ?></p>
+<?php endif; ?>
+<?php if ( $btn_texte && $btn_lien ) : ?>
 <div class="ms-cont__btn">
-<a class="btn btn-mokko btn--lg btn--primary" href="#services">
-<div class="ms-btn__text"> En savoir plus</div>
+<a class="btn btn-mokko btn--lg btn--primary" href="<?php echo esc_url( $btn_lien ); ?>">
+<div class="ms-btn__text"><?php echo esc_html( $btn_texte ); ?></div>
 </a>
 </div>
+<?php endif; ?>
 <div class="ms-slider--overlay"></div>
 </div>
 </div>
 </div>
 </div>
+<?php
+    endwhile;
+    wp_reset_postdata();
+else :
+    // Fallback si aucune slide n'est créée
+?>
+<div class="swiper-slide">
+<div class="slider-inner">
+<div class="ms-slider--cont ms-material-label swiper-material-animate-scale">
+<div class="ms-cont__inner">
+<h1 class="ms-sc--t" data-splitting="">Bienvenue chez<br/>E-digital</h1>
+<p class="ms-sc--text">Créez vos premières slides dans l'admin : Slider Hero → Ajouter</p>
+</div>
+</div>
+</div>
+</div>
+<?php endif; ?>
 </div>
 <div class="swiper-button-wrapper">
 <div aria-label="Diapositive suivante" class="swiper-button-next" role="button" tabindex="0">
@@ -229,6 +225,25 @@ get_header();
 </div>
 </div>
 </div>
+<?php
+$marquee_items = get_field('marquee_images');
+if ( $marquee_items ) :
+    // Doubler les items pour l'effet infini
+    $all_items = array_merge( $marquee_items, $marquee_items );
+?>
+<div class="marquee-area">
+<div class="marquee-inner">
+<ul class="marquee">
+<?php foreach ( $all_items as $item ) :
+    $img = $item['marquee_image'];
+    $alt = $item['marquee_alt'] ?: ( $img['alt'] ?? '' );
+    if ( ! empty( $img['url'] ) ) : ?>
+<li><img alt="<?php echo esc_attr( $alt ); ?>" src="<?php echo esc_url( $img['url'] ); ?>"/></li>
+<?php endif; endforeach; ?>
+</ul>
+</div>
+</div>
+<?php else : ?>
 <div class="marquee-area">
 <div class="marquee-inner">
 <ul class="marquee">
@@ -240,17 +255,10 @@ get_header();
 <li><img alt="Création de Sites" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/portfolio/blog-web-creation.png"/></li>
 <li><img alt="Applications Spécifiques" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/portfolio/blog-custom-app.png"/></li>
 <li><img alt="E-commerce" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/portfolio/blog-ecommerce.png"/></li>
-<li><img alt="Conception Web sur Mesure" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/portfolio/web-design.png"/></li>
-<li><img alt="Développement Mobile" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/portfolio/blog-mobile-dev.png"/></li>
-<li><img alt="Applications Mobiles" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/portfolio/mobile-app.png"/></li>
-<li><img alt="Marketing Digital" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/portfolio/blog-smma.png"/></li>
-<li><img alt="Logiciels Métier" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/portfolio/logiciel-metier.png"/></li>
-<li><img alt="Création de Sites" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/portfolio/blog-web-creation.png"/></li>
-<li><img alt="Applications Spécifiques" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/portfolio/blog-custom-app.png"/></li>
-<li><img alt="E-commerce" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/portfolio/blog-ecommerce.png"/></li>
 </ul>
 </div>
 </div>
+<?php endif; ?>
 <div class="project-area">
 <div class="container">
 <div class="e-con-inner">
@@ -266,9 +274,13 @@ get_header();
 <path d="M5.25 20.9999C5.05109 20.9999 4.86032 20.9209 4.71967 20.7803C4.57902 20.6396 4.5 20.4488 4.5 20.2499V3.74993C4.49999 3.6196 4.53395 3.49151 4.59852 3.37829C4.6631 3.26508 4.75606 3.17065 4.86825 3.1043C4.98044 3.03796 5.10798 3.002 5.2383 2.99997C5.36862 2.99794 5.49722 3.0299 5.61143 3.09271L20.6114 11.3427C20.7291 11.4074 20.8273 11.5026 20.8956 11.6182C20.964 11.7338 21 11.8656 21 11.9999C21 12.1342 20.964 12.266 20.8956 12.3816C20.8273 12.4972 20.7291 12.5924 20.6114 12.6571L5.61143 20.9071C5.50069 20.968 5.37637 20.9999 5.25 20.9999Z" fill="currentColor"></path>
 </svg>
 </a>
+<?php
+$popup_video = get_field('video_popup_url');
+$popup_video_url = ! empty( $popup_video['url'] ) ? $popup_video['url'] : get_template_directory_uri() . '/assets/images/slider/freepik_create-a-video_seedance_720p_16-9_24fps_3921.mp4';
+?>
 <div class="mfp-hide" id="video-popup" style="max-width:900px;margin:auto;background:#000;border-radius:16px;overflow:hidden;">
 <video autoplay="" controls="" style="width:100%;display:block;">
-<source src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/slider/freepik_create-a-video_seedance_720p_16-9_24fps_3921.mp4" type="video/mp4"/>
+<source src="<?php echo esc_url( $popup_video_url ); ?>" type="video/mp4"/>
 </video>
 </div>
 </div>
@@ -405,169 +417,62 @@ get_header();
 </div>
 <div class="ms-posts--wrap">
 <div class="row ms-posts--card">
+<?php
+$blog_query = new WP_Query( array(
+    'post_type'      => 'post',
+    'post_status'    => 'publish',
+    'posts_per_page' => 6,
+    'orderby'        => 'date',
+    'order'          => 'DESC',
+) );
+if ( $blog_query->have_posts() ) :
+    while ( $blog_query->have_posts() ) : $blog_query->the_post();
+        $categories = get_the_category();
+        $thumb_url  = get_the_post_thumbnail_url( null, 'medium' );
+        $avatar_url = get_template_directory_uri() . '/assets/images/portfolio/avatar.png';
+?>
 <article class="grid-item col-sm-12 col-md-6 col-lg-4 post has-post-thumbnail">
-<a aria-label="Développement d'applications mobiles à Paris et Guyancourt 📱✨" href="#"></a>
+<a aria-label="<?php echo esc_attr( get_the_title() ); ?>" href="<?php the_permalink(); ?>"></a>
 <figure class="ms-posts--card__media">
-<img alt="Développement d'applications mobiles" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/portfolio/blog-mobile-dev.png"/>
+<?php if ( $thumb_url ) : ?>
+<img alt="<?php echo esc_attr( get_the_title() ); ?>" src="<?php echo esc_url( $thumb_url ); ?>"/>
+<?php else : ?>
+<img alt="<?php echo esc_attr( get_the_title() ); ?>" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/portfolio/blog-web-creation.png"/>
+<?php endif; ?>
 </figure>
 <div class="post-content">
 <div class="post-meta-header">
 <div class="post-header--author">
-<img alt="E-digital" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/portfolio/avatar.png"/>
+<img alt="<?php echo esc_attr( get_the_author() ); ?>" src="<?php echo esc_url( $avatar_url ); ?>"/>
 <div class="post-meta__info">
-<span class="post-meta__author"><?php $acf_val = get_field('e_digital'); echo $acf_val ? esc_html($acf_val) : 'E-digital'; ?></span>
-<span class="post-meta__date"><?php $acf_val = get_field('04_07_2024'); echo $acf_val ? esc_html($acf_val) : '04.07.2024'; ?></span>
+<span class="post-meta__author"><?php echo esc_html( get_the_author() ); ?></span>
+<span class="post-meta__date"><?php echo esc_html( get_the_date( 'd.m.Y' ) ); ?></span>
 </div>
 </div>
 </div>
 <div class="post-meta-cont">
+<?php if ( ! empty( $categories ) ) : ?>
 <div class="post-category">
-<a href="#" rel="category tag"><?php $acf_val = get_field('technologie'); echo $acf_val ? esc_html($acf_val) : 'Technologie'; ?></a>, 
-                                        <a href="#" rel="category tag"><?php $acf_val = get_field('design'); echo $acf_val ? esc_html($acf_val) : 'Design'; ?></a>
+<?php foreach ( $categories as $i => $cat ) :
+    if ( $i > 0 ) echo ', ';
+?>
+<a href="<?php echo esc_url( get_category_link( $cat->term_id ) ); ?>" rel="category tag"><?php echo esc_html( $cat->name ); ?></a>
+<?php endforeach; ?>
 </div>
+<?php endif; ?>
 <div class="post-header">
-<a class="post-title" href="#">
-<h3><?php $acf_val = get_field('d_veloppement_d_applicati'); echo $acf_val ? esc_html($acf_val) : 'Développement d\'applications mobiles à Paris et Guyancourt 📱✨'; ?></h3>
+<a class="post-title" href="<?php the_permalink(); ?>">
+<h3><?php the_title(); ?></h3>
 </a>
 </div>
 </div>
 </div>
 </article>
-<article class="grid-item col-sm-12 col-md-6 col-lg-4 post has-post-thumbnail">
-<a aria-label="Agence Marketing des Médias Sociaux" href="#"></a>
-<figure class="ms-posts--card__media">
-<img alt="Agence Marketing des Médias Sociaux" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/portfolio/blog-smma.png"/>
-</figure>
-<div class="post-content">
-<div class="post-meta-header">
-<div class="post-header--author">
-<img alt="E-digital" decoding="async" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/portfolio/avatar.png"/>
-<div class="post-meta__info">
-<span class="post-meta__author"><?php $acf_val = get_field('e_digital_1'); echo $acf_val ? esc_html($acf_val) : 'E-digital'; ?></span>
-<span class="post-meta__date"><?php $acf_val = get_field('27_01_2026'); echo $acf_val ? esc_html($acf_val) : '27.01.2026'; ?></span>
-</div>
-</div>
-</div>
-<div class="post-meta-cont">
-<div class="post-category">
-<a href="#" rel="category tag"><?php $acf_val = get_field('strat_gie_1'); echo $acf_val ? esc_html($acf_val) : 'Stratégie'; ?></a>
-</div>
-<div class="post-header">
-<a class="post-title" href="#">
-<h3><?php $acf_val = get_field('agence_marketing_des_m_di'); echo $acf_val ? esc_html($acf_val) : 'Agence Marketing des Médias Sociaux'; ?></h3>
-</a>
-</div>
-</div>
-</div>
-</article>
-<article class="grid-item col-sm-12 col-md-6 col-lg-4 post has-post-thumbnail">
-<a aria-label="Création de Site Internet à Guyancourt" href="#"></a>
-<figure class="ms-posts--card__media">
-<img alt="Création de Site Internet à Guyancourt" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/portfolio/blog-web-creation.png"/>
-</figure>
-<div class="post-content">
-<div class="post-meta-header">
-<div class="post-header--author">
-<img alt="E-digital" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/portfolio/avatar.png"/>
-<div class="post-meta__info">
-<span class="post-meta__author"><?php $acf_val = get_field('e_digital_2'); echo $acf_val ? esc_html($acf_val) : 'E-digital'; ?></span>
-<span class="post-meta__date"><?php $acf_val = get_field('07_01_2026'); echo $acf_val ? esc_html($acf_val) : '07.01.2026'; ?></span>
-</div>
-</div>
-</div>
-<div class="post-meta-cont">
-<div class="post-category">
-<a href="#" rel="category tag"><?php $acf_val = get_field('design_1'); echo $acf_val ? esc_html($acf_val) : 'Design'; ?></a>
-</div>
-<div class="post-header">
-<a class="post-title" href="#">
-<h3><?php $acf_val = get_field('cr_ation_de_site_internet'); echo $acf_val ? esc_html($acf_val) : 'Création de Site Internet à Guyancourt : Donnez Vie à Vos Idées'; ?></h3>
-</a>
-</div>
-</div>
-</div>
-</article>
-<article class="grid-item col-sm-12 col-md-6 col-lg-4 post has-post-thumbnail">
-<a aria-label="Création Application Spécifique" href="#"></a>
-<figure class="ms-posts--card__media">
-<img alt="Création Application Spécifique" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/portfolio/blog-custom-app.png"/>
-</figure>
-<div class="post-content">
-<div class="post-meta-header">
-<div class="post-header--author">
-<img alt="E-digital" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/portfolio/avatar.png"/>
-<div class="post-meta__info">
-<span class="post-meta__author"><?php $acf_val = get_field('e_digital_3'); echo $acf_val ? esc_html($acf_val) : 'E-digital'; ?></span>
-<span class="post-meta__date"><?php $acf_val = get_field('03_03_2025'); echo $acf_val ? esc_html($acf_val) : '03.03.2025'; ?></span>
-</div>
-</div>
-</div>
-<div class="post-meta-cont">
-<div class="post-category">
-<a href="#" rel="category tag"><?php $acf_val = get_field('d_veloppement'); echo $acf_val ? esc_html($acf_val) : 'Développement'; ?></a>
-</div>
-<div class="post-header">
-<a class="post-title" href="#">
-<h3><?php $acf_val = get_field('cr_ation_application_sp_c'); echo $acf_val ? esc_html($acf_val) : 'Création Application Spécifique'; ?></h3>
-</a>
-</div>
-</div>
-</div>
-</article>
-<article class="grid-item col-sm-12 col-md-6 col-lg-4 post has-post-thumbnail">
-<a aria-label="Solutions E-commerce &amp; Prestashop" href="#"></a>
-<figure class="ms-posts--card__media">
-<img alt="Solutions E-commerce &amp; Prestashop" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/portfolio/blog-ecommerce.png"/>
-</figure>
-<div class="post-content">
-<div class="post-meta-header">
-<div class="post-header--author">
-<img alt="E-digital" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/portfolio/avatar.png"/>
-<div class="post-meta__info">
-<span class="post-meta__author"><?php $acf_val = get_field('e_digital_4'); echo $acf_val ? esc_html($acf_val) : 'E-digital'; ?></span>
-<span class="post-meta__date"><?php $acf_val = get_field('15_09_2025'); echo $acf_val ? esc_html($acf_val) : '15.09.2025'; ?></span>
-</div>
-</div>
-</div>
-<div class="post-meta-cont">
-<div class="post-category">
-<a href="#" rel="category tag"><?php $acf_val = get_field('e_commerce_1'); echo $acf_val ? esc_html($acf_val) : 'E-commerce'; ?></a>
-</div>
-<div class="post-header">
-<a class="post-title" href="#">
-<h3><?php $acf_val = get_field('solutions_e_commerce_pr'); echo $acf_val ? esc_html($acf_val) : 'Solutions E-commerce &amp; Prestashop pour TPE/PME'; ?></h3>
-</a>
-</div>
-</div>
-</div>
-</article>
-<article class="grid-item col-sm-12 col-md-6 col-lg-4 post has-post-thumbnail">
-<a aria-label="Stratégie Digitale &amp; Croissance" href="#"></a>
-<figure class="ms-posts--card__media">
-<img alt="Stratégie Digitale &amp; Croissance" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/portfolio/blog-strategy.png"/>
-</figure>
-<div class="post-content">
-<div class="post-meta-header">
-<div class="post-header--author">
-<img alt="E-digital" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/portfolio/avatar.png"/>
-<div class="post-meta__info">
-<span class="post-meta__author"><?php $acf_val = get_field('e_digital_5'); echo $acf_val ? esc_html($acf_val) : 'E-digital'; ?></span>
-<span class="post-meta__date"><?php $acf_val = get_field('10_11_2025'); echo $acf_val ? esc_html($acf_val) : '10.11.2025'; ?></span>
-</div>
-</div>
-</div>
-<div class="post-meta-cont">
-<div class="post-category">
-<a href="#" rel="category tag"><?php $acf_val = get_field('strat_gie_2'); echo $acf_val ? esc_html($acf_val) : 'Stratégie'; ?></a>
-</div>
-<div class="post-header">
-<a class="post-title" href="#">
-<h3><?php $acf_val = get_field('accompagnement_strat_giqu'); echo $acf_val ? esc_html($acf_val) : 'Accompagnement Stratégique pour la Croissance Digitale'; ?></h3>
-</a>
-</div>
-</div>
-</div>
-</article>
+<?php
+    endwhile;
+    wp_reset_postdata();
+endif;
+?>
 </div>
 <div class="btn-wrap">
 <a class="btn btn-mokko btn--md" href="<?php echo esc_url( home_url( '/blog/' ) ); ?>" role="button">
@@ -576,6 +481,7 @@ get_header();
 <div class="ms-btn__border"></div>
 </div>
 </a>
+</div>
 </div>
 </div>
 <div class="newsletter-area">
@@ -766,113 +672,31 @@ get_header();
 <div class="col-lg-4"></div>
 <div class="col-lg-8">
 <div class="accordion-container">
-<div class="ms_accordion i--right l-ef" data-collapse="yes">
+<?php
+$accordion_items = get_field('accordion_services');
+if ( $accordion_items ) :
+    foreach ( $accordion_items as $item ) : ?>
 <div class="ms_ac_panel">
 <div class="ms_ac--label">
-<div class="label-title"> CRÉATION WEB </div>
+<div class="label-title"><?php echo esc_html( strtoupper( $item['accordion_titre'] ) ); ?></div>
 <div class="ms_ac--icon rotation">
 <div class="accordion_icon--open">
 <svg aria-hidden="true" class="e-font-icon-svg e-fas-arrow-down" viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg">
-<path d="M413.1 222.5l22.2 22.2c9.4 9.4 9.4 24.6 0 33.9L241 473c-9.4 9.4-24.6 9.4-33.9 0L12.7 278.6c-9.4-9.4-9.4-24.6 0-33.9l22.2-22.2c9.5-9.5 25-9.3 34.3.4L184 343.4V56c0-13.3 10.7-24 24-24h32c13.3 0 24 10.7 24 24v287.4l114.8-120.5c9.3-9.8 24.8-10 34.3-.4z">
-</path>
+<path d="M413.1 222.5l22.2 22.2c9.4 9.4 9.4 24.6 0 33.9L241 473c-9.4 9.4-24.6 9.4-33.9 0L12.7 278.6c-9.4-9.4-9.4-24.6 0-33.9l22.2-22.2c9.5-9.5 25-9.3 34.3.4L184 343.4V56c0-13.3 10.7-24 24-24h32c13.3 0 24 10.7 24 24v287.4l114.8-120.5c9.3-9.8 24.8-10 34.3-.4z"></path>
 </svg>
 </div>
 </div>
 </div>
 <div class="ms_ac--content">
 <div class="ms_ac--text">
-<p>
-<p><strong><?php $acf_val = get_field('sites_modernes'); echo $acf_val ? esc_html($acf_val) : 'Sites Modernes :'; ?></strong> Nous développons des sites web
-                                                modernes, réactifs et optimisés pour le SEO.</p>
-<p><strong><?php $acf_val = get_field('visibilit'); echo $acf_val ? esc_html($acf_val) : 'Visibilité :'; ?></strong> Améliorez votre présence en ligne et
-                                                attirez plus de visiteurs.</p>
-</p></div>
-</div>
-</div>
-<div class="ms_ac_panel">
-<div class="ms_ac--label">
-<div class="label-title"> APP MOBILE </div>
-<div class="ms_ac--icon rotation">
-<div class="accordion_icon--open">
-<svg aria-hidden="true" class="e-font-icon-svg e-fas-arrow-down" viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg">
-<path d="M413.1 222.5l22.2 22.2c9.4 9.4 9.4 24.6 0 33.9L241 473c-9.4 9.4-24.6 9.4-33.9 0L12.7 278.6c-9.4-9.4-9.4-24.6 0-33.9l22.2-22.2c9.5-9.5 25-9.3 34.3.4L184 343.4V56c0-13.3 10.7-24 24-24h32c13.3 0 24 10.7 24 24v287.4l114.8-120.5c9.3-9.8 24.8-10 34.3-.4z">
-</path>
-</svg>
+<?php echo wp_kses_post( $item['accordion_contenu'] ); ?>
 </div>
 </div>
 </div>
-<div class="ms_ac--content">
-<div class="ms_ac--text">
-<p>
-<p><strong><?php $acf_val = get_field('natives_ios_android'); echo $acf_val ? esc_html($acf_val) : 'Natives iOS &amp; Android :'; ?></strong> Nous concevons des applications
-                                                mobiles natives offrant une expérience et des performances élevées.</p>
-</p></div>
-</div>
-</div>
-<div class="ms_ac_panel">
-<div class="ms_ac--label">
-<div class="label-title"> APP MÉTIER </div>
-<div class="ms_ac--icon rotation">
-<div class="accordion_icon--open">
-<svg aria-hidden="true" class="e-font-icon-svg e-fas-arrow-down" viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg">
-<path d="M413.1 222.5l22.2 22.2c9.4 9.4 9.4 24.6 0 33.9L241 473c-9.4 9.4-24.6 9.4-33.9 0L12.7 278.6c-9.4-9.4-9.4-24.6 0-33.9l22.2-22.2c9.5-9.5 25-9.3 34.3.4L184 343.4V56c0-13.3 10.7-24 24-24h32c13.3 0 24 10.7 24 24v287.4l114.8-120.5c9.3-9.8 24.8-10 34.3-.4z">
-</path>
-</svg>
-</div>
-</div>
-</div>
-<div class="ms_ac--content">
-<div class="ms_ac--text">
-<p>
-<p><strong><?php $acf_val = get_field('sur_mesure'); echo $acf_val ? esc_html($acf_val) : 'Sur Mesure :'; ?></strong> Nous développons des applications métiers
-                                                sur mesure pour optimiser vos processus internes et améliorer la
-                                                productivité de votre entreprise.</p>
-</p></div>
-</div>
-</div>
-<div class="ms_ac_panel">
-<div class="ms_ac--label">
-<div class="label-title"> SMMA </div>
-<div class="ms_ac--icon rotation">
-<div class="accordion_icon--open">
-<svg aria-hidden="true" class="e-font-icon-svg e-fas-arrow-down" viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg">
-<path d="M413.1 222.5l22.2 22.2c9.4 9.4 9.4 24.6 0 33.9L241 473c-9.4 9.4-24.6 9.4-33.9 0L12.7 278.6c-9.4-9.4-9.4-24.6 0-33.9l22.2-22.2c9.5-9.5 25-9.3 34.3.4L184 343.4V56c0-13.3 10.7-24 24-24h32c13.3 0 24 10.7 24 24v287.4l114.8-120.5c9.3-9.8 24.8-10 34.3-.4z">
-</path>
-</svg>
-</div>
-</div>
-</div>
-<div class="ms_ac--content">
-<div class="ms_ac--text">
-<p>
-<p><strong><?php $acf_val = get_field('croissance'); echo $acf_val ? esc_html($acf_val) : 'Croissance :'; ?></strong> Faire des réseaux sociaux un levier de
-                                                croissance pour votre business.</p>
-<p><strong><?php $acf_val = get_field('strat_gie_3'); echo $acf_val ? esc_html($acf_val) : 'Stratégie :'; ?></strong> Création de contenu, Publicité (Media
-                                                Buying) et gestion de communauté.</p>
-</p></div>
-</div>
-</div>
-<div class="ms_ac_panel">
-<div class="ms_ac--label">
-<div class="label-title"> CONSULTING </div>
-<div class="ms_ac--icon rotation">
-<div class="accordion_icon--open">
-<svg aria-hidden="true" class="e-font-icon-svg e-fas-arrow-down" viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg">
-<path d="M413.1 222.5l22.2 22.2c9.4 9.4 9.4 24.6 0 33.9L241 473c-9.4 9.4-24.6 9.4-33.9 0L12.7 278.6c-9.4-9.4-9.4-24.6 0-33.9l22.2-22.2c9.5-9.5 25-9.3 34.3.4L184 343.4V56c0-13.3 10.7-24 24-24h32c13.3 0 24 10.7 24 24v287.4l114.8-120.5c9.3-9.8 24.8-10 34.3-.4z">
-</path>
-</svg>
-</div>
-</div>
-</div>
-<div class="ms_ac--content">
-<div class="ms_ac--text">
-<p>
-<p><?php $acf_val = get_field('une_quipe_d_di_e_de_8_co'); echo $acf_val ? wp_kses_post($acf_val) : 'Une équipe dédiée de 8 collaborateurs pour un accompagnement de A à Z.
-                                                Accédez à des applications pour CMS, CRM, ERP, PrestaShop avec un budget
-                                                maîtrisé.'; ?></p>
-</p></div>
-</div>
-</div>
+<?php endforeach;
+else : ?>
+<p style="padding:20px;color:#888;">Aucun service configuré. Ajoutez des entrées dans l'accordéon Services depuis l'admin.</p>
+<?php endif; ?>
 </div>
 </div>
 </div>

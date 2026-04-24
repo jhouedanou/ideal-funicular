@@ -53,6 +53,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'NOUS SOMMES UNE AGENCE DIGITAL...',
             'name' => 'nous_sommes_une_agence_di',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -60,6 +63,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Agence digitale spécialisée da...',
             'name' => 'agence_digitale_sp_cialis',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -186,6 +192,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Nous donnons vie à vos idées g...',
             'name' => 'nous_donnons_vie_vos_id',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -465,7 +474,10 @@ if( function_exists('acf_add_local_field_group') ):
             'key' => 'field_page_accueil_d_couvrez_nos_derni_res_r',
             'label' => 'Découvrez nos dernières réalis...',
             'name' => 'd_couvrez_nos_derni_res_r',
-            'type' => 'text',
+            'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -529,6 +541,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Une équipe dédiée de 8 collabo...',
             'name' => 'une_quipe_d_di_e_de_8_co',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -667,6 +682,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Développement d\'applications m...',
             'name' => 'd_veloppement_d_applicati_1',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -723,6 +741,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Création de Site Internet à Gu...',
             'name' => 'cr_ation_de_site_internet_1',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -816,10 +837,70 @@ if( function_exists('acf_add_local_field_group') ):
             'name' => 'cabinet_famchon',
             'type' => 'text',
         )
-            
+            ,
+        array(
+            'key' => 'field_accueil_marquee_images',
+            'label' => 'Bannière images défilantes',
+            'name' => 'marquee_images',
+            'type' => 'repeater',
+            'layout' => 'table',
+            'button_label' => 'Ajouter une image',
+            'sub_fields' => array(
+                array(
+                    'key' => 'field_accueil_marquee_image',
+                    'label' => 'Image',
+                    'name' => 'marquee_image',
+                    'type' => 'image',
+                    'return_format' => 'array',
+                    'preview_size' => 'thumbnail',
+                ),
+                array(
+                    'key' => 'field_accueil_marquee_alt',
+                    'label' => 'Texte alternatif',
+                    'name' => 'marquee_alt',
+                    'type' => 'text',
+                ),
+            ),
+        ),
+        array(
+            'key' => 'field_accueil_accordion_services',
+            'label' => 'Accordéon Services',
+            'name' => 'accordion_services',
+            'type' => 'repeater',
+            'layout' => 'block',
+            'button_label' => 'Ajouter un service',
+            'sub_fields' => array(
+                array(
+                    'key' => 'field_accueil_accordion_titre',
+                    'label' => 'Titre du panneau',
+                    'name' => 'accordion_titre',
+                    'type' => 'text',
+                    'required' => 1,
+                ),
+                array(
+                    'key' => 'field_accueil_accordion_contenu',
+                    'label' => 'Contenu',
+                    'name' => 'accordion_contenu',
+                    'type' => 'wysiwyg',
+                    'toolbar' => 'basic',
+                    'media_upload' => 0,
+                    'delay' => 0,
+                ),
+            ),
+        ),
+        array(
+            'key' => 'field_accueil_video_popup_url',
+            'label' => 'URL vidéo popup (section À propos)',
+            'name' => 'video_popup_url',
+            'type' => 'file',
+            'return_format' => 'array',
+            'library' => 'all',
+            'mime_types' => 'mp4,webm',
+        ),
+
         ),
         'location' => array(
-            
+
             array(
                 array(
                     'param' => 'page_template',
@@ -827,7 +908,7 @@ if( function_exists('acf_add_local_field_group') ):
                     'value' => 'templates/page-accueil.php',
                 ),
             ),
-            
+
         ),
     ));
         
@@ -856,6 +937,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Des solutions sur-mesure pour ...',
             'name' => 'des_solutions_sur_mesure',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -863,6 +947,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Une agence digitale globale ca...',
             'name' => 'une_agence_digitale_globa',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -877,6 +964,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Développement de sites vitrine...',
             'name' => 'd_veloppement_de_sites_vi',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -891,6 +981,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Analyse approfondie et optimis...',
             'name' => 'analyse_approfondie_et_op',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -905,6 +998,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Campagnes publicitaires ciblée...',
             'name' => 'campagnes_publicitaires_c',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -919,6 +1015,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Développement de logiciels sur...',
             'name' => 'd_veloppement_de_logiciel',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -933,6 +1032,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Création d\'identités visuelles...',
             'name' => 'cr_ation_d_identit_s_visu',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -947,6 +1049,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Hébergement sécurisé, mises à ...',
             'name' => 'h_bergement_s_curis_mis',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -1072,6 +1177,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Nous créons des sites web mode...',
             'name' => 'nous_cr_ons_des_sites_web',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -1093,6 +1201,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Un site vitrine soigné, rapide...',
             'name' => 'un_site_vitrine_soign_r',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -1114,6 +1225,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Des boutiques en ligne sur Woo...',
             'name' => 'des_boutiques_en_ligne_su',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -1135,6 +1249,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Plateformes web complexes, int...',
             'name' => 'plateformes_web_complexes',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -1156,6 +1273,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Chaque site est conçu avec les...',
             'name' => 'chaque_site_est_con_u_ave',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -1177,6 +1297,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Votre site est vieillissant ou...',
             'name' => 'votre_site_est_vieillissa',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -1198,6 +1321,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Mises à jour régulières, sauve...',
             'name' => 'mises_jour_r_guli_res',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -1268,6 +1394,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Discutons ensemble de vos beso...',
             'name' => 'discutons_ensemble_de_vos',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -1315,7 +1444,10 @@ if( function_exists('acf_add_local_field_group') ):
             'key' => 'field_page_service-mobile-native_applications_mobiles_nati',
             'label' => 'Applications Mobiles Natives',
             'name' => 'applications_mobiles_nati',
-            'type' => 'text',
+            'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -1323,6 +1455,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Nous concevons des application...',
             'name' => 'nous_concevons_des_applic',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -1344,6 +1479,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Applications natives fluides e...',
             'name' => 'applications_natives_flui',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -1365,6 +1503,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Applications robustes et moder...',
             'name' => 'applications_robustes_et',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -1386,6 +1527,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Solutions hybrides (Flutter/Re...',
             'name' => 'solutions_hybrides_flutt',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -1407,6 +1551,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Tests rigoureux sur une multit...',
             'name' => 'tests_rigoureux_sur_une_m',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -1428,6 +1575,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Accompagnement complet pour la...',
             'name' => 'accompagnement_complet_po',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -1519,6 +1669,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Discutons ensemble de vos beso...',
             'name' => 'discutons_ensemble_de_vos',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -1567,6 +1720,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Vos processus internes sont ra...',
             'name' => 'vos_processus_internes_so',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -1581,6 +1737,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Une application métier n\'est p...',
             'name' => 'une_application_m_tier_n',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -1721,6 +1880,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Ne laissez pas des outils obso...',
             'name' => 'ne_laissez_pas_des_outils',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -1769,6 +1931,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Votre identité visuelle est la...',
             'name' => 'votre_identit_visuelle_e',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -1783,6 +1948,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Nous créons des univers de mar...',
             'name' => 'nous_cr_ons_des_univers_d',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -1804,6 +1972,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Un design qui reflète vos vale...',
             'name' => 'un_design_qui_refl_te_vos',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -1860,6 +2031,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Une marque forte est un actif ...',
             'name' => 'une_marque_forte_est_un_a',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -1985,6 +2159,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Un site sans trafic est un inv...',
             'name' => 'un_site_sans_trafic_est_u',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -1999,6 +2176,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Ne laissez plus vos concurrent...',
             'name' => 'ne_laissez_plus_vos_concu',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -2132,6 +2312,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Discutons ensemble de vos beso...',
             'name' => 'discutons_ensemble_de_vos',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -2180,6 +2363,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Vous voulez des résultats immé...',
             'name' => 'vous_voulez_des_r_sultats',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -2215,6 +2401,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'On cible les clients qui reche...',
             'name' => 'on_cible_les_clients_qui',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -2236,6 +2425,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'On cible les clients selon leu...',
             'name' => 'on_cible_les_clients_selo',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -2250,6 +2442,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Gérer des budgets publicitaire...',
             'name' => 'g_rer_des_budgets_publici',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -2313,6 +2508,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Ajustement des stratégies en t...',
             'name' => 'ajustement_des_strat_gies',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -2383,6 +2581,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Contactez-nous pour définir vo...',
             'name' => 'contactez_nous_pour_d_fin',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -2431,6 +2632,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Un site ou une application qui...',
             'name' => 'un_site_ou_une_applicatio',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -2445,6 +2649,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Nous ne nous contentons pas de...',
             'name' => 'nous_ne_nous_contentons_p',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -2466,6 +2673,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Mises à jour critiques et patc...',
             'name' => 'mises_jour_critiques_et',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -2487,6 +2697,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Une assistance technique à vos...',
             'name' => 'une_assistance_technique',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -2508,6 +2721,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Votre outil reste performant, ...',
             'name' => 'votre_outil_reste_perform',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -2585,6 +2801,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Découvrez nos plans de mainten...',
             'name' => 'd_couvrez_nos_plans_de_ma',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -2633,6 +2852,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Nous maîtrisons les outils les...',
             'name' => 'nous_ma_trisons_les_outil',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -2654,6 +2876,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Développement mobile multiplat...',
             'name' => 'd_veloppement_mobile_mult',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -2675,6 +2900,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Applications mobiles natives p...',
             'name' => 'applications_mobiles_nati',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -2696,6 +2924,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Création de sites vitrines et ...',
             'name' => 'cr_ation_de_sites_vitrine',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -2710,6 +2941,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Solutions e-commerce robustes ...',
             'name' => 'solutions_e_commerce_robu',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -2731,6 +2965,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Développement de plateformes w...',
             'name' => 'd_veloppement_de_platefor',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -2752,6 +2989,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Automatisation intelligente et...',
             'name' => 'automatisation_intelligen',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -2773,6 +3013,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Interfaces utilisateur ultra-r...',
             'name' => 'interfaces_utilisateur_ul',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -2794,6 +3037,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Design moderne, réactif et épu...',
             'name' => 'design_moderne_r_actif_e',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -2856,6 +3102,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Découvrez nos dernières réalis...',
             'name' => 'd_couvrez_nos_derni_res_r',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -2863,6 +3112,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Agence digitale spécialisée da...',
             'name' => 'agence_digitale_sp_cialis',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -3121,6 +3373,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Actualités, conseils et tendan...',
             'name' => 'actualit_s_conseils_et_t',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -3442,6 +3697,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'C\'est ici que vous pourrez déc...',
             'name' => 'c_est_ici_que_vous_pourre',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -3623,6 +3881,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Logic Design Solutions, acteur...',
             'name' => 'logic_design_solutions_a',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -3637,6 +3898,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Nous avons opté pour une appro...',
             'name' => 'nous_avons_opt_pour_une',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -3811,6 +4075,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'À l\'ère du tout numérique, pos...',
             'name' => 'l_re_du_tout_num_rique',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -3825,6 +4092,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Une application mobile offre u...',
             'name' => 'une_application_mobile_of',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -3832,6 +4102,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => '"Le succès d\'une application m...',
             'name' => 'le_succ_s_d_une_applicat',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -3853,6 +4126,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Chez E-digital, nous maîtrison...',
             'name' => 'chez_e_digital_nous_ma_t',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -3867,6 +4143,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'À Paris comme ailleurs, un uti...',
             'name' => 'paris_comme_ailleurs_u',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -3881,6 +4160,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'De la phase d\'idéation et de c...',
             'name' => 'de_la_phase_d_id_ation_et',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -3895,6 +4177,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Le marché des applications mob...',
             'name' => 'le_march_des_application',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -3978,6 +4263,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'In the vast expanse of the dig...',
             'name' => 'in_the_vast_expanse_of_th',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -4034,6 +4322,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'In the ever-evolving landscape...',
             'name' => 'in_the_ever_evolving_land',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -4090,6 +4381,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Ever wondered what goes on beh...',
             'name' => 'ever_wondered_what_goes_o',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -4146,6 +4440,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Artificial Intelligence (AI) i...',
             'name' => 'artificial_intelligence',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -4202,6 +4499,9 @@ if( function_exists('acf_add_local_field_group') ):
             'label' => 'Welcome to Home, a devoted tea...',
             'name' => 'welcome_to_home_a_devote',
             'type' => 'wysiwyg',
+            'toolbar'      => 'basic',
+            'media_upload' => 0,
+            'delay'        => 0,
         )
             ,
         array(
@@ -4413,5 +4713,297 @@ if( function_exists('acf_add_local_field_group') ):
             
         ),
     ));
-        
+
+    // -------------------------------------------------------------------------
+    // CPT Slide — champs du slider hero
+    // -------------------------------------------------------------------------
+    acf_add_local_field_group(array(
+        'key'      => 'group_slide',
+        'title'    => 'Contenu de la slide',
+        'fields'   => array(
+
+            // --- Titre principal (h1) ---
+            array(
+                'key'   => 'field_slide_titre',
+                'label' => 'Titre principal',
+                'name'  => 'slide_titre',
+                'type'  => 'text',
+                'instructions' => 'Utilisez <br/> pour forcer un retour à la ligne (ex : "Participe à la<br/>croissance").',
+                'required' => 1,
+            ),
+
+            // --- Sous-titre / texte accroche (p) ---
+            array(
+                'key'   => 'field_slide_sous_titre',
+                'label' => 'Sous-titre / texte accroche',
+                'name'  => 'slide_sous_titre',
+                'type'  => 'text',
+            ),
+
+            // --- Type de média ---
+            array(
+                'key'     => 'field_slide_type_media',
+                'label'   => 'Type de média de fond',
+                'name'    => 'slide_type_media',
+                'type'    => 'select',
+                'choices' => array(
+                    'image' => 'Image',
+                    'video' => 'Vidéo (MP4)',
+                ),
+                'default_value' => 'image',
+                'return_format' => 'value',
+            ),
+
+            // --- Image de fond (visible si type = image) ---
+            array(
+                'key'           => 'field_slide_image',
+                'label'         => 'Image de fond',
+                'name'          => 'slide_image',
+                'type'          => 'image',
+                'return_format' => 'array',
+                'preview_size'  => 'medium',
+                'library'       => 'all',
+                'conditional_logic' => array(
+                    array(
+                        array(
+                            'field'    => 'field_slide_type_media',
+                            'operator' => '==',
+                            'value'    => 'image',
+                        ),
+                    ),
+                ),
+            ),
+
+            // --- Vidéo de fond (visible si type = video) ---
+            array(
+                'key'           => 'field_slide_video',
+                'label'         => 'Vidéo de fond (MP4)',
+                'name'          => 'slide_video',
+                'type'          => 'file',
+                'return_format' => 'array',
+                'library'       => 'all',
+                'mime_types'    => 'mp4,webm',
+                'conditional_logic' => array(
+                    array(
+                        array(
+                            'field'    => 'field_slide_type_media',
+                            'operator' => '==',
+                            'value'    => 'video',
+                        ),
+                    ),
+                ),
+            ),
+
+            // --- Luminosité du média (filtre CSS brightness) ---
+            array(
+                'key'           => 'field_slide_luminosite',
+                'label'         => 'Luminosité du fond (0 = noir, 1 = original)',
+                'name'          => 'slide_luminosite',
+                'type'          => 'number',
+                'default_value' => 0.4,
+                'min'           => 0,
+                'max'           => 1,
+                'step'          => 0.05,
+            ),
+
+            // --- Texte du bouton CTA ---
+            array(
+                'key'   => 'field_slide_btn_texte',
+                'label' => 'Texte du bouton',
+                'name'  => 'slide_btn_texte',
+                'type'  => 'text',
+            ),
+
+            // --- Lien du bouton CTA ---
+            array(
+                'key'   => 'field_slide_btn_lien',
+                'label' => 'Lien du bouton',
+                'name'  => 'slide_btn_lien',
+                'type'  => 'url',
+            ),
+        ),
+
+        'location' => array(
+            array(
+                array(
+                    'param'    => 'post_type',
+                    'operator' => '==',
+                    'value'    => 'slide',
+                ),
+            ),
+        ),
+
+        'menu_order'            => 0,
+        'position'              => 'normal',
+        'style'                 => 'default',
+        'label_placement'       => 'top',
+        'instruction_placement' => 'label',
+        'active'                => true,
+    ));
+
+    // =========================================================================
+    // COMPOSANTS PARTAGÉS — Pages de service
+    // Repeater "Cartes de service" + "Ticker" applicables à tous les templates
+    // de service. Chaque page peut avoir son propre contenu.
+    // =========================================================================
+    acf_add_local_field_group(array(
+        'key'   => 'group_service_components',
+        'title' => 'Composants — Cartes & Ticker',
+        'fields' => array(
+
+            // --- Cartes de service ---
+            array(
+                'key'          => 'field_svc_cards',
+                'label'        => 'Cartes de service',
+                'name'         => 'services_cards',
+                'type'         => 'repeater',
+                'layout'       => 'block',
+                'button_label' => 'Ajouter une carte',
+                'sub_fields'   => array(
+                    array(
+                        'key'   => 'field_svc_card_icon',
+                        'label' => 'Classe icône FontAwesome',
+                        'name'  => 'card_icon',
+                        'type'  => 'text',
+                        'instructions' => 'Ex: fa-globe, fa-mobile-alt, fa-cogs',
+                        'placeholder'  => 'fa-globe',
+                    ),
+                    array(
+                        'key'      => 'field_svc_card_titre',
+                        'label'    => 'Titre',
+                        'name'     => 'card_titre',
+                        'type'     => 'text',
+                        'required' => 1,
+                    ),
+                    array(
+                        'key'   => 'field_svc_card_tag',
+                        'label' => 'Tag / catégorie',
+                        'name'  => 'card_tag',
+                        'type'  => 'text',
+                    ),
+                    array(
+                        'key'          => 'field_svc_card_desc',
+                        'label'        => 'Description',
+                        'name'         => 'card_description',
+                        'type'         => 'wysiwyg',
+                        'toolbar'      => 'basic',
+                        'media_upload' => 0,
+                        'delay'        => 0,
+                    ),
+                ),
+            ),
+
+            // --- Ticker texte défilant ---
+            array(
+                'key'          => 'field_svc_ticker',
+                'label'        => 'Ticker — texte défilant',
+                'name'         => 'ticker_items',
+                'type'         => 'repeater',
+                'layout'       => 'table',
+                'button_label' => 'Ajouter un item',
+                'instructions' => 'Chaque item sera séparé par le bullet rond doré.',
+                'sub_fields'   => array(
+                    array(
+                        'key'   => 'field_svc_ticker_texte',
+                        'label' => 'Texte',
+                        'name'  => 'ticker_texte',
+                        'type'  => 'text',
+                    ),
+                ),
+            ),
+        ),
+
+        'location' => array(
+            array(array( 'param' => 'page_template', 'operator' => '==', 'value' => 'templates/page-services.php' )),
+            array(array( 'param' => 'page_template', 'operator' => '==', 'value' => 'templates/page-service-creation-web.php' )),
+            array(array( 'param' => 'page_template', 'operator' => '==', 'value' => 'templates/page-service-mobile-native.php' )),
+            array(array( 'param' => 'page_template', 'operator' => '==', 'value' => 'templates/page-service-app-metier.php' )),
+            array(array( 'param' => 'page_template', 'operator' => '==', 'value' => 'templates/page-service-branding.php' )),
+            array(array( 'param' => 'page_template', 'operator' => '==', 'value' => 'templates/page-service-visibilite-seo.php' )),
+            array(array( 'param' => 'page_template', 'operator' => '==', 'value' => 'templates/page-service-visibilite-google-ads.php' )),
+            array(array( 'param' => 'page_template', 'operator' => '==', 'value' => 'templates/page-service-maintenance.php' )),
+            array(array( 'param' => 'page_template', 'operator' => '==', 'value' => 'templates/page-accueil.php' )),
+        ),
+
+        'menu_order'            => 10,
+        'position'              => 'normal',
+        'style'                 => 'default',
+        'label_placement'       => 'top',
+        'instruction_placement' => 'label',
+        'active'                => true,
+    ));
+
+    // =========================================================================
+    // LIENS SOCIAUX — Page contact
+    // =========================================================================
+    acf_add_local_field_group(array(
+        'key'   => 'group_social_links',
+        'title' => 'Réseaux sociaux',
+        'fields' => array(
+            array(
+                'key'   => 'field_social_facebook',
+                'label' => 'URL Facebook',
+                'name'  => 'social_facebook',
+                'type'  => 'url',
+            ),
+            array(
+                'key'   => 'field_social_linkedin',
+                'label' => 'URL LinkedIn',
+                'name'  => 'social_linkedin',
+                'type'  => 'url',
+            ),
+            array(
+                'key'   => 'field_social_instagram',
+                'label' => 'URL Instagram',
+                'name'  => 'social_instagram',
+                'type'  => 'url',
+            ),
+            array(
+                'key'   => 'field_social_twitter',
+                'label' => 'URL X / Twitter',
+                'name'  => 'social_twitter',
+                'type'  => 'url',
+            ),
+        ),
+        'location' => array(
+            array(array( 'param' => 'page_template', 'operator' => '==', 'value' => 'templates/page-contact.php' )),
+        ),
+        'menu_order'            => 5,
+        'position'              => 'side',
+        'style'                 => 'default',
+        'label_placement'       => 'top',
+        'instruction_placement' => 'label',
+        'active'                => true,
+    ));
+
+    // =========================================================================
+    // ARTICLES MIS EN AVANT — Page blog
+    // =========================================================================
+    acf_add_local_field_group(array(
+        'key'   => 'group_blog_featured',
+        'title' => 'Articles mis en avant (sidebar)',
+        'fields' => array(
+            array(
+                'key'           => 'field_blog_featured_posts',
+                'label'         => 'Articles à mettre en avant',
+                'name'          => 'blog_featured_posts',
+                'type'          => 'relationship',
+                'post_type'     => array( 'post' ),
+                'filters'       => array( 'search', 'taxonomy' ),
+                'max'           => 3,
+                'return_format' => 'object',
+                'instructions'  => 'Sélectionnez jusqu\'à 3 articles à afficher dans la section "Les plus lus".',
+            ),
+        ),
+        'location' => array(
+            array(array( 'param' => 'page_template', 'operator' => '==', 'value' => 'templates/page-blog.php' )),
+        ),
+        'menu_order'            => 5,
+        'position'              => 'side',
+        'style'                 => 'default',
+        'label_placement'       => 'top',
+        'instruction_placement' => 'label',
+        'active'                => true,
+    ));
+
 endif;

@@ -249,6 +249,44 @@ function edigital_register_cpt_projet() {
 add_action( 'init', 'edigital_register_cpt_projet', 0 );
 
 /**
+ * Register Custom Post Type: Slides (Hero slider)
+ */
+function edigital_register_cpt_slide() {
+    $labels = array(
+        'name'          => _x( 'Slides', 'Post Type General Name', 'edigital' ),
+        'singular_name' => _x( 'Slide', 'Post Type Singular Name', 'edigital' ),
+        'menu_name'     => __( 'Slider Hero', 'edigital' ),
+        'all_items'     => __( 'Toutes les slides', 'edigital' ),
+        'add_new_item'  => __( 'Ajouter une slide', 'edigital' ),
+        'add_new'       => __( 'Ajouter', 'edigital' ),
+        'edit_item'     => __( 'Modifier la slide', 'edigital' ),
+        'update_item'   => __( 'Mettre à jour la slide', 'edigital' ),
+    );
+    $args = array(
+        'label'               => __( 'Slide', 'edigital' ),
+        'description'         => __( 'Slides du slider hero de la page d\'accueil', 'edigital' ),
+        'labels'              => $labels,
+        'supports'            => array( 'title', 'page-attributes' ),
+        'hierarchical'        => false,
+        'public'              => false,
+        'show_ui'             => true,
+        'show_in_menu'        => true,
+        'menu_position'       => 6,
+        'menu_icon'           => 'dashicons-images-alt2',
+        'show_in_admin_bar'   => true,
+        'show_in_nav_menus'   => false,
+        'can_export'          => true,
+        'has_archive'         => false,
+        'exclude_from_search' => true,
+        'publicly_queryable'  => false,
+        'capability_type'     => 'post',
+        'show_in_rest'        => false,
+    );
+    register_post_type( 'slide', $args );
+}
+add_action( 'init', 'edigital_register_cpt_slide', 0 );
+
+/**
  * ---------------------------------------------------------------------------
  * Compatibilité Elementor
  * ---------------------------------------------------------------------------
