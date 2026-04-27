@@ -1,0 +1,33 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "edigital/section-heading",
+	"version": "1.0.0",
+	"title": "E-Digital — Titre de section avec tag",
+	"category": "edigital",
+	"icon": "heading",
+	"description": "Grand titre éditorial accompagné d'un tag (ex. « Histoire », « Expertise »).",
+	"keywords": ["titre", "section", "histoire", "tag"],
+	"textdomain": "edigital",
+	"supports": {
+		"html": false,
+		"reusable": true
+	},
+	"attributes": {
+		"titre": {
+			"type": "string",
+			"default": "Nous donnons vie à vos idées grâce à notre maîtrise des dernières technologies web et mobiles."
+		},
+		"etiquette": {
+			"type": "string",
+			"default": "Histoire"
+		},
+		"variante": {
+			"type": "string",
+			"enum": ["default", "last"],
+			"default": "default"
+		}
+	},
+	"editorScript": "file:./index.js",
+	"render": "file:./render.php"
+}

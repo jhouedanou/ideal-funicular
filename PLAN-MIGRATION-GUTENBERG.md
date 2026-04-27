@@ -70,6 +70,7 @@ git pull
 | Bloc | Nom technique | Rôle |
 |------|--------------|------|
 | Intro | `edigital/intro` | Titre principal + étiquette + ancre |
+| **À Propos** | `edigital/about-section` | **Numéro `-01` + grand titre + image parallax + bouton play vidéo + sous-titre + tag « Expertise ». Reproduit la section absente entre le marquee et la grille expertise.** |
 | Bande images | `edigital/marquee-images` | Marquee d'images (sélection médiathèque) |
 | Bande texte | `edigital/text-ticker` | Ticker mots-clés double ligne |
 | Grille expertise | `edigital/expertise-grid` | Container + CTA |
@@ -89,6 +90,29 @@ git pull
 
 **Contenu initial à coller dans WP Admin :**
 → `wp-theme-edigital/sql/home-default-content.html`
+
+### Fix post-déploiement (écarts maquette)
+
+Différences observées entre la home rendue et la maquette d'origine, et leur résolution :
+
+| Symptôme | Cause | Résolution |
+|----------|-------|------------|
+| Hero affiche « Bienvenue chez E-digital » | Aucune slide créée (CPT `slide` vide) | `wp eval-file import-slides.php` (ou via WP admin → Slider Hero → Ajouter) |
+| Section « Nous sommes une agence digitale… » absente | Bloc inexistant lors du Phase 1 | ✅ Bloc `edigital/about-section` créé |
+| Cartes expertise sans images | Attribut `imageUrl` non rempli dans la fixture | ✅ URLs ajoutées dans `home-default-content.html` |
+| Une seule actualité (Hello world!) | Pas de seed CPT `actualite` | Créer manuellement les actualités via WP admin (4 minimum pour remplir la grille) |
+
+**Workflow après modification de la fixture :**
+
+```bash
+# 1. Éditer wp-theme-edigital/sql/home-default-content.html
+# 2. Régénérer le SQL
+python3 wp-theme-edigital/sql/build-sql.py
+# 3. Rebuild des blocs (si on a ajouté un nouveau bloc dans src/)
+cd wp-theme-edigital && npm run build
+# 4. Recharger le stack Docker (purge volume DB pour réimport)
+docker compose down -v && docker compose up -d
+```
 
 ---
 

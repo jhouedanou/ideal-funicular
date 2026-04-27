@@ -1,0 +1,47 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "edigital/about-section",
+	"version": "1.0.0",
+	"title": "E-Digital — Section À Propos (numéro + image vidéo)",
+	"category": "edigital",
+	"icon": "format-quote",
+	"description": "Bloc d'introduction avec numéro, grand titre, image parallax et bouton lecture vidéo, puis sous-titre expertise.",
+	"keywords": ["à propos", "intro", "numéro", "vidéo"],
+	"textdomain": "edigital",
+	"supports": {
+		"html": false,
+		"reusable": true
+	},
+	"attributes": {
+		"numero": {
+			"type": "string",
+			"default": "-01"
+		},
+		"titrePrincipal": {
+			"type": "string",
+			"default": "NOUS SOMMES UNE AGENCE DIGITALE SPÉCIALISÉE DANS LE DÉVELOPPEMENT WEB ET MOBILE AU SERVICE DES TPE/PME DEPUIS 2003."
+		},
+		"imageUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"imageId": {
+			"type": "number"
+		},
+		"videoUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"sousTitre": {
+			"type": "string",
+			"default": "Agence digitale spécialisée dans la conception et le développement de solutions sur mesure."
+		},
+		"etiquette": {
+			"type": "string",
+			"default": "Expertise"
+		}
+	},
+	"editorScript": "file:./index.js",
+	"render": "file:./render.php"
+}
