@@ -1,17 +1,26 @@
 <!--
-  Contenu initial de la page d'accueil — à coller dans l'éditeur Gutenberg
-  (mode « éditeur de code » dans WordPress) après l'activation du thème.
+  Contenu initial (fixture) de la page d'accueil E-Digital.
 
-  Comment l'utiliser :
-    1. Activer le thème E-Digital, lancer "npm install && npm run build"
-       depuis wp-content/themes/wp-theme-edigital pour compiler les blocs.
-    2. Aller dans Pages > Accueil > "Modifier".
-    3. Cliquer sur l'icône ⋮ (en haut à droite) > "Éditeur de code".
-    4. Coller tout le contenu ci-dessous, puis "Quitter l'éditeur de code".
-    5. Sauvegarder.
+  >>> AUTO-PROVISIONING : ce fichier est lu automatiquement par
+      wp-theme-edigital/sql/build-sql.py (fonction build_home) pour générer
+      sql/edigital-pages.sql, lui-même importé au boot par
+      docker/init/install.sh. Aucun copier/coller manuel n'est nécessaire.
 
-  Les libellés ne sont là qu'en valeurs par défaut — tout est éditable dans
-  l'interface après collage.
+  Workflow après modification :
+    1. Éditer ce fichier (les blocs Gutenberg ci-dessous).
+    2. Régénérer le SQL :
+         python3 wp-theme-edigital/sql/build-sql.py
+    3. Reconstruire le stack :
+         docker compose down -v && docker compose up -d
+       (le -v purge le volume DB, sinon le marker .edigital-installed
+        empêche la ré-importation.)
+
+  Fallback manuel (si besoin) — éditeur Gutenberg en mode code :
+    Pages > Accueil > Modifier > menu kebab > Éditeur de code, puis coller
+    le contenu ci-dessous (à partir de la 1re balise wp:edigital).
+
+  Les libellés sont des valeurs par défaut — tout reste éditable depuis
+  l'interface WordPress après import.
 -->
 
 <!-- wp:edigital/intro {"titreLigne1":"Agence Digitale","titreLigne2":"Avant-gardiste","etiquette":"À Propos","ancre":"services"} /-->

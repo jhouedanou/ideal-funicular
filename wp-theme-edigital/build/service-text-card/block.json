@@ -1,0 +1,47 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "edigital/service-text-card",
+  "version": "1.0.0",
+  "title": "E-Digital — Carte Service",
+  "category": "edigital",
+  "icon": "id",
+  "description": "Carte texte avec icône Font Awesome, tag, titre et description.",
+  "keywords": [
+    "service",
+    "carte",
+    "texte"
+  ],
+  "textdomain": "edigital",
+  "parent": [
+    "edigital/service-text-grid"
+  ],
+  "supports": {
+    "html": false,
+    "reusable": false
+  },
+  "attributes": {
+    "icone": {
+      "type": "string",
+      "default": "fa-laptop"
+    },
+    "icoFamille": {
+      "type": "string",
+      "default": "fas"
+    },
+    "tag": {
+      "type": "string",
+      "default": ""
+    },
+    "titre": {
+      "type": "string",
+      "default": ""
+    },
+    "texte": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "editorScript": "file:./index.js",
+  "render": "file:./render.php"
+}

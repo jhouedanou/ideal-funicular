@@ -1,0 +1,28 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "edigital/service-intro",
+  "version": "1.0.0",
+  "title": "E-Digital — Intro Service",
+  "category": "edigital",
+  "icon": "editor-alignleft",
+  "description": "Titre introductif centré (avec effet de masque).",
+  "keywords": [
+    "intro",
+    "titre",
+    "service"
+  ],
+  "textdomain": "edigital",
+  "supports": {
+    "html": false,
+    "reusable": true
+  },
+  "attributes": {
+    "titre": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "editorScript": "file:./index.js",
+  "render": "file:./render.php"
+}

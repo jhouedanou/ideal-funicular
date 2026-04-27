@@ -1,0 +1,28 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "edigital/service-text-grid",
+  "version": "1.0.0",
+  "title": "E-Digital — Grille Cartes Service",
+  "category": "edigital",
+  "icon": "grid-view",
+  "description": "Grille de cartes texte pour les pages service (icône + tag + titre + texte).",
+  "keywords": [
+    "service",
+    "grille",
+    "cartes"
+  ],
+  "textdomain": "edigital",
+  "supports": {
+    "html": false,
+    "reusable": true
+  },
+  "attributes": {
+    "colonnes": {
+      "type": "number",
+      "default": 3
+    }
+  },
+  "editorScript": "file:./index.js",
+  "render": "file:./render.php"
+}

@@ -134,7 +134,42 @@ def to_blocks(items: list[tuple[str, str]]) -> list[str]:
 # Contenus spécifiques par page
 # ---------------------------------------------------------------------------
 
+def load_fixture(filename: str) -> str:
+    """Charge un fichier de blocs Gutenberg E-Digital depuis sql/fixtures/.
+
+    Le commentaire HTML d'introduction (documentation pour les humains)
+    est retiré : on ne garde que le contenu à partir du premier bloc
+    Gutenberg réel (`<!-- wp:edigital/` ou `<!-- wp:`).
+    """
+    path = THEME / "sql" / "fixtures" / filename
+    if not path.exists():
+        path = THEME / "sql" / filename
+    raw = path.read_text(encoding="utf-8")
+
+    # Retire les commentaires HTML de tête NON-Gutenberg (qui ne commencent
+    # pas par `<!-- wp:` ni `<!-- /wp:`) tant qu'on en rencontre.
+    pattern = re.compile(r"^\s*<!--(?!\s*/?wp:)(.*?)-->\s*", re.DOTALL)
+    while True:
+        m = pattern.match(raw)
+        if not m:
+            break
+        raw = raw[m.end():]
+
+    return raw.strip()
+
+
 def build_home() -> list[str]:
+    """Charge home-default-content.html avec les blocs edigital/* d'origine."""
+    return [load_fixture("home-default-content.html")]
+
+
+def build_from_fixture(filename: str) -> list[str]:
+    """Builder pour les pages dont le contenu est défini dans un fichier de blocs."""
+    return [load_fixture(filename)]
+
+
+def build_legacy_home_fallback() -> list[str]:
+    """Ancien builder home (gardé en référence — non utilisé)."""
     return [
         block_heading("Agence Digitale Avant-gardiste", 1),
         block_paragraph(
@@ -143,34 +178,6 @@ def build_home() -> list[str]:
             "web et mobile au service des TPE/PME depuis 2003."
         ),
         block_button("Accéder à nos services", "/services/"),
-        block_heading("À Propos", 2),
-        block_paragraph(
-            "Nous sommes une agence digitale spécialisée dans le développement "
-            "web et mobile au service des TPE/PME depuis 2003. Budget maîtrisé "
-            "pour CMS, CRM, ERP, Prestashop."
-        ),
-        block_heading("Notre expertise", 2),
-        block_list([
-            "Conception Web sur Mesure — Sites Web & E-commerce",
-            "Applications Mobiles — iOS & Android",
-            "Logiciels Métier — CRM, ERP & Solutions",
-            "Référencement SEO / SEA — Marketing Digital",
-            "Création d'Identité Visuelle — Branding & Design",
-            "Maintenance & Hébergement — Support Technique",
-        ]),
-        block_button("Voir tous les projets", "/nos-projets/"),
-        block_shortcode(
-            '[edigital_marquee items="SITES WEB SUR MESURE, APPLICATIONS MOBILES, '
-            'LOGICIELS MÉTIER, SOLUTION SMMA, SITES E-COMMERCE, SEO & STRATÉGIE DIGITALE, '
-            'DESIGN PREMIUM, ACCOMPAGNEMENT DÉDIÉ, INNOVATION TECH, EXPERTISE WEB"]'
-        ),
-        block_heading("Des solutions pour votre succès", 2),
-        block_paragraph(
-            "Conception et développement web innovant depuis 2003. "
-            "Nous donnons vie à vos idées grâce à notre maîtrise des dernières "
-            "technologies web et mobiles."
-        ),
-        block_button("En savoir plus", "/services/"),
     ]
 
 
