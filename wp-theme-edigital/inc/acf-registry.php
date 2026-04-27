@@ -5,6 +5,7 @@ if( function_exists('acf_add_local_field_group') ):
 
     acf_add_local_field_group(array(
         'key' => 'group_page_services',
+	'active' => false, // Désactivé Phase 2-4 migration Gutenberg
         'title' => 'Champs : page-services.php',
         'fields' => array(
             
@@ -238,6 +239,7 @@ if( function_exists('acf_add_local_field_group') ):
 
     acf_add_local_field_group(array(
         'key' => 'group_page_service_creation_web',
+	'active' => false, // Désactivé Phase 2-4 migration Gutenberg
         'title' => 'Champs : page-service-creation-web.php',
         'fields' => array(
             
@@ -513,6 +515,7 @@ if( function_exists('acf_add_local_field_group') ):
 
     acf_add_local_field_group(array(
         'key' => 'group_page_service_mobile_native',
+	'active' => false, // Désactivé Phase 2-4 migration Gutenberg
         'title' => 'Champs : page-service-mobile-native.php',
         'fields' => array(
             
@@ -788,6 +791,7 @@ if( function_exists('acf_add_local_field_group') ):
 
     acf_add_local_field_group(array(
         'key' => 'group_page_service_app_metier',
+	'active' => false, // Désactivé Phase 2-4 migration Gutenberg
         'title' => 'Champs : page-service-app-metier.php',
         'fields' => array(
             
@@ -999,6 +1003,7 @@ if( function_exists('acf_add_local_field_group') ):
 
     acf_add_local_field_group(array(
         'key' => 'group_page_service_branding',
+	'active' => false, // Désactivé Phase 2-4 migration Gutenberg
         'title' => 'Champs : page-service-branding.php',
         'fields' => array(
             
@@ -1220,6 +1225,7 @@ if( function_exists('acf_add_local_field_group') ):
 
     acf_add_local_field_group(array(
         'key' => 'group_page_service_visibilite_seo',
+	'active' => false, // Désactivé Phase 2-4 migration Gutenberg
         'title' => 'Champs : page-service-visibilite-seo.php',
         'fields' => array(
             
@@ -1431,6 +1437,7 @@ if( function_exists('acf_add_local_field_group') ):
 
     acf_add_local_field_group(array(
         'key' => 'group_page_service_visibilite_google_ads',
+	'active' => false, // Désactivé Phase 2-4 migration Gutenberg
         'title' => 'Champs : page-service-visibilite-google-ads.php',
         'fields' => array(
             
@@ -1700,6 +1707,7 @@ if( function_exists('acf_add_local_field_group') ):
 
     acf_add_local_field_group(array(
         'key' => 'group_page_service_maintenance',
+	'active' => false, // Désactivé Phase 2-4 migration Gutenberg
         'title' => 'Champs : page-service-maintenance.php',
         'fields' => array(
             
@@ -1920,6 +1928,7 @@ if( function_exists('acf_add_local_field_group') ):
 
     acf_add_local_field_group(array(
         'key' => 'group_page_nos_technologies',
+	'active' => false, // Désactivé Phase 2-4 migration Gutenberg
         'title' => 'Champs : page-nos-technologies.php',
         'fields' => array(
             
@@ -2170,6 +2179,7 @@ if( function_exists('acf_add_local_field_group') ):
 
     acf_add_local_field_group(array(
         'key' => 'group_page_nos_projets',
+	'active' => false, // Désactivé Phase 2-4 migration Gutenberg
         'title' => 'Champs : page-nos-projets.php',
         'fields' => array(
             
@@ -2441,6 +2451,7 @@ if( function_exists('acf_add_local_field_group') ):
 
     acf_add_local_field_group(array(
         'key' => 'group_page_blog',
+	'active' => false, // Désactivé Phase 2-4 migration Gutenberg
         'title' => 'Champs : page-blog.php',
         'fields' => array(
             
@@ -2751,6 +2762,7 @@ if( function_exists('acf_add_local_field_group') ):
 
     acf_add_local_field_group(array(
         'key' => 'group_page_contact',
+	'active' => false, // Désactivé Phase 2-4 migration Gutenberg
         'title' => 'Champs : page-contact.php',
         'fields' => array(
             

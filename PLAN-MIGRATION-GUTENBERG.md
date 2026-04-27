@@ -45,12 +45,12 @@ git pull
 | Page / Template | Statut | Blocs créés | ACF retiré |
 |-----------------|--------|-------------|------------|
 | **Page d'accueil** (`page-accueil.php`) | ✅ Terminé | 12 blocs | ✅ `group_page_accueil` supprimé |
-| Pages service (×7) | 🔲 À faire | — | — |
-| Page services (hub) | 🔲 À faire | — | — |
-| Page contact | 🔲 À faire | — | — |
-| Page nos-projets | 🔲 À faire | — | — |
-| Page nos-technologies | 🔲 À faire | — | — |
-| Page blog | 🔲 À faire | — | — |
+| **Pages service (×7)** | ✅ Terminé | 5 blocs (service-hero, service-intro, service-text-grid, service-text-card, service-cta) | ✅ 7 groupes désactivés (`'active' => false`) |
+| **Page services (hub)** | ✅ Terminé | 1 bloc (`edigital/services-hub`) | ✅ `group_page_services` désactivé |
+| **Page contact** | ✅ Terminé | 2 blocs (`edigital/contact-info`, `edigital/office-card`) | ✅ `group_page_contact` désactivé |
+| **Page nos-projets** | ✅ Terminé | 1 bloc (`edigital/projets-intro`) + boucle CPT conservée en PHP | ✅ `group_page_nos_projets` désactivé |
+| **Page nos-technologies** | ✅ Terminé | 1 bloc (`edigital/technos-grid`) | ✅ `group_page_nos_technologies` désactivé |
+| **Page blog** | ✅ Terminé | Blocs natifs WP + boucle posts conservée en PHP | ✅ `group_page_blog` désactivé |
 | CPT Projet (single) | ⏸ Garder ACF | — | — |
 | CPT Actualité (single) | ⏸ Garder ACF | — | — |
 
@@ -92,7 +92,7 @@ git pull
 
 ---
 
-## Phase 2 — Pages de service (×7) 🔲
+## Phase 2 — Pages de service (×7) ✅
 
 **Pages concernées :**
 `page-service-creation-web.php`, `page-service-mobile-native.php`,
@@ -118,36 +118,58 @@ créés en Phase 1 sont **réutilisables** sur les pages service sans modificati
 
 **ACF à retirer :** groupes `group_page_service_*` (×7) dans `acf-registry.php`.
 
+### ✅ Réalisation
+
+- 5 nouveaux blocs créés sous `src/` : `service-hero`, `service-intro`, `service-text-grid`, `service-text-card` (parent : `service-text-grid`), `service-cta`.
+- 7 templates `page-service-*.php` réduits à un squelette de **23 lignes** (`get_header()` + `the_content()` + `get_footer()`).
+- CSS commun extrait vers `inc/services-styles.php` (chargé via `wp_add_inline_style` priorité 25) — couvre `.ms-hero-internal`, `.service-text-card`, `.service-cta`, `.btn-cta`, etc.
+- Inclusion ajoutée dans `functions.php` : `require_once get_template_directory() . '/inc/services-styles.php';`.
+- 7 groupes ACF désactivés dans `inc/acf-registry.php` via `'active' => false` (réversible — il suffit de supprimer la ligne pour réactiver).
+
+> **Important :** Lancer `npm run build` dans `wp-theme-edigital/` pour générer le dossier `build/` des nouveaux blocs avant de tester.
+
 ---
 
-## Phase 3 — Pages hub et contact 🔲
+## Phase 3 — Pages hub et contact ✅
 
 ### page-services.php (hub)
 - Structure similaire aux pages service mais avec liens vers chaque service
-- Bloc à créer : `edigital/services-hub` (grille de liens vers les sous-pages)
+- Bloc créé : `edigital/services-hub` (grille de cartes — image + titre + description + lien)
 
-### page-contact.php (703 lignes)
-- La plus longue — formulaire + adresses + horaires + carte
-- Blocs à créer : `edigital/contact-info`, `edigital/office-card`
-- Le formulaire de devis (`[edigital_devis]`) reste un shortcode
+### page-contact.php
+- Blocs créés : `edigital/contact-info` (téléphone + email + horaires) et `edigital/office-card` (label + adresse)
+- Le formulaire de devis (`[edigital_devis]`) reste un shortcode — à insérer via le bloc Shortcode dans la page
 
-**ACF à retirer :** `group_page_services`, `group_page_contact`.
+**ACF désactivé :** `group_page_services`, `group_page_contact`.
+
+### ✅ Réalisation
+
+- 3 nouveaux blocs créés sous `src/` : `services-hub`, `contact-info`, `office-card`.
+- Templates `page-services.php` et `page-contact.php` réduits au squelette `the_content()`.
+- 2 groupes ACF désactivés (`'active' => false`).
+- Réutilisation du bloc `edigital/service-hero` (Phase 2) pour le bandeau d'en-tête de ces pages.
 
 ---
 
-## Phase 4 — Archives et pages secondaires 🔲
+## Phase 4 — Archives et pages secondaires ✅
 
 ### page-nos-projets.php
-- Archive filtrée par taxonomie `expertise` (Isotope)
-- Peu de champs ACF (16) — principalement le titre de section
-- Bloc à créer : `edigital/projets-intro` (titre + filtre)
+- Archive filtrée par taxonomie (Isotope)
+- Bloc créé : `edigital/projets-intro` (titre + sous-titre + boutons de filtre paramétrables)
+- La grille des projets reste **dynamique** (boucle `WP_Query` sur le CPT `projet` conservée dans le template)
 
 ### page-nos-technologies.php
-- Grille de logos technos
-- Bloc à créer : `edigital/technos-grid`
+- Bloc créé : `edigital/technos-grid` (grille items : icône + nom + description, items repeater dans l'inspecteur)
 
 ### page-blog.php
-- 10 champs ACF, peu d'impact — peut passer en blocs natifs WordPress standards
+- Hero + intro éditables via blocs natifs WordPress + `edigital/service-hero`
+- La grille d'articles + pagination restent **dynamiques** (boucle `WP_Query` conservée dans le template)
+
+### ✅ Réalisation
+
+- 2 nouveaux blocs créés sous `src/` : `projets-intro`, `technos-grid`.
+- Templates `page-nos-projets.php`, `page-nos-technologies.php`, `page-blog.php` réduits au squelette `the_content()` ; les boucles dynamiques (CPT projet, posts) sont conservées en PHP après le contenu Gutenberg.
+- 3 groupes ACF désactivés.
 
 ---
 
@@ -169,6 +191,31 @@ créés en Phase 1 sont **réutilisables** sur les pages service sans modificati
 4. **`get_block_wrapper_attributes()`** systématique dans les `render.php`
 5. **`build/` commité** dans git — aucun `npm` sur le serveur de prod
 6. **ACF conservé** pour les CPT individuels (projet, actualité, slide)
+7. **Désactivation ACF réversible** — on utilise `'active' => false` (et non la suppression du groupe) pour pouvoir réactiver rapidement en cas de besoin.
+
+---
+
+## Récapitulatif des blocs E-Digital
+
+| Phase | Bloc | Rôle |
+|-------|------|------|
+| 1 | `edigital/intro` | Intro accueil |
+| 1 | `edigital/marquee-images` | Bande d'images |
+| 1 | `edigital/text-ticker` | Bande de mots-clés |
+| 1 | `edigital/expertise-grid` + `edigital/expertise-card` | Cartes expertise |
+| 1 | `edigital/services-accordion` + `edigital/accordion-item` | Accordéon |
+| 1 | `edigital/pricing` + `edigital/pricing-card` | Tarifs |
+| 1 | `edigital/parallax-hero` | Hero parallaxe |
+| 1 | `edigital/clients` + `edigital/client-logo` | Logos clients |
+| 2 | `edigital/service-hero` | Bandeau interne (titre + breadcrumb) |
+| 2 | `edigital/service-intro` | Titre de section masqué |
+| 2 | `edigital/service-text-grid` + `edigital/service-text-card` | Grille de cartes texte |
+| 2 | `edigital/service-cta` | Section CTA |
+| 3 | `edigital/services-hub` | Grille de cartes services (avec liens) |
+| 3 | `edigital/contact-info` | Bloc téléphone + email + horaires |
+| 3 | `edigital/office-card` | Carte adresse de bureau |
+| 4 | `edigital/projets-intro` | Titre + boutons de filtre projets |
+| 4 | `edigital/technos-grid` | Grille de technologies |
 
 ---
 

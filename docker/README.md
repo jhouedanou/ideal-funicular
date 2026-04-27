@@ -6,10 +6,27 @@ Stack Docker pour tester et développer le thème `wp-theme-edigital` en local. 
 
 | Service       | URL                      | Rôle                                       |
 |---------------|--------------------------|--------------------------------------------|
-| `wordpress`   | http://localhost:8080    | Site public + /wp-admin                    |
+| `wordpress`   | http://localhost:8080    | Site public + /wp-admin (image custom + Redis + OPcache) |
+| `redis`       | (interne `redis:6379`)   | Object cache pour WordPress                |
 | `phpmyadmin`  | http://localhost:8081    | Interface base de données                  |
 | `db`          | (interne)                | MariaDB 11                                 |
 | `wp-install`  | (tâche ponctuelle)       | Installe WP, active le thème, importe SQL  |
+
+## Performance & durcissement
+
+- **OPcache + realpath cache** activés via [`docker/php/php-tuning.ini`](php/php-tuning.ini) — gain ×3 à ×5 sur Elementor / blocs Gutenberg.
+- **Redis Object Cache** : le conteneur PHP a l'extension `redis` installée ([`docker/wordpress/Dockerfile`](wordpress/Dockerfile)). Pour l'activer côté WP : installer le plugin **Redis Object Cache** (en local, copier-coller sur le filesystem ou via WP-CLI) puis cliquer "Enable" dans Réglages → Redis. Les constantes `WP_REDIS_*` sont déjà déclarées dans `docker-compose.yml`.
+- **Auto-updates wp.org coupées** ([`docker/mu-plugins/edigital-hardening.php`](mu-plugins/edigital-hardening.php)) — supprime les warnings "Could not establish a secure connection to WordPress.org" en environnement Docker isolé.
+- **Warnings PHP non affichés** : `WP_DEBUG=1` mais `WP_DEBUG_DISPLAY=false` + `display_errors=Off`. Les erreurs vont dans `wp-content/debug.log`. Élimine définitivement les bugs "Cannot modify header information — headers already sent".
+- **Heartbeat ralenti** à 60s + désactivé sur le frontend.
+- **Mémoire PHP** : 512 Mo (vs 256 Mo par défaut WP).
+
+## Reconstruire après modification du `Dockerfile` ou des `.ini`
+
+```bash
+docker compose build wordpress
+docker compose up -d
+```
 
 ## Identifiants par défaut
 

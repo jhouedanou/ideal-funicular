@@ -205,6 +205,7 @@ require_once get_template_directory() . '/inc/expertise-filter.php';
 require_once get_template_directory() . '/inc/loops.php';
 require_once get_template_directory() . '/inc/forms-style.php';
 require_once get_template_directory() . '/inc/blocks.php';
+require_once get_template_directory() . '/inc/services-styles.php';
 
 /**
  * Après activation du thème, si un menu « edigital-primary » existe (créé par

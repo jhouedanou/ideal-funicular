@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "edigital/service-cta",
+	"version": "1.0.0",
+	"title": "E-Digital — CTA Service",
+	"category": "edigital",
+	"icon": "megaphone",
+	"description": "Bandeau d'appel à l'action avec titre, texte et bouton.",
+	"keywords": ["cta", "bouton", "service"],
+	"textdomain": "edigital",
+	"supports": {
+		"html": false,
+		"reusable": true
+	},
+	"attributes": {
+		"titre": { "type": "string", "default": "Prêt à lancer votre projet ?" },
+		"texte": { "type": "string", "default": "" },
+		"libelleCta": { "type": "string", "default": "Demander un devis gratuit" },
+		"lienCta": { "type": "string", "default": "/contact/" }
+	},
+	"editorScript": "file:./index.js",
+	"render": "file:./render.php"
+}
