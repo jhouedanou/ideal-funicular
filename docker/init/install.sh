@@ -77,6 +77,28 @@ else
   fi
 fi
 
+# -----------------------------------------------------------------------------
+# Seed des CPT « slide » et « actualite ».
+# Scripts WP-CLI idempotents (skip si l'entrée existe déjà), donc relançables
+# sans danger. Les fichiers vivent dans wp-theme-edigital/sql/seed/.
+# -----------------------------------------------------------------------------
+SLIDES_SCRIPT="/var/www/html/wp-content/themes/edigital/sql/seed/import-slides.php"
+ACTUALITES_SCRIPT="/var/www/html/wp-content/themes/edigital/sql/seed/import-actualites.php"
+
+if [ -f "$SLIDES_SCRIPT" ]; then
+  echo "[edigital] Seed des slides (CPT slide) ..."
+  wp eval-file "$SLIDES_SCRIPT" --path=/var/www/html || echo "[edigital]   !! seed slides en erreur (on continue)"
+else
+  echo "[edigital] Script import-slides.php introuvable — skip."
+fi
+
+if [ -f "$ACTUALITES_SCRIPT" ]; then
+  echo "[edigital] Seed des actualités (CPT actualite) ..."
+  wp eval-file "$ACTUALITES_SCRIPT" --path=/var/www/html || echo "[edigital]   !! seed actualités en erreur (on continue)"
+else
+  echo "[edigital] Script import-actualites.php introuvable — skip."
+fi
+
 echo "[edigital] Application des permaliens jolis ..."
 wp rewrite structure '/%postname%/' --path=/var/www/html
 wp rewrite flush --path=/var/www/html

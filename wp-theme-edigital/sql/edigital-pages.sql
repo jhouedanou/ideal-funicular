@@ -50,6 +50,18 @@ INSERT INTO wp_posts (ID, post_author, post_date, post_date_gmt, post_content, p
 	<!-- wp:edigital/expertise-card {"titre":"Maintenance & Hébergement","categorie":"Support Technique","imageUrl":"/wp-content/themes/edigital/assets/images/portfolio/expertise-support.png","imageAlt":"Maintenance et Hébergement","lien":"/services/maintenance/"} /-->
 <!-- /wp:edigital/expertise-grid -->
 
+<!-- wp:edigital/text-ticker {"separateurUrl":"/wp-content/themes/edigital/assets/images/portfolio/circle-mokko.svg","ligne1":[{"avant":"SITES","mot":"WEB","apres":"SUR MESURE"},{"avant":"APPLICATIONS","mot":"MOBILES","apres":""},{"avant":"LOGICIELS","mot":"MÉTIER","apres":""},{"avant":"SOLUTION","mot":"SMMA","apres":""},{"avant":"SITES","mot":"E-COMMERCE","apres":""}],"ligne2":[{"avant":"SEO &","mot":"STRATÉGIE","apres":"DIGITALE"},{"avant":"DESIGN","mot":"PREMIUM","apres":""},{"avant":"ACCOMPAGNEMENT","mot":"DÉDIÉ","apres":""},{"avant":"INNOVATION","mot":"TECH","apres":""},{"avant":"EXPERTISE","mot":"WEB","apres":""}]} /-->
+
+<!-- wp:edigital/section-heading {"titre":"Nous donnons vie à vos idées grâce à notre maîtrise des dernières technologies web et mobiles.","etiquette":"Histoire","variante":"last"} /-->
+
+<!-- wp:edigital/actualites-grid {"nombre":6,"colonnes":"3","libelleCta":"Toutes les actualités","lienCta":"/blog/","variante":"histoire"} /-->
+
+<!-- wp:edigital/marquee-images {"images":[{"url":"/wp-content/themes/edigital/assets/images/portfolio/web-design.png","alt":"Conception Web sur Mesure"},{"url":"/wp-content/themes/edigital/assets/images/portfolio/blog-mobile-dev.png","alt":"Développement Mobile"},{"url":"/wp-content/themes/edigital/assets/images/portfolio/mobile-app.png","alt":"Applications Mobiles"},{"url":"/wp-content/themes/edigital/assets/images/portfolio/blog-smma.png","alt":"Marketing Digital"},{"url":"/wp-content/themes/edigital/assets/images/portfolio/logiciel-metier.png","alt":"Logiciels Métier"},{"url":"/wp-content/themes/edigital/assets/images/portfolio/blog-web-creation.png","alt":"Création de Sites"},{"url":"/wp-content/themes/edigital/assets/images/portfolio/blog-custom-app.png","alt":"Applications Spécifiques"},{"url":"/wp-content/themes/edigital/assets/images/portfolio/blog-ecommerce.png","alt":"E-commerce"}]} /-->
+
+<!-- wp:edigital/parallax-hero {"titreLigne1":"Créateurs d''expériences","titreLigne2":"digitales depuis 2003","backgroundUrl":"/wp-content/themes/edigital/assets/images/portfolio/createurs-bg.png"} /-->
+
+<!-- wp:edigital/actualites-grid {"titre":"ACTUALITÉS E-DIGITAL","nombre":4,"colonnes":"2","libelleCta":"Voir tous les projets","lienCta":"/nos-projets/","variante":"section"} /-->
+
 <!-- wp:edigital/services-accordion {"titre":"Services","alignement":"right"} -->
 	<!-- wp:edigital/accordion-item {"titre":"CRÉATION WEB"} -->
 		<!-- wp:paragraph --><p><strong>Sites Modernes :</strong> Nous développons des sites web modernes, réactifs et optimisés pour le SEO.</p><!-- /wp:paragraph -->
@@ -70,17 +82,13 @@ INSERT INTO wp_posts (ID, post_author, post_date, post_date_gmt, post_content, p
 	<!-- /wp:edigital/accordion-item -->
 <!-- /wp:edigital/services-accordion -->
 
-<!-- wp:edigital/text-ticker {"ligne1":[{"avant":"SITES","mot":"WEB","apres":"SUR MESURE"},{"avant":"APPLICATIONS","mot":"MOBILES","apres":""},{"avant":"LOGICIELS","mot":"MÉTIER","apres":""},{"avant":"SOLUTION","mot":"SMMA","apres":""},{"avant":"SITES","mot":"E-COMMERCE","apres":""}],"ligne2":[{"avant":"SEO &","mot":"STRATÉGIE","apres":"DIGITALE"},{"avant":"DESIGN","mot":"PREMIUM","apres":""},{"avant":"ACCOMPAGNEMENT","mot":"DÉDIÉ","apres":""},{"avant":"INNOVATION","mot":"TECH","apres":""},{"avant":"EXPERTISE","mot":"WEB","apres":""}]} /-->
-
 <!-- wp:edigital/pricing {"titre":"NOS TARIFS","ancre":"tarifs","extras":[{"libelle":"Référencement SEO","prix":"à partir de 500€ / mois"},{"libelle":"Maintenance & Support","prix":"à partir de 99€ / mois"}]} -->
 	<!-- wp:edigital/pricing-card {"titre":"Site Vitrine","sousTitre":"Idéal pour les TPE/PME et indépendants.","prix":"à partir de 1 200€","points":["Design Personnalisé","Optimisé SEO","Responsive Design"],"libelleCta":"Demander un Devis","lienCta":"/contact/","accent":false} /-->
 	<!-- wp:edigital/pricing-card {"titre":"Site E-commerce","sousTitre":"Votre boutique en ligne sur mesure.","prix":"à partir de 3 500€","points":["Paiement Sécurisé","Gestion des Stocks","PrestaShop / WooCommerce"],"libelleCta":"Demander un Devis","lienCta":"/contact/","accent":true} /-->
 	<!-- wp:edigital/pricing-card {"titre":"App Mobile","sousTitre":"Application Native iOS & Android.","prix":"à partir de 5 000€","points":["Haute Performance","UX / UI Premium","Notification Push"],"libelleCta":"Demander un Devis","lienCta":"/contact/","accent":false} /-->
 <!-- /wp:edigital/pricing -->
 
-<!-- wp:edigital/parallax-hero {"titreLigne1":"Créateurs d''expériences","titreLigne2":"digitales depuis 2003","backgroundUrl":"/wp-content/themes/edigital/assets/images/portfolio/createurs-bg.png"} /-->
-
-<!-- wp:edigital/clients {"titreLigne1":"Ils nous font","titreLigne2":"confiance."} -->
+<!-- wp:edigital/clients {"titreLigne1":"Ils nous font","titreLigne2":"confiance.","backgroundUrl":"/wp-content/themes/edigital/assets/images/clients/client-bg.webp"} -->
 	<!-- wp:edigital/client-logo {"libelle":"TOTAL CI","police":"cinzel","taille":38} /-->
 	<!-- wp:edigital/client-logo {"libelle":"Yves Rocher","police":"playfair","taille":40} /-->
 	<!-- wp:edigital/client-logo {"libelle":"Raufils Assurance","police":"caveat","taille":42} /-->

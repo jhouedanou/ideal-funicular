@@ -71,6 +71,8 @@ git pull
 |------|--------------|------|
 | Intro | `edigital/intro` | Titre principal + étiquette + ancre |
 | **À Propos** | `edigital/about-section` | **Numéro `-01` + grand titre + image parallax + bouton play vidéo + sous-titre + tag « Expertise ». Reproduit la section absente entre le marquee et la grille expertise.** |
+| **Titre de section** | `edigital/section-heading` | **Grand titre + tag (« Histoire », « Expertise »…). Variante `last` pour les sections en bas de bloc.** |
+| **Grille actualités** | `edigital/actualites-grid` | **Liste les N derniers articles du CPT `actualite` (paramétrable : nombre, colonnes 2/3/4, variante `histoire`/`section`, CTA).** |
 | Bande images | `edigital/marquee-images` | Marquee d'images (sélection médiathèque) |
 | Bande texte | `edigital/text-ticker` | Ticker mots-clés double ligne |
 | Grille expertise | `edigital/expertise-grid` | Container + CTA |
@@ -91,16 +93,43 @@ git pull
 **Contenu initial à coller dans WP Admin :**
 → `wp-theme-edigital/sql/home-default-content.html`
 
-### Fix post-déploiement (écarts maquette)
+### Fix post-déploiement (écarts maquette) — itération 2
 
-Différences observées entre la home rendue et la maquette d'origine, et leur résolution :
+Audit complet vs `index.html` : tous les écarts identifiés sont corrigés.
 
 | Symptôme | Cause | Résolution |
 |----------|-------|------------|
-| Hero affiche « Bienvenue chez E-digital » | Aucune slide créée (CPT `slide` vide) | `wp eval-file import-slides.php` (ou via WP admin → Slider Hero → Ajouter) |
-| Section « Nous sommes une agence digitale… » absente | Bloc inexistant lors du Phase 1 | ✅ Bloc `edigital/about-section` créé |
-| Cartes expertise sans images | Attribut `imageUrl` non rempli dans la fixture | ✅ URLs ajoutées dans `home-default-content.html` |
-| Une seule actualité (Hello world!) | Pas de seed CPT `actualite` | Créer manuellement les actualités via WP admin (4 minimum pour remplir la grille) |
+| Hero « Bienvenue chez E-digital » | Aucune slide créée | ✅ Auto-seed via `import-slides.php` → `install.sh` |
+| Section « Nous sommes une agence… » absente | Bloc inexistant | ✅ Bloc `edigital/about-section` créé |
+| Section « Histoire / Nous donnons vie à vos idées » absente | Bloc inexistant | ✅ Bloc `edigital/section-heading` créé |
+| Cartes expertise sans images | Attribut `imageUrl` vide | ✅ URLs ajoutées (`expertise-vitrine.png`, etc.) |
+| Une seule actualité affichée | Pas de seed CPT `actualite` | ✅ Auto-seed via `import-actualites.php` → 6 articles |
+| Grille actualités (×2) hardcodée dans le template | Logique non éditable | ✅ Bloc `edigital/actualites-grid` (CPT-driven, paramétrable) |
+| 1 seule bande marquee | Maquette en a 2 | ✅ Doublée dans la fixture |
+| Ordre des sections inversé | Erreur de layout itération 1 | ✅ Réorganisée selon `index.html` (voir entête fixture) |
+
+### Auto-provisioning au boot Docker
+
+Le script `docker/init/install.sh` exécute désormais en cascade après l'import SQL :
+
+```bash
+wp eval-file wp-theme-edigital/sql/seed/import-slides.php       # CPT slide
+wp eval-file wp-theme-edigital/sql/seed/import-actualites.php   # CPT actualite
+```
+
+Les deux scripts sont **idempotents** (skip si l'entrée existe déjà), donc relançables sans danger.
+
+**Pour exécuter manuellement (debug ou ré-import) :**
+
+```bash
+docker compose run --rm wp-install \
+  wp eval-file /var/www/html/wp-content/themes/edigital/sql/seed/import-slides.php \
+  --path=/var/www/html
+
+docker compose run --rm wp-install \
+  wp eval-file /var/www/html/wp-content/themes/edigital/sql/seed/import-actualites.php \
+  --path=/var/www/html
+```
 
 **Workflow après modification de la fixture :**
 

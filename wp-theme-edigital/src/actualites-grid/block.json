@@ -1,0 +1,46 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "edigital/actualites-grid",
+	"version": "1.0.0",
+	"title": "E-Digital — Grille actualités (CPT)",
+	"category": "edigital",
+	"icon": "format-aside",
+	"description": "Grille des derniers articles du CPT « actualite ». Mise en page paramétrable (3 ou 4 colonnes), bouton CTA optionnel.",
+	"keywords": ["actualités", "blog", "articles", "grid"],
+	"textdomain": "edigital",
+	"supports": {
+		"html": false,
+		"reusable": true
+	},
+	"attributes": {
+		"titre": {
+			"type": "string",
+			"default": ""
+		},
+		"nombre": {
+			"type": "number",
+			"default": 6
+		},
+		"colonnes": {
+			"type": "string",
+			"enum": ["2", "3", "4"],
+			"default": "3"
+		},
+		"libelleCta": {
+			"type": "string",
+			"default": "Toutes les actualités"
+		},
+		"lienCta": {
+			"type": "string",
+			"default": "/blog/"
+		},
+		"variante": {
+			"type": "string",
+			"enum": ["histoire", "section"],
+			"default": "histoire"
+		}
+	},
+	"editorScript": "file:./index.js",
+	"render": "file:./render.php"
+}
