@@ -3,6 +3,7 @@
  * Template Name: E-Digital — Accueil
  */
 if ( ! defined( 'ABSPATH' ) ) { exit; }
+// Les fallbacks ACF sont chargés globalement via /inc/acf-helpers.php.
 add_action( 'wp_enqueue_scripts', function() { wp_add_inline_style( 'edigital-style', '/* Force allow scrolling on everything */
         html,
         body {
@@ -418,16 +419,30 @@ $popup_video_url = ! empty( $popup_video['url'] ) ? $popup_video['url'] : get_te
 <div class="ms-posts--wrap">
 <div class="row ms-posts--card">
 <?php
+// Boucle Actualités (CPT `actualite`) avec repli sur les articles `post`
+// si aucune actualité n'a encore été publiée.
 $blog_query = new WP_Query( array(
-    'post_type'      => 'post',
+    'post_type'      => 'actualite',
     'post_status'    => 'publish',
     'posts_per_page' => 6,
     'orderby'        => 'date',
     'order'          => 'DESC',
 ) );
+if ( ! $blog_query->have_posts() ) {
+    $blog_query = new WP_Query( array(
+        'post_type'      => 'post',
+        'post_status'    => 'publish',
+        'posts_per_page' => 6,
+        'orderby'        => 'date',
+        'order'          => 'DESC',
+    ) );
+}
 if ( $blog_query->have_posts() ) :
     while ( $blog_query->have_posts() ) : $blog_query->the_post();
-        $categories = get_the_category();
+        $categories = ( 'actualite' === get_post_type() )
+            ? get_the_terms( get_the_ID(), 'actualite_categorie' )
+            : get_the_category();
+        if ( is_wp_error( $categories ) ) { $categories = array(); }
         $thumb_url  = get_the_post_thumbnail_url( null, 'medium' );
         $avatar_url = get_template_directory_uri() . '/assets/images/portfolio/avatar.png';
 ?>
@@ -456,7 +471,8 @@ if ( $blog_query->have_posts() ) :
 <?php foreach ( $categories as $i => $cat ) :
     if ( $i > 0 ) echo ', ';
 ?>
-<a href="<?php echo esc_url( get_category_link( $cat->term_id ) ); ?>" rel="category tag"><?php echo esc_html( $cat->name ); ?></a>
+<?php $cat_link = get_term_link( $cat ); ?>
+<a href="<?php echo esc_url( is_wp_error( $cat_link ) ? '#' : $cat_link ); ?>" rel="category tag"><?php echo esc_html( $cat->name ); ?></a>
 <?php endforeach; ?>
 </div>
 <?php endif; ?>
@@ -475,7 +491,8 @@ endif;
 ?>
 </div>
 <div class="btn-wrap">
-<a class="btn btn-mokko btn--md" href="<?php echo esc_url( home_url( '/blog/' ) ); ?>" role="button">
+<?php $archive_actu = get_post_type_archive_link( 'actualite' ) ?: home_url( '/blog/' ); ?>
+<a class="btn btn-mokko btn--md" href="<?php echo esc_url( $archive_actu ); ?>" role="button">
 <div class="ms-btn--label">
 <div class="ms-btn__text">Toutes les actualités</div>
 <div class="ms-btn__border"></div>
@@ -486,16 +503,18 @@ endif;
 </div>
 <div class="newsletter-area">
 <div class="newsletter-inner">
-<h2 class="heading-title"><?php $acf_val = get_field('newsletter'); echo $acf_val ? esc_html($acf_val) : 'Newsletter'; ?></h2>
+<h2 class="heading-title"><?php echo esc_html( edigital_field( 'newsletter', __( 'Newsletter', 'edigital' ) ) ); ?></h2>
 <div class="form-area">
-<form action="api/send.php" class="mc4wp-form mc4wp-form-116" data-id="116" data-name="Newsletter E-digital" id="mc4wp-form-1" method="post">
+<form action="<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>" class="mc4wp-form mc4wp-form-116" data-id="116" data-name="Newsletter E-digital" id="mc4wp-form-1" method="post" data-edigital-newsletter>
+<input name="action" type="hidden" value="edigital_newsletter_subscribe"/>
+<input name="nonce" type="hidden" value="<?php echo esc_attr( wp_create_nonce( 'edigital_newsletter' ) ); ?>"/>
 <input name="form_type" type="hidden" value="newsletter"/>
 <div class="mc4wp-form-fields">
 <div class="ms-mc4wp--wrap">
 <p>Abonnez-vous pour recevoir nos idées inspirantes,<br/> l'actualité de nos
                                             projets et nos innovations quotidiennes.</p>
 <div class="ms-mc4wp--action">
-<input class="form-control" name="EMAIL" placeholder="Votre adresse e-mail" required="" type="email"/>
+<input class="form-control" name="email" placeholder="Votre adresse e-mail" required="" type="email"/>
 <button class="btn btn-default btn--md btn--primary" type="submit">
 <span class="ms-btn__text">
 <svg class="ms-btt-i" enable-background="new 0 0 96 96" height="96px" version="1.1" viewbox="0 0 96 96" width="96px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -505,6 +524,7 @@ endif;
 </span>
 </button>
 </div>
+<p class="edigital-newsletter-feedback" role="status" aria-live="polite"></p>
 </div>
 </div>
 </form>

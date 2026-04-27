@@ -178,14 +178,28 @@ function edigital_contact_form_shortcode() {
 }
 add_shortcode( 'edigital_contact_form', 'edigital_contact_form_shortcode' );
 
-require_once get_template_directory() . '/inc/template-tags.php';
-
 /**
- * Inclusion du registre ACF regénéré automatiquement
+ * Modules du thème — chargés dans cet ordre :
+ *   1. acf-helpers     : fallbacks pour get_field/update_field si ACF inactif.
+ *   2. custom-post-types : CPT (slide, projet, actualite) + taxonomies.
+ *   3. template-tags   : helpers d'affichage.
+ *   4. acf-registry    : (optionnel) registre ACF auto-généré.
+ *   5. newsletter-api  : intégration Brevo + shortcode [edigital_newsletter].
+ *   6. quote-form      : formulaire de devis + shortcode [edigital_devis].
+ *   7. expertise-filter: filtrage de l'archive Projets via ?expertise=slug.
+ *   8. loops           : boucles WP_Query réutilisables (actualités, projets liés).
  */
+require_once get_template_directory() . '/inc/acf-helpers.php';
+require_once get_template_directory() . '/inc/custom-post-types.php';
+require_once get_template_directory() . '/inc/template-tags.php';
 if ( file_exists( get_template_directory() . '/inc/acf-registry.php' ) ) {
     require_once get_template_directory() . '/inc/acf-registry.php';
 }
+require_once get_template_directory() . '/inc/newsletter-api.php';
+require_once get_template_directory() . '/inc/quote-form.php';
+require_once get_template_directory() . '/inc/expertise-filter.php';
+require_once get_template_directory() . '/inc/loops.php';
+require_once get_template_directory() . '/inc/forms-style.php';
 
 /**
  * Après activation du thème, si un menu « edigital-primary » existe (créé par
@@ -205,86 +219,6 @@ function edigital_auto_assign_menu() {
 	}
 }
 add_action( 'after_switch_theme', 'edigital_auto_assign_menu' );
-
-/**
- * Register Custom Post Type: Projets
- */
-function edigital_register_cpt_projet() {
-    $labels = array(
-        'name'                  => _x( 'Projets', 'Post Type General Name', 'edigital' ),
-        'singular_name'         => _x( 'Projet', 'Post Type Singular Name', 'edigital' ),
-        'menu_name'             => __( 'Projets', 'edigital' ),
-        'name_admin_bar'        => __( 'Projet', 'edigital' ),
-        'all_items'             => __( 'Tous les projets', 'edigital' ),
-        'add_new_item'          => __( 'Ajouter un nouveau projet', 'edigital' ),
-        'add_new'               => __( 'Ajouter', 'edigital' ),
-        'new_item'              => __( 'Nouveau projet', 'edigital' ),
-        'edit_item'             => __( 'Modifier le projet', 'edigital' ),
-        'update_item'           => __( 'Mettre à jour le projet', 'edigital' ),
-        'view_item'             => __( 'Voir le projet', 'edigital' ),
-        'search_items'          => __( 'Rechercher un projet', 'edigital' ),
-    );
-    $args = array(
-        'label'                 => __( 'Projet', 'edigital' ),
-        'description'           => __( 'Portfolio de nos projets', 'edigital' ),
-        'labels'                => $labels,
-        'supports'              => array( 'title', 'editor', 'thumbnail', 'excerpt' ),
-        'hierarchical'          => false,
-        'public'                => true,
-        'show_ui'               => true,
-        'show_in_menu'          => true,
-        'menu_position'         => 5,
-        'menu_icon'             => 'dashicons-portfolio',
-        'show_in_admin_bar'     => true,
-        'show_in_nav_menus'     => true,
-        'can_export'            => true,
-        'has_archive'           => 'nos-projets',
-        'exclude_from_search'   => false,
-        'publicly_queryable'    => true,
-        'capability_type'       => 'post',
-        'show_in_rest'          => true,
-    );
-    register_post_type( 'projet', $args );
-}
-add_action( 'init', 'edigital_register_cpt_projet', 0 );
-
-/**
- * Register Custom Post Type: Slides (Hero slider)
- */
-function edigital_register_cpt_slide() {
-    $labels = array(
-        'name'          => _x( 'Slides', 'Post Type General Name', 'edigital' ),
-        'singular_name' => _x( 'Slide', 'Post Type Singular Name', 'edigital' ),
-        'menu_name'     => __( 'Slider Hero', 'edigital' ),
-        'all_items'     => __( 'Toutes les slides', 'edigital' ),
-        'add_new_item'  => __( 'Ajouter une slide', 'edigital' ),
-        'add_new'       => __( 'Ajouter', 'edigital' ),
-        'edit_item'     => __( 'Modifier la slide', 'edigital' ),
-        'update_item'   => __( 'Mettre à jour la slide', 'edigital' ),
-    );
-    $args = array(
-        'label'               => __( 'Slide', 'edigital' ),
-        'description'         => __( 'Slides du slider hero de la page d\'accueil', 'edigital' ),
-        'labels'              => $labels,
-        'supports'            => array( 'title', 'page-attributes' ),
-        'hierarchical'        => false,
-        'public'              => false,
-        'show_ui'             => true,
-        'show_in_menu'        => true,
-        'menu_position'       => 6,
-        'menu_icon'           => 'dashicons-images-alt2',
-        'show_in_admin_bar'   => true,
-        'show_in_nav_menus'   => false,
-        'can_export'          => true,
-        'has_archive'         => false,
-        'exclude_from_search' => true,
-        'publicly_queryable'  => false,
-        'capability_type'     => 'post',
-        'show_in_rest'        => false,
-    );
-    register_post_type( 'slide', $args );
-}
-add_action( 'init', 'edigital_register_cpt_slide', 0 );
 
 /**
  * ---------------------------------------------------------------------------
