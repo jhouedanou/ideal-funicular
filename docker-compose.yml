@@ -35,6 +35,7 @@ services:
     volumes:
       - wp_data:/var/www/html
       - ./wp-theme-edigital:/var/www/html/wp-content/themes/edigital
+      - ./docker/php/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini:ro
 
   wp-install:
     image: wordpress:cli-php8.2

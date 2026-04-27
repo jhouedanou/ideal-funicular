@@ -293,82 +293,98 @@ $popup_video_url = ! empty( $popup_video['url'] ) ? $popup_video['url'] : get_te
 <h2 class="content__title rts-has-mask-fill"><span><?php $acf_val = get_field('agence_digitale_sp_cialis'); echo $acf_val ? wp_kses_post($acf_val) : 'Agence digitale spécialisée dans la conception et le développement de solutions sur mesure.'; ?></span></h2>
 <p class="number-tag"><?php $acf_val = get_field('expertise'); echo $acf_val ? esc_html($acf_val) : 'Expertise'; ?></p>
 </div>
-<div class="portfolio_wrap">
-<div class="portfolio-feed ms-p--d row">
-<div class="below left grid-item-p custom-ratio col-md-4 portfolios">
-<div class="item--inner">
-<a aria-label="Conception Web sur Mesure" href="<?php echo esc_url( home_url( '/services/service-creation-web/' ) ); ?>">
-<div class="ms-p-arrow">
-<svg class="ms-btt-arrow" enable-background="new 0 0 96 96" height="96px" version="1.1" viewbox="0 0 96 96" width="96px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<path d="M52,84V21.656l21.457,21.456c1.561,1.562,4.095,1.562,5.656,0.001c1.562-1.562,1.562-4.096,0-5.658L50.829,9.172l0,0  c-0.186-0.186-0.391-0.352-0.609-0.498c-0.101-0.067-0.21-0.114-0.315-0.172c-0.124-0.066-0.242-0.142-0.373-0.195  c-0.135-0.057-0.275-0.089-0.415-0.129c-0.111-0.033-0.216-0.076-0.331-0.099C48.527,8.027,48.264,8,48.001,8l0,0  c-0.003,0-0.006,0.001-0.009,0.001c-0.259,0.001-0.519,0.027-0.774,0.078c-0.12,0.024-0.231,0.069-0.349,0.104  c-0.133,0.039-0.268,0.069-0.397,0.123c-0.139,0.058-0.265,0.136-0.396,0.208c-0.098,0.054-0.198,0.097-0.292,0.159  c-0.221,0.146-0.427,0.314-0.614,0.501L16.889,37.456c-1.562,1.562-1.562,4.095-0.001,5.657c1.562,1.562,4.094,1.562,5.658,0  L44,21.657V84c0,2.209,1.791,4,4,4S52,86.209,52,84z">
-</path>
-</svg>
+<?php
+// Zone éditable Gutenberg : si la page d'accueil a du contenu saisi dans
+// l'éditeur WordPress, on l'affiche ici à la place de l'accordéon statique.
+// Installer Kadence Blocks (gratuit) pour créer un accordéon visuel.
+$home_id      = get_option( 'page_on_front' );
+$home_content = $home_id ? trim( get_post_field( 'post_content', $home_id ) ) : '';
+if ( $home_content ) :
+?>
+<div class="edigital-gutenberg-zone">
+<?php echo apply_filters( 'the_content', $home_content ); ?>
 </div>
-<figure class="ms-p-img cursor-none">
-<img alt="Conception Web sur Mesure" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/portfolio/web-design.png"/>
-</figure>
-<div class="ms-p-content justify-top cursor-none">
-<div class="ms-p-content__inner bottom">
-<h3><?php $acf_val = get_field('conception_web_sur_mesure'); echo $acf_val ? esc_html($acf_val) : 'Conception Web sur Mesure'; ?></h3>
-<span class="ms-p-cat"><?php $acf_val = get_field('sites_web_e_commerce'); echo $acf_val ? esc_html($acf_val) : 'Sites Web &amp; E-commerce'; ?></span>
-</div>
-</div>
-</a>
+<?php else : ?>
+<div class="ms_accordion i--right l-ef" data-collapse="yes">
+<div class="ms_ac_panel">
+<div class="ms_ac--label">
+<div class="label-title"> CRÉATION WEB </div>
+<div class="ms_ac--icon rotation">
+<div class="accordion_icon--open">
+<svg aria-hidden="true" class="e-font-icon-svg e-fas-arrow-down" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M413.1 222.5l22.2 22.2c9.4 9.4 9.4 24.6 0 33.9L241 473c-9.4 9.4-24.6 9.4-33.9 0L12.7 278.6c-9.4-9.4-9.4-24.6 0-33.9l22.2-22.2c9.5-9.5 25-9.3 34.3.4L184 343.4V56c0-13.3 10.7-24 24-24h32c13.3 0 24 10.7 24 24v287.4l114.8-120.5c9.3-9.8 24.8-10 34.3-.4z"/></svg>
 </div>
 </div>
-<div class="below left grid-item-p custom-ratio col-md-4 portfolios">
-<div class="item--inner">
-<a aria-label="Applications Mobiles" href="<?php echo esc_url( home_url( '/services/service-app-metier/' ) ); ?>">
-<div class="ms-p-arrow">
-<svg class="ms-btt-arrow" enable-background="new 0 0 96 96" height="96px" version="1.1" viewbox="0 0 96 96" width="96px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<path d="M52,84V21.656l21.457,21.456c1.561,1.562,4.095,1.562,5.656,0.001c1.562-1.562,1.562-4.096,0-5.658L50.829,9.172l0,0  c-0.186-0.186-0.391-0.352-0.609-0.498c-0.101-0.067-0.21-0.114-0.315-0.172c-0.124-0.066-0.242-0.142-0.373-0.195  c-0.135-0.057-0.275-0.089-0.415-0.129c-0.111-0.033-0.216-0.076-0.331-0.099C48.527,8.027,48.264,8,48.001,8l0,0  c-0.003,0-0.006,0.001-0.009,0.001c-0.259,0.001-0.519,0.027-0.774,0.078c-0.12,0.024-0.231,0.069-0.349,0.104  c-0.133,0.039-0.268,0.069-0.397,0.123c-0.139,0.058-0.265,0.136-0.396,0.208c-0.098,0.054-0.198,0.097-0.292,0.159  c-0.221,0.146-0.427,0.314-0.614,0.501L16.889,37.456c-1.562,1.562-1.562,4.095-0.001,5.657c1.562,1.562,4.094,1.562,5.658,0  L44,21.657V84c0,2.209,1.791,4,4,4S52,86.209,52,84z">
-</path>
-</svg>
 </div>
-<figure class="ms-p-img cursor-none">
-<img alt="Applications Mobiles" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/portfolio/mobile-app.png"/>
-</figure>
-<div class="ms-p-content justify-top cursor-none">
-<div class="ms-p-content__inner bottom">
-<h3><?php $acf_val = get_field('applications_mobiles'); echo $acf_val ? esc_html($acf_val) : 'Applications Mobiles'; ?></h3>
-<span class="ms-p-cat"><?php $acf_val = get_field('ios_android'); echo $acf_val ? esc_html($acf_val) : 'iOS &amp; Android'; ?></span>
+<div class="ms_ac--content" style="height:0px;">
+<div class="ms_ac--text">
+<p><strong>Sites Modernes :</strong> Nous développons des sites web modernes, réactifs et optimisés pour le SEO.</p>
+<p><strong>Visibilité :</strong> Améliorez votre présence en ligne et attirez plus de visiteurs.</p>
 </div>
 </div>
-</a>
+</div>
+<div class="ms_ac_panel">
+<div class="ms_ac--label">
+<div class="label-title"> APP MOBILE </div>
+<div class="ms_ac--icon rotation">
+<div class="accordion_icon--open">
+<svg aria-hidden="true" class="e-font-icon-svg e-fas-arrow-down" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M413.1 222.5l22.2 22.2c9.4 9.4 9.4 24.6 0 33.9L241 473c-9.4 9.4-24.6 9.4-33.9 0L12.7 278.6c-9.4-9.4-9.4-24.6 0-33.9l22.2-22.2c9.5-9.5 25-9.3 34.3.4L184 343.4V56c0-13.3 10.7-24 24-24h32c13.3 0 24 10.7 24 24v287.4l114.8-120.5c9.3-9.8 24.8-10 34.3-.4z"/></svg>
 </div>
 </div>
-<div class="below left grid-item-p custom-ratio col-md-4 portfolios">
-<div class="item--inner">
-<a aria-label="Logiciels Métier" href="<?php echo esc_url( home_url( '/services/service-app-metier/' ) ); ?>">
-<div class="ms-p-arrow">
-<svg class="ms-btt-arrow" enable-background="new 0 0 96 96" height="96px" version="1.1" viewbox="0 0 96 96" width="96px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<path d="M52,84V21.656l21.457,21.456c1.561,1.562,4.095,1.562,5.656,0.001c1.562-1.562,1.562-4.096,0-5.658L50.829,9.172l0,0  c-0.186-0.186-0.391-0.352-0.609-0.498c-0.101-0.067-0.21-0.114-0.315-0.172c-0.124-0.066-0.242-0.142-0.373-0.195  c-0.135-0.057-0.275-0.089-0.415-0.129c-0.111-0.033-0.216-0.076-0.331-0.099C48.527,8.027,48.264,8,48.001,8l0,0  c-0.003,0-0.006,0.001-0.009,0.001c-0.259,0.001-0.519,0.027-0.774,0.078c-0.12,0.024-0.231,0.069-0.349,0.104  c-0.133,0.039-0.268,0.069-0.397,0.123c-0.139,0.058-0.265,0.136-0.396,0.208c-0.098,0.054-0.198,0.097-0.292,0.159  c-0.221,0.146-0.427,0.314-0.614,0.501L16.889,37.456c-1.562,1.562-1.562,4.095-0.001,5.657c1.562,1.562,4.094,1.562,5.658,0  L44,21.657V84c0,2.209,1.791,4,4,4S52,86.209,52,84z">
-</path>
-</svg>
 </div>
-<figure class="ms-p-img cursor-none">
-<img alt="Logiciels Métier" src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/portfolio/logiciel-metier.png"/>
-</figure>
-<div class="ms-p-content justify-top cursor-none">
-<div class="ms-p-content__inner bottom">
-<h3><?php $acf_val = get_field('logiciels_m_tier'); echo $acf_val ? esc_html($acf_val) : 'Logiciels Métier'; ?></h3>
-<span class="ms-p-cat"><?php $acf_val = get_field('crm_erp_solutions'); echo $acf_val ? esc_html($acf_val) : 'CRM, ERP &amp; Solutions'; ?></span>
+<div class="ms_ac--content" style="height:0px;">
+<div class="ms_ac--text">
+<p><strong>Natives iOS &amp; Android :</strong> Nous concevons des applications mobiles natives offrant une expérience et des performances élevées.</p>
 </div>
 </div>
-</a>
+</div>
+<div class="ms_ac_panel">
+<div class="ms_ac--label">
+<div class="label-title"> APP MÉTIER </div>
+<div class="ms_ac--icon rotation">
+<div class="accordion_icon--open">
+<svg aria-hidden="true" class="e-font-icon-svg e-fas-arrow-down" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M413.1 222.5l22.2 22.2c9.4 9.4 9.4 24.6 0 33.9L241 473c-9.4 9.4-24.6 9.4-33.9 0L12.7 278.6c-9.4-9.4-9.4-24.6 0-33.9l22.2-22.2c9.5-9.5 25-9.3 34.3.4L184 343.4V56c0-13.3 10.7-24 24-24h32c13.3 0 24 10.7 24 24v287.4l114.8-120.5c9.3-9.8 24.8-10 34.3-.4z"/></svg>
 </div>
 </div>
-<div class="grid-sizer col-md-4"></div>
+</div>
+<div class="ms_ac--content" style="height:0px;">
+<div class="ms_ac--text">
+<p><strong>Sur Mesure :</strong> Nous développons des applications métiers sur mesure pour optimiser vos processus internes et améliorer la productivité de votre entreprise.</p>
 </div>
 </div>
-<div class="btn-wrap">
-<a class="btn btn-mokko btn--md" href="<?php echo esc_url( home_url( '/nos-projets/' ) ); ?>" role="button">
-<div class="ms-btn--label">
-<div class="ms-btn__text">Voir tous les projets</div>
-<div class="ms-btn__border"></div>
 </div>
-</a>
+<div class="ms_ac_panel">
+<div class="ms_ac--label">
+<div class="label-title"> SMMA </div>
+<div class="ms_ac--icon rotation">
+<div class="accordion_icon--open">
+<svg aria-hidden="true" class="e-font-icon-svg e-fas-arrow-down" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M413.1 222.5l22.2 22.2c9.4 9.4 9.4 24.6 0 33.9L241 473c-9.4 9.4-24.6 9.4-33.9 0L12.7 278.6c-9.4-9.4-9.4-24.6 0-33.9l22.2-22.2c9.5-9.5 25-9.3 34.3.4L184 343.4V56c0-13.3 10.7-24 24-24h32c13.3 0 24 10.7 24 24v287.4l114.8-120.5c9.3-9.8 24.8-10 34.3-.4z"/></svg>
 </div>
+</div>
+</div>
+<div class="ms_ac--content" style="height:0px;">
+<div class="ms_ac--text">
+<p><strong>Croissance :</strong> Faire des réseaux sociaux un levier de croissance pour votre business.</p>
+<p><strong>Stratégie :</strong> Création de contenu, Publicité (Media Buying) et gestion de communauté.</p>
+</div>
+</div>
+</div>
+<div class="ms_ac_panel">
+<div class="ms_ac--label">
+<div class="label-title"> CONSULTING </div>
+<div class="ms_ac--icon rotation">
+<div class="accordion_icon--open">
+<svg aria-hidden="true" class="e-font-icon-svg e-fas-arrow-down" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M413.1 222.5l22.2 22.2c9.4 9.4 9.4 24.6 0 33.9L241 473c-9.4 9.4-24.6 9.4-33.9 0L12.7 278.6c-9.4-9.4-9.4-24.6 0-33.9l22.2-22.2c9.5-9.5 25-9.3 34.3.4L184 343.4V56c0-13.3 10.7-24 24-24h32c13.3 0 24 10.7 24 24v287.4l114.8-120.5c9.3-9.8 24.8-10 34.3-.4z"/></svg>
+</div>
+</div>
+</div>
+<div class="ms_ac--content" style="height:0px;">
+<div class="ms_ac--text">
+<p>Une équipe dédiée de 8 collaborateurs pour un accompagnement de A à Z. Accédez à des applications pour CMS, CRM, ERP, PrestaShop avec un budget maîtrisé.</p>
+</div>
+</div>
+</div>
+</div>
+<?php endif; ?>
 </div>
 </div>
 <div class="project-area last">
