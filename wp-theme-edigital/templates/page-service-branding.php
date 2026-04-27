@@ -151,6 +151,16 @@ get_header();
 <h2 class="content__title rts-has-mask-fill" style="flex-basis: 100%; text-align: center; justify-content: center; width: 100%; margin-top: 50px !important; text-transform: none !important;"><span><?php $acf_val = get_field('au_del_du_simple_logo'); echo $acf_val ? esc_html($acf_val) : 'Au-delà du simple logo'; ?></span></h2>
 <p style="font-size: 1.1rem; color: #666; max-width: 800px; margin: 20px auto 30px;"><?php $acf_val = get_field('nous_cr_ons_des_univers_d'); echo $acf_val ? wp_kses_post($acf_val) : 'Nous créons des univers de marque qui captent l\'attention et inspirent la confiance :'; ?></p>
 </div>
+<?php
+// Zone éditable Gutenberg : si la page a du contenu saisi dans l'éditeur,
+// il prend le pas sur la grille statique ci-dessous.
+$page_content = edigital_get_editor_content();
+if ( $page_content ) :
+?>
+<div class="edigital-gutenberg-zone">
+<?php echo apply_filters( 'the_content', $page_content ); ?>
+</div>
+<?php else : ?>
 <div class="service-text-grid">
 <div class="service-text-card">
 <div class="stc-icon"><i class="fas fa-fingerprint"></i></div>
@@ -171,6 +181,7 @@ get_header();
 <p><?php $acf_val = get_field('des_interfaces_pens_es_po'); echo $acf_val ? esc_html($acf_val) : 'Des interfaces pensées pour la conversion et le confort de vos clients.'; ?></p>
 </div>
 </div>
+<?php endif; ?>
 <div class="e-con-inner mb-50 text-center" style="display: block; width: 100%; margin-top: 100px;">
 <h2 class="content__title rts-has-mask-fill" style="flex-basis: 100%; text-align: center; justify-content: center; width: 100%; text-transform: none !important;"><span><?php $acf_val = get_field('l_expertise_e_digital_fr'); echo $acf_val ? esc_html($acf_val) : 'L\'expertise E-Digital.fr'; ?></span></h2>
 <p style="font-size: 1.1rem; color: #666; max-width: 800px; margin: 20px auto 30px;"><?php $acf_val = get_field('une_marque_forte_est_un_a'); echo $acf_val ? wp_kses_post($acf_val) : 'Une marque forte est un actif qui prend de la valeur. Avec plus de dix ans d’expérience, E-Digital conçoit des identités visuelles pérennes, capables de soutenir les besoins de votre croissance sur le long terme.'; ?></p>

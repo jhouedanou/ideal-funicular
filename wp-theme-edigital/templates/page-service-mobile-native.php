@@ -150,6 +150,16 @@ get_header();
 <div class="e-con-inner mb-50 text-center" style="display: block; width: 100%;">
 <h2 class="content__title rts-has-mask-fill" style="flex-basis: 100%; text-align: center; justify-content: center; width: 100%; margin-top: 50px !important;"><span><?php $acf_val = get_field('nous_concevons_des_applic'); echo $acf_val ? wp_kses_post($acf_val) : 'Nous concevons des applications fluides, performantes et intuitives pour engager vos utilisateurs au quotidien.'; ?></span></h2>
 </div>
+<?php
+// Zone éditable Gutenberg : si la page a du contenu saisi dans l'éditeur,
+// il prend le pas sur la grille statique ci-dessous.
+$page_content = edigital_get_editor_content();
+if ( $page_content ) :
+?>
+<div class="edigital-gutenberg-zone">
+<?php echo apply_filters( 'the_content', $page_content ); ?>
+</div>
+<?php else : ?>
 <div class="service-text-grid">
 <div class="service-text-card">
 <div class="stc-icon"><i class="fab fa-apple"></i></div>
@@ -187,7 +197,9 @@ get_header();
 <h3><?php $acf_val = get_field('maintenance_mobile'); echo $acf_val ? esc_html($acf_val) : 'Maintenance Mobile'; ?></h3>
 <p><?php $acf_val = get_field('mises_jour_r_guli_res_p'); echo $acf_val ? esc_html($acf_val) : 'Mises à jour régulières pour suivre les évolutions des systèmes iOS et Android.'; ?></p>
 </div>
-</div></div>
+</div>
+<?php endif; ?>
+</div>
 </section></div>
 
 <!--================= Services Text Area End =================-->

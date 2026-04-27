@@ -91,6 +91,16 @@ get_header();
 <div class="e-con-inner mb-50 text-center" style="display: block; width: 100%;">
 <h2 class="content__title rts-has-mask-fill" style="flex-basis: 100%; text-align: center; justify-content: center; width: 100%; margin-top: 50px !important;"><span><?php $acf_val = get_field('agence_digitale_sp_cialis'); echo $acf_val ? wp_kses_post($acf_val) : 'Agence digitale spécialisée dans la conception et le développement de solutions sur mesure.'; ?></span></h2>
 </div>
+<?php
+// Zone éditable Gutenberg : si la page a du contenu saisi dans l'éditeur,
+// il prend le pas sur la grille de projets dynamique ci-dessous.
+$page_content = edigital_get_editor_content();
+if ( $page_content ) :
+?>
+<div class="edigital-gutenberg-zone">
+<?php echo apply_filters( 'the_content', $page_content ); ?>
+</div>
+<?php else : ?>
 <div class="ms-portfolio-filter-area project main-isotop">
 <div class="container">
 <div class="filter-nav filter-nav--expanded js-filter-nav"></div>
@@ -149,6 +159,7 @@ get_header();
 </div>
 </div>
 </div>
+<?php endif; ?>
 </div>
 </section>
 <!--================= Projects Area End =================-->

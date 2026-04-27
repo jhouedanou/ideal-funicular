@@ -151,6 +151,16 @@ get_header();
 <h2 class="content__title rts-has-mask-fill" style="flex-basis: 100%; text-align: center; justify-content: center; width: 100%; margin-top: 50px !important; text-transform: none !important;"><span><?php $acf_val = get_field('z_ro_interruption_100_d'); echo $acf_val ? esc_html($acf_val) : 'Zéro interruption, 100% de sérénité'; ?></span></h2>
 <p style="font-size: 1.1rem; color: #666; max-width: 800px; margin: 20px auto 30px;"><?php $acf_val = get_field('nous_ne_nous_contentons_p'); echo $acf_val ? wp_kses_post($acf_val) : 'Nous ne nous contentons pas de réparer ; nous anticipons. Notre service de maintenance garantit la pérennité de vos outils :'; ?></p>
 </div>
+<?php
+// Zone éditable Gutenberg : si la page a du contenu saisi dans l'éditeur,
+// il prend le pas sur la grille statique ci-dessous.
+$page_content = edigital_get_editor_content();
+if ( $page_content ) :
+?>
+<div class="edigital-gutenberg-zone">
+<?php echo apply_filters( 'the_content', $page_content ); ?>
+</div>
+<?php else : ?>
 <div class="service-text-grid">
 <div class="service-text-card">
 <div class="stc-icon"><i class="fas fa-shield-alt"></i></div>
@@ -171,6 +181,7 @@ get_header();
 <p><?php $acf_val = get_field('votre_outil_reste_perform'); echo $acf_val ? wp_kses_post($acf_val) : 'Votre outil reste performant, rapide et compatible avec les nouveaux usages du web.'; ?></p>
 </div>
 </div>
+<?php endif; ?>
 <div class="e-con-inner mb-50 text-center" style="display: block; width: 100%; margin-top: 100px;">
 <h2 class="content__title rts-has-mask-fill" style="flex-basis: 100%; text-align: center; justify-content: center; width: 100%; text-transform: none !important;"><span><?php $acf_val = get_field('la_fiabilit_e_digital_fr'); echo $acf_val ? esc_html($acf_val) : 'La fiabilité E-Digital.fr'; ?></span></h2>
 <p style="font-size: 1.1rem; color: #666; max-width: 800px; margin: 20px auto 30px;">S’appuyer sur E-Digital, c’est bénéficier de plus de dix ans d’expérience dans la gestion d'infrastructures critiques.<br/><br/>Nous assurons la surveillance de vos plateformes pour que vous puissiez vous concentrer sur l'essentiel : vos besoins de croissance.</p>

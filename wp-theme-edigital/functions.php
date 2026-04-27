@@ -13,6 +13,9 @@ if ( ! defined( 'EDIGITAL_VERSION' ) ) {
 	define( 'EDIGITAL_VERSION', '1.0.0' );
 }
 
+// Forcer le chargement des fonctions de plugins WordPress pour Elementor
+require_once ABSPATH . 'wp-admin/includes/plugin.php';
+
 /**
  * Déclare le support du thème et enregistre les emplacements de menu.
  */
@@ -188,6 +191,7 @@ add_shortcode( 'edigital_contact_form', 'edigital_contact_form_shortcode' );
  *   6. quote-form      : formulaire de devis + shortcode [edigital_devis].
  *   7. expertise-filter: filtrage de l'archive Projets via ?expertise=slug.
  *   8. loops           : boucles WP_Query réutilisables (actualités, projets liés).
+ *   9. blocks          : enregistrement des blocs Gutenberg E-Digital (build/).
  */
 require_once get_template_directory() . '/inc/acf-helpers.php';
 require_once get_template_directory() . '/inc/custom-post-types.php';
@@ -200,6 +204,7 @@ require_once get_template_directory() . '/inc/quote-form.php';
 require_once get_template_directory() . '/inc/expertise-filter.php';
 require_once get_template_directory() . '/inc/loops.php';
 require_once get_template_directory() . '/inc/forms-style.php';
+require_once get_template_directory() . '/inc/blocks.php';
 
 /**
  * Après activation du thème, si un menu « edigital-primary » existe (créé par

@@ -151,6 +151,15 @@ get_header();
 <h2 class="content__title rts-has-mask-fill" style="flex-basis: 100%; text-align: center; justify-content: center; width: 100%; margin-top: 50px !important;"><span><?php $acf_val = get_field('nous_cr_ons_des_sites_web'); echo $acf_val ? wp_kses_post($acf_val) : 'Nous créons des sites web modernes, performants et optimisés pour propulser votre activité en ligne.'; ?></span></h2>
 </div>
 <?php
+// Zone éditable Gutenberg : si la page a du contenu saisi dans l'éditeur,
+// il prend le pas sur le repeater ACF et sur le fallback statique.
+$page_content = edigital_get_editor_content();
+if ( $page_content ) : ?>
+<div class="edigital-gutenberg-zone">
+<?php echo apply_filters( 'the_content', $page_content ); ?>
+</div>
+<?php
+else :
 $services_cards = get_field('services_cards');
 if ( $services_cards ) :
     foreach ( $services_cards as $card ) : ?>
@@ -213,7 +222,7 @@ else : ?>
 <p><?php $acf_val = get_field('mises_jour_r_guli_res'); echo $acf_val ? wp_kses_post($acf_val) : 'Mises à jour régulières, sauvegardes automatiques, surveillance de sécurité 24h/24 et support réactif. Votre site reste rapide, sécurisé et opérationnel en permanence.'; ?></p>
 </div>
 </div>
-<?php endif; ?>
+<?php endif; endif; ?>
 </div>
 </section>
 <!--================= Services Text Area End =================-->

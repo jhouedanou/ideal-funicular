@@ -31,6 +31,28 @@ function edigital_breadcrumb() {
 }
 
 /**
+ * Récupère le contenu éditeur d'une page si réellement saisi.
+ *
+ * Les pages seedées par sql/edigital-pages.sql contiennent un marqueur
+ * indiquant que le rendu est assuré par le template PHP. On le détecte
+ * pour ne pas l'afficher dans la zone Gutenberg.
+ */
+function edigital_get_editor_content( $post_id = null ) {
+	$post_id = $post_id ? $post_id : get_the_ID();
+	$content = trim( (string) get_post_field( 'post_content', $post_id ) );
+
+	if ( '' === $content ) {
+		return '';
+	}
+
+	if ( false !== strpos( $content, 'Le rendu visuel de cette page est fourni par le template' ) ) {
+		return '';
+	}
+
+	return $content;
+}
+
+/**
  * Fallback de menu primaire si aucun menu n'est assigné.
  */
 function edigital_primary_menu_fallback() {

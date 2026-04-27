@@ -151,6 +151,16 @@ get_header();
 <h2 class="content__title rts-has-mask-fill" style="flex-basis: 100%; text-align: center; justify-content: center; width: 100%; margin-top: 50px !important; text-transform: none !important;"><span><?php $acf_val = get_field('pourquoi_passer_au_sur_me'); echo $acf_val ? esc_html($acf_val) : 'Pourquoi passer au sur-mesure ?'; ?></span></h2>
 <p style="font-size: 1.1rem; color: #666; max-width: 800px; margin: 20px auto 30px;"><?php $acf_val = get_field('une_application_m_tier_n'); echo $acf_val ? wp_kses_post($acf_val) : 'Une application métier n\'est pas un gadget, c\'est le moteur de votre productivité :'; ?></p>
 </div>
+<?php
+// Zone éditable Gutenberg : si la page a du contenu saisi dans l'éditeur,
+// il prend le pas sur la grille statique ci-dessous.
+$page_content = edigital_get_editor_content();
+if ( $page_content ) :
+?>
+<div class="edigital-gutenberg-zone">
+<?php echo apply_filters( 'the_content', $page_content ); ?>
+</div>
+<?php else : ?>
 <div class="service-text-grid">
 <div class="service-text-card">
 <div class="stc-icon"><i class="fas fa-cogs"></i></div>
@@ -171,6 +181,7 @@ get_header();
 <p><?php $acf_val = get_field('un_outil_qui_volue_au_ry'); echo $acf_val ? esc_html($acf_val) : 'Un outil qui évolue au rythme de vos besoins et de votre croissance.'; ?></p>
 </div>
 </div>
+<?php endif; ?>
 <div class="e-con-inner mb-50 text-center" style="display: block; width: 100%; margin-top: 100px;">
 <h2 class="content__title rts-has-mask-fill" style="flex-basis: 100%; text-align: center; justify-content: center; width: 100%; text-transform: none !important;"><span><?php $acf_val = get_field('l_expertise_e_digital_fr'); echo $acf_val ? esc_html($acf_val) : 'L’expertise E-Digital.fr'; ?></span></h2>
 <p style="font-size: 1.1rem; color: #666; max-width: 800px; margin: 20px auto 30px;">Développer une application efficace demande une compréhension profonde des enjeux business.<br/><br/>Avec plus de dix ans d’expérience, E-Digital conçoit des solutions robustes et intuitives qui transforment votre organisation quotidienne en avantage concurrentiel.</p>

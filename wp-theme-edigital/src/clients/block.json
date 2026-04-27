@@ -1,0 +1,35 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "edigital/clients",
+	"version": "1.0.0",
+	"title": "E-Digital — Ils nous font confiance",
+	"category": "edigital",
+	"icon": "groups",
+	"description": "Section clients avec image de fond et liste de logos texte.",
+	"keywords": ["clients", "logos", "confiance"],
+	"textdomain": "edigital",
+	"supports": {
+		"html": false,
+		"reusable": true
+	},
+	"attributes": {
+		"titreLigne1": {
+			"type": "string",
+			"default": "Ils nous font"
+		},
+		"titreLigne2": {
+			"type": "string",
+			"default": "confiance."
+		},
+		"backgroundUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"backgroundId": {
+			"type": "number"
+		}
+	},
+	"editorScript": "file:./index.js",
+	"render": "file:./render.php"
+}

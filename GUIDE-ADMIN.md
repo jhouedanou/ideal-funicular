@@ -1,5 +1,53 @@
 # Guide Administration — Thème E-Digital
 
+## ⚡ Nouveauté : page d'accueil pilotée par blocs Gutenberg
+
+Depuis la migration vers les blocs Gutenberg natifs, **la page d'accueil n'utilise plus les champs ACF** (sauf le slider Hero, voir section 1). Tout son contenu (intro, expertise, services, tarifs, clients...) est édité via des blocs dédiés directement dans l'éditeur WordPress.
+
+### Première activation
+
+```bash
+# Depuis wp-content/themes/wp-theme-edigital
+npm install
+npm run build
+```
+
+Le build compile les sources `src/*` vers `build/*`. Les blocs sont alors disponibles dans l'inserter Gutenberg, catégorie **« E-Digital »**.
+
+### Initialiser la page d'accueil
+
+1. **Pages → Accueil → Modifier**.
+2. Si la page est vide ou contient l'ancien contenu : ouvrir le menu **⋮** (en haut à droite) → **« Éditeur de code »**.
+3. Coller le contenu du fichier `wp-theme-edigital/sql/home-default-content.html`.
+4. **« Quitter l'éditeur de code »** → **Mettre à jour**.
+
+### Blocs E-Digital disponibles
+
+| Bloc | Rôle |
+|------|------|
+| **E-Digital — Intro** | Titre principal « À Propos » avec ancre |
+| **E-Digital — Bande défilante (images)** | Marquee d'images sur deux lignes |
+| **E-Digital — Bande défilante (texte)** | Ticker mots-clés double ligne |
+| **E-Digital — Notre Expertise (grille)** | Grille de cartes (image + titre + catégorie) |
+| **E-Digital — Carte expertise** | Sous-bloc de la grille |
+| **E-Digital — Accordéon services** | Section services avec accordéon |
+| **E-Digital — Item d'accordéon** | Sous-bloc accordéon (titre + contenu riche) |
+| **E-Digital — Section Tarifs** | Section pricing (3 cartes + lignes additionnelles) |
+| **E-Digital — Carte tarif** | Sous-bloc pricing (titre, prix, points, CTA) |
+| **E-Digital — Hero parallaxe** | Bandeau plein écran (image + titre) |
+| **E-Digital — Ils nous font confiance** | Section clients (titre + logos texte) |
+| **E-Digital — Logo client** | Sous-bloc clients (texte stylisé selon police choisie) |
+
+### Sections fixes du template (non éditables via blocs)
+
+Ces parties restent gérées en code car alimentées dynamiquement :
+
+- **Hero slider** → CPT « Slider Hero »
+- **Actualités E-Digital** → CPT « Actualités » (4 derniers articles)
+- **Newsletter** → formulaire AJAX
+
+---
+
 ## Table des matières
 
 1. [Slider Hero (page d'accueil)](#1-slider-hero)

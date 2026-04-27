@@ -1,0 +1,34 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "edigital/text-ticker",
+	"version": "1.0.0",
+	"title": "E-Digital — Bande défilante (texte)",
+	"category": "edigital",
+	"icon": "editor-textcolor",
+	"description": "Deux lignes de texte défilant avec des mots-clés mis en valeur.",
+	"keywords": ["ticker", "défilant", "marquee", "texte"],
+	"textdomain": "edigital",
+	"supports": {
+		"html": false,
+		"reusable": true
+	},
+	"attributes": {
+		"ligne1": {
+			"type": "array",
+			"default": [],
+			"items": { "type": "object" }
+		},
+		"ligne2": {
+			"type": "array",
+			"default": [],
+			"items": { "type": "object" }
+		},
+		"separateurUrl": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"editorScript": "file:./index.js",
+	"render": "file:./render.php"
+}

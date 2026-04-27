@@ -1,0 +1,36 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "edigital/services-accordion",
+  "version": "1.0.0",
+  "title": "E-Digital — Accordéon services",
+  "category": "edigital",
+  "icon": "list-view",
+  "description": "Section avec titre et liste d'items en accordéon.",
+  "keywords": [
+    "accordéon",
+    "services",
+    "FAQ"
+  ],
+  "textdomain": "edigital",
+  "supports": {
+    "html": false,
+    "reusable": true
+  },
+  "attributes": {
+    "titre": {
+      "type": "string",
+      "default": "Services"
+    },
+    "alignement": {
+      "type": "string",
+      "enum": [
+        "left",
+        "right"
+      ],
+      "default": "right"
+    }
+  },
+  "editorScript": "file:./index.js",
+  "render": "file:./render.php"
+}

@@ -151,6 +151,16 @@ get_header();
 <h2 class="content__title rts-has-mask-fill" style="flex-basis: 100%; text-align: center; justify-content: center; width: 100%; margin-top: 50px !important; text-transform: none !important;"><span><?php $acf_val = get_field('pourquoi_coupler_google_e'); echo $acf_val ? esc_html($acf_val) : 'Pourquoi coupler Google et Meta ?'; ?></span></h2>
 <p style="font-size: 1.1rem; color: #666; max-width: 800px; margin: 20px auto 30px;"><?php $acf_val = get_field('c_est_l_alliance_parfaite'); echo $acf_val ? esc_html($acf_val) : 'C’est l’alliance parfaite pour couvrir 100% du parcours de vos clients :'; ?></p>
 </div>
+<?php
+// Zone éditable Gutenberg : si la page a du contenu saisi dans l'éditeur,
+// il prend le pas sur les grilles statiques ci-dessous.
+$page_content = edigital_get_editor_content();
+if ( $page_content ) :
+?>
+<div class="edigital-gutenberg-zone">
+<?php echo apply_filters( 'the_content', $page_content ); ?>
+</div>
+<?php else : ?>
 <div class="service-text-grid" style="grid-template-columns: repeat(2, 1fr);">
 <div class="service-text-card">
 <div class="stc-icon"><i class="fab fa-google"></i></div>
@@ -192,6 +202,7 @@ get_header();
 <div style="text-align: center; margin-top: 60px; font-size: 1.3rem; font-weight: 700; color: #e31414;">
                         Stop aux budgets gaspillés. Passez à une stratégie publicitaire qui transforme vos investissements en chiffre d'affaires.
                     </div>
+<?php endif; ?>
 </div>
 </section>
 <!--================= Services Text Area End =================-->

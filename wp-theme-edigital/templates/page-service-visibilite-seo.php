@@ -151,6 +151,16 @@ get_header();
 <h2 class="content__title rts-has-mask-fill" style="flex-basis: 100%; text-align: center; justify-content: center; width: 100%; margin-top: 50px !important; text-transform: none !important;"><span><?php $acf_val = get_field('e_digital_fr_l_exp_rien'); echo $acf_val ? esc_html($acf_val) : 'E-Digital.fr : L\'expérience au service de votre croissance'; ?></span></h2>
 <p style="font-size: 1.1rem; color: #666; max-width: 800px; margin: 20px auto 0;"><?php $acf_val = get_field('ne_laissez_plus_vos_concu'); echo $acf_val ? wp_kses_post($acf_val) : 'Ne laissez plus vos concurrents prendre toute la place. Nous transformons votre site en un véritable levier de business.'; ?></p>
 </div>
+<?php
+// Zone éditable Gutenberg : si la page a du contenu saisi dans l'éditeur,
+// il prend le pas sur la grille statique ci-dessous.
+$page_content = edigital_get_editor_content();
+if ( $page_content ) :
+?>
+<div class="edigital-gutenberg-zone">
+<?php echo apply_filters( 'the_content', $page_content ); ?>
+</div>
+<?php else : ?>
 <div class="service-text-grid">
 <div class="service-text-card">
 <div class="stc-icon"><i class="fas fa-briefcase"></i></div>
@@ -171,6 +181,7 @@ get_header();
 <p><?php $acf_val = get_field('un_flux_constant_de_prosp'); echo $acf_val ? esc_html($acf_val) : 'Un flux constant de prospects qualifiés pour nourrir votre développement.'; ?></p>
 </div>
 </div>
+<?php endif; ?>
 <div style="text-align: center; margin-top: 60px; font-size: 1.3rem; font-weight: 700; color: #e31414;">
                         Le constat est simple : Votre croissance de demain dépend de votre visibilité d'aujourd'hui.
                     </div>

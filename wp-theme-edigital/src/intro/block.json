@@ -1,0 +1,38 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "edigital/intro",
+	"version": "1.0.0",
+	"title": "E-Digital — Intro",
+	"category": "edigital",
+	"icon": "megaphone",
+	"description": "Bandeau d'introduction avec titre principal et étiquette À Propos.",
+	"keywords": ["intro", "hero", "à propos"],
+	"textdomain": "edigital",
+	"supports": {
+		"html": false,
+		"align": false,
+		"customClassName": false,
+		"reusable": true
+	},
+	"attributes": {
+		"titreLigne1": {
+			"type": "string",
+			"default": "Agence Digitale"
+		},
+		"titreLigne2": {
+			"type": "string",
+			"default": "Avant-gardiste"
+		},
+		"etiquette": {
+			"type": "string",
+			"default": "À Propos"
+		},
+		"ancre": {
+			"type": "string",
+			"default": "services"
+		}
+	},
+	"editorScript": "file:./index.js",
+	"render": "file:./render.php"
+}

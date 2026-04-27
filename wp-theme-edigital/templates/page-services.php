@@ -91,6 +91,16 @@ get_header();
 <div class="e-con-inner mb-50 text-center" style="display: block; width: 100%;">
 <h2 class="content__title rts-has-mask-fill" style="flex-basis: 100%; text-align: center; justify-content: center; width: 100%; margin-top: 50px !important;"><span><?php $acf_val = get_field('une_agence_digitale_globa'); echo $acf_val ? wp_kses_post($acf_val) : 'Une agence digitale globale capable de répondre à tous vos enjeux technologiques et marketing.'; ?></span></h2>
 </div>
+<?php
+// Zone éditable Gutenberg : si la page a du contenu saisi dans l'éditeur
+// WordPress, on l'affiche ici à la place de la grille statique.
+$page_content = edigital_get_editor_content();
+if ( $page_content ) :
+?>
+<div class="edigital-gutenberg-zone">
+<?php echo apply_filters( 'the_content', $page_content ); ?>
+</div>
+<?php else : ?>
 <div class="services-grid-wrap">
 <div class="row">
 <!-- Service 1: Création Web -->
@@ -179,6 +189,7 @@ get_header();
 </div>
 </div>
 </div>
+<?php endif; ?>
 </div>
 </section>
 <!--================= Services Area End =================-->
