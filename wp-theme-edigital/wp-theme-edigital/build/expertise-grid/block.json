@@ -1,0 +1,40 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "edigital/expertise-grid",
+  "version": "1.0.0",
+  "title": "E-Digital — Notre Expertise (grille)",
+  "category": "edigital",
+  "icon": "screenoptions",
+  "description": "Grille de cartes d'expertise (image + titre + catégorie).",
+  "keywords": [
+    "expertise",
+    "grille",
+    "services"
+  ],
+  "textdomain": "edigital",
+  "supports": {
+    "html": false,
+    "reusable": true
+  },
+  "attributes": {
+    "titre": {
+      "type": "string",
+      "default": "Notre Expertise"
+    },
+    "texteCta": {
+      "type": "string",
+      "default": "Découvrez nos dernières réalisations"
+    },
+    "libelleCta": {
+      "type": "string",
+      "default": "Voir Tous Les Projets"
+    },
+    "lienCta": {
+      "type": "string",
+      "default": "/nos-projets/"
+    }
+  },
+  "editorScript": "file:./index.js",
+  "render": "file:./render.php"
+}

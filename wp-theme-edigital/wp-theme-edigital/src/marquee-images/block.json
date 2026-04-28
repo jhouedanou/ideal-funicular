@@ -1,0 +1,27 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "edigital/marquee-images",
+	"version": "1.0.0",
+	"title": "E-Digital — Bande défilante (images)",
+	"category": "edigital",
+	"icon": "images-alt2",
+	"description": "Bandeau d'images défilant en boucle.",
+	"keywords": ["marquee", "défilant", "carrousel"],
+	"textdomain": "edigital",
+	"supports": {
+		"html": false,
+		"reusable": true
+	},
+	"attributes": {
+		"images": {
+			"type": "array",
+			"default": [],
+			"items": {
+				"type": "object"
+			}
+		}
+	},
+	"editorScript": "file:./index.js",
+	"render": "file:./render.php"
+}

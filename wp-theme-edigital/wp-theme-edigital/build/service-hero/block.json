@@ -1,0 +1,60 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "edigital/service-hero",
+  "version": "1.0.0",
+  "title": "E-Digital — Hero Service (bandeau interne)",
+  "category": "edigital",
+  "icon": "format-image",
+  "description": "Bandeau interne avec image de fond, fil d'Ariane, titre et sous-titre.",
+  "keywords": [
+    "hero",
+    "bandeau",
+    "service",
+    "breadcrumb"
+  ],
+  "textdomain": "edigital",
+  "supports": {
+    "html": false,
+    "reusable": true
+  },
+  "attributes": {
+    "backgroundUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "backgroundId": {
+      "type": "number"
+    },
+    "breadcrumb1Label": {
+      "type": "string",
+      "default": "Accueil"
+    },
+    "breadcrumb1Url": {
+      "type": "string",
+      "default": "/"
+    },
+    "breadcrumb2Label": {
+      "type": "string",
+      "default": "Services"
+    },
+    "breadcrumb2Url": {
+      "type": "string",
+      "default": "/services/"
+    },
+    "breadcrumbCurrent": {
+      "type": "string",
+      "default": ""
+    },
+    "titre": {
+      "type": "string",
+      "default": ""
+    },
+    "sousTitre": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "editorScript": "file:./index.js",
+  "render": "file:./render.php"
+}

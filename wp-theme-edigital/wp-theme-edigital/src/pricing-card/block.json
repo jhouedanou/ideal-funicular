@@ -1,0 +1,49 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "edigital/pricing-card",
+	"version": "1.0.0",
+	"title": "E-Digital — Carte tarif",
+	"category": "edigital",
+	"icon": "tag",
+	"parent": ["edigital/pricing"],
+	"description": "Carte de tarif (titre, sous-titre, prix, points, CTA).",
+	"textdomain": "edigital",
+	"supports": {
+		"html": false,
+		"reusable": false
+	},
+	"attributes": {
+		"titre": {
+			"type": "string",
+			"default": "Site Vitrine"
+		},
+		"sousTitre": {
+			"type": "string",
+			"default": "Idéal pour les TPE/PME et indépendants."
+		},
+		"prix": {
+			"type": "string",
+			"default": "à partir de 1 200€"
+		},
+		"points": {
+			"type": "array",
+			"default": [],
+			"items": { "type": "string" }
+		},
+		"libelleCta": {
+			"type": "string",
+			"default": "Demander un Devis"
+		},
+		"lienCta": {
+			"type": "string",
+			"default": "/contact/"
+		},
+		"accent": {
+			"type": "boolean",
+			"default": false
+		}
+	},
+	"editorScript": "file:./index.js",
+	"render": "file:./render.php"
+}

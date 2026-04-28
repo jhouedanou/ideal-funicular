@@ -1,0 +1,48 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "edigital/contact-info",
+  "version": "1.0.0",
+  "title": "E-Digital — Infos Contact",
+  "category": "edigital",
+  "icon": "phone",
+  "description": "Bloc d'infos de contact (téléphone + email) pour la sidebar.",
+  "keywords": [
+    "contact",
+    "téléphone",
+    "email"
+  ],
+  "textdomain": "edigital",
+  "supports": {
+    "html": false,
+    "reusable": true
+  },
+  "attributes": {
+    "telLabel": {
+      "type": "string",
+      "default": "Appelez-nous"
+    },
+    "telValue": {
+      "type": "string",
+      "default": ""
+    },
+    "emailLabel": {
+      "type": "string",
+      "default": "Écrivez-nous"
+    },
+    "emailValue": {
+      "type": "string",
+      "default": ""
+    },
+    "horairesLabel": {
+      "type": "string",
+      "default": "Horaires"
+    },
+    "horairesValue": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "editorScript": "file:./index.js",
+  "render": "file:./render.php"
+}

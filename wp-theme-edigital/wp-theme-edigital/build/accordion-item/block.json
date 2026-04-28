@@ -1,0 +1,26 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "edigital/accordion-item",
+  "version": "1.0.0",
+  "title": "E-Digital — Item d'accordéon",
+  "category": "edigital",
+  "icon": "menu-alt",
+  "parent": [
+    "edigital/services-accordion"
+  ],
+  "description": "Un item d'accordéon (titre + contenu riche).",
+  "textdomain": "edigital",
+  "supports": {
+    "html": false,
+    "reusable": false
+  },
+  "attributes": {
+    "titre": {
+      "type": "string",
+      "default": "Service"
+    }
+  },
+  "editorScript": "file:./index.js",
+  "render": "file:./render.php"
+}

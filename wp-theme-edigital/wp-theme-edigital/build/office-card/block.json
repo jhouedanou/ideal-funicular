@@ -1,0 +1,32 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "edigital/office-card",
+  "version": "1.0.0",
+  "title": "E-Digital — Carte Bureau",
+  "category": "edigital",
+  "icon": "location-alt",
+  "description": "Carte d'adresse de bureau (label + adresse).",
+  "keywords": [
+    "bureau",
+    "adresse",
+    "contact"
+  ],
+  "textdomain": "edigital",
+  "supports": {
+    "html": false,
+    "reusable": true
+  },
+  "attributes": {
+    "label": {
+      "type": "string",
+      "default": "Bureau"
+    },
+    "adresse": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "editorScript": "file:./index.js",
+  "render": "file:./render.php"
+}

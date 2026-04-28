@@ -1,0 +1,105 @@
+<!--
+  Contenu initial (fixture) de la page d'accueil E-Digital.
+
+  >>> AUTO-PROVISIONING : ce fichier est lu automatiquement par
+      wp-theme-edigital/sql/build-sql.py (fonction build_home) pour générer
+      sql/edigital-pages.sql, lui-même importé au boot par
+      docker/init/install.sh. Aucun copier/coller manuel n'est nécessaire.
+
+  Workflow après modification :
+    1. Éditer ce fichier (les blocs Gutenberg ci-dessous).
+    2. Régénérer le SQL :
+         python3 wp-theme-edigital/sql/build-sql.py
+    3. Reconstruire le stack :
+         docker compose down -v && docker compose up -d
+       (le -v purge le volume DB, sinon le marker .edigital-installed
+        empêche la ré-importation.)
+
+  Fallback manuel (si besoin) — éditeur Gutenberg en mode code :
+    Pages > Accueil > Modifier > menu kebab > Éditeur de code, puis coller
+    le contenu ci-dessous (à partir de la 1re balise wp:edigital).
+
+  Les libellés sont des valeurs par défaut — tout reste éditable depuis
+  l'interface WordPress après import.
+
+  ORDRE EXACT DE LA MAQUETTE index.html (top → bottom) :
+    1.  Hero slider (CPT slide, hors fixture)
+    2.  intro                  - Agence Digitale Avant-gardiste / À Propos
+    3.  marquee-images (#1)    - Bande défilante haute
+    4.  about-section          - "-01" + Nous sommes une agence + image vidéo
+                                 + sous-titre Expertise
+    5.  expertise-grid         - Notre Expertise (6 cartes)
+    6.  text-ticker            - Mots clés défilants 2 lignes
+    7.  section-heading        - "Nous donnons vie à vos idées" / Histoire
+    8.  actualites-grid (#1)   - 6 actualités, 3 colonnes (variante histoire)
+    9.  marquee-images (#2)    - Bande défilante basse
+    10. parallax-hero          - Créateurs d'expériences digitales depuis 2003
+    11. actualites-grid (#2)   - 4 actualités, 2 colonnes, avec titre
+    12. services-accordion     - Services (CRÉATION WEB / APP MOBILE / …)
+    13. pricing                - NOS TARIFS
+    14. clients                - Ils nous font confiance
+    15. Newsletter (template)  - hors fixture
+-->
+
+<!-- wp:edigital/intro {"titreLigne1":"Agence Digitale","titreLigne2":"Avant-gardiste","etiquette":"À Propos","ancre":"services"} /-->
+
+<!-- wp:edigital/marquee-images {"images":[{"url":"/wp-content/themes/edigital/assets/images/portfolio/web-design.png","alt":"Conception Web sur Mesure"},{"url":"/wp-content/themes/edigital/assets/images/portfolio/blog-mobile-dev.png","alt":"Développement Mobile"},{"url":"/wp-content/themes/edigital/assets/images/portfolio/mobile-app.png","alt":"Applications Mobiles"},{"url":"/wp-content/themes/edigital/assets/images/portfolio/blog-smma.png","alt":"Marketing Digital"},{"url":"/wp-content/themes/edigital/assets/images/portfolio/logiciel-metier.png","alt":"Logiciels Métier"},{"url":"/wp-content/themes/edigital/assets/images/portfolio/blog-web-creation.png","alt":"Création de Sites"},{"url":"/wp-content/themes/edigital/assets/images/portfolio/blog-custom-app.png","alt":"Applications Spécifiques"},{"url":"/wp-content/themes/edigital/assets/images/portfolio/blog-ecommerce.png","alt":"E-commerce"}]} /-->
+
+<!-- wp:edigital/about-section {"numero":"-01","titrePrincipal":"NOUS SOMMES UNE AGENCE DIGITALE SPÉCIALISÉE DANS LE DÉVELOPPEMENT WEB ET MOBILE AU SERVICE DES TPE/PME DEPUIS 2003.","imageUrl":"/wp-content/themes/edigital/assets/images/portfolio/most-hero.png","videoUrl":"/wp-content/themes/edigital/assets/images/slider/freepik_create-a-video_seedance_720p_16-9_24fps_3921.mp4","sousTitre":"Agence digitale spécialisée dans la conception et le développement de solutions sur mesure.","etiquette":"Expertise"} /-->
+
+<!-- wp:edigital/expertise-grid {"titre":"Notre Expertise","texteCta":"Découvrez nos dernières réalisations","libelleCta":"Voir Tous Les Projets","lienCta":"/nos-projets/"} -->
+	<!-- wp:edigital/expertise-card {"titre":"Conception de site vitrine","categorie":"Web Design","imageUrl":"/wp-content/themes/edigital/assets/images/portfolio/expertise-vitrine.png","imageAlt":"Conception de site vitrine","lien":"/services/creation-web/"} /-->
+	<!-- wp:edigital/expertise-card {"titre":"Développement E-commerce","categorie":"E-commerce","imageUrl":"/wp-content/themes/edigital/assets/images/portfolio/expertise-ecommerce.png","imageAlt":"Développement E-commerce","lien":"/services/creation-web/"} /-->
+	<!-- wp:edigital/expertise-card {"titre":"Application Mobile Native","categorie":"Développement Mobile","imageUrl":"/wp-content/themes/edigital/assets/images/portfolio/expertise-mobile.png","imageAlt":"Application Mobile Native","lien":"/services/mobile-native/"} /-->
+	<!-- wp:edigital/expertise-card {"titre":"Référencement SEO / SEA","categorie":"Marketing Digital","imageUrl":"/wp-content/themes/edigital/assets/images/portfolio/expertise-seo.png","imageAlt":"Référencement SEO et SEA","lien":"/services/visibilite-seo/"} /-->
+	<!-- wp:edigital/expertise-card {"titre":"Création d'Identité Visuelle","categorie":"Branding & Design","imageUrl":"/wp-content/themes/edigital/assets/images/portfolio/expertise-branding.png","imageAlt":"Création d'identité visuelle","lien":"/services/branding/"} /-->
+	<!-- wp:edigital/expertise-card {"titre":"Maintenance & Hébergement","categorie":"Support Technique","imageUrl":"/wp-content/themes/edigital/assets/images/portfolio/expertise-support.png","imageAlt":"Maintenance et Hébergement","lien":"/services/maintenance/"} /-->
+<!-- /wp:edigital/expertise-grid -->
+
+<!-- wp:edigital/text-ticker {"separateurUrl":"/wp-content/themes/edigital/assets/images/portfolio/circle-mokko.svg","ligne1":[{"avant":"SITES","mot":"WEB","apres":"SUR MESURE"},{"avant":"APPLICATIONS","mot":"MOBILES","apres":""},{"avant":"LOGICIELS","mot":"MÉTIER","apres":""},{"avant":"SOLUTION","mot":"SMMA","apres":""},{"avant":"SITES","mot":"E-COMMERCE","apres":""}],"ligne2":[{"avant":"SEO &","mot":"STRATÉGIE","apres":"DIGITALE"},{"avant":"DESIGN","mot":"PREMIUM","apres":""},{"avant":"ACCOMPAGNEMENT","mot":"DÉDIÉ","apres":""},{"avant":"INNOVATION","mot":"TECH","apres":""},{"avant":"EXPERTISE","mot":"WEB","apres":""}]} /-->
+
+<!-- wp:edigital/section-heading {"titre":"Nous donnons vie à vos idées grâce à notre maîtrise des dernières technologies web et mobiles.","etiquette":"Histoire","variante":"last"} /-->
+
+<!-- wp:edigital/actualites-grid {"nombre":6,"colonnes":"3","libelleCta":"Toutes les actualités","lienCta":"/blog/","variante":"histoire"} /-->
+
+<!-- wp:edigital/marquee-images {"images":[{"url":"/wp-content/themes/edigital/assets/images/portfolio/web-design.png","alt":"Conception Web sur Mesure"},{"url":"/wp-content/themes/edigital/assets/images/portfolio/blog-mobile-dev.png","alt":"Développement Mobile"},{"url":"/wp-content/themes/edigital/assets/images/portfolio/mobile-app.png","alt":"Applications Mobiles"},{"url":"/wp-content/themes/edigital/assets/images/portfolio/blog-smma.png","alt":"Marketing Digital"},{"url":"/wp-content/themes/edigital/assets/images/portfolio/logiciel-metier.png","alt":"Logiciels Métier"},{"url":"/wp-content/themes/edigital/assets/images/portfolio/blog-web-creation.png","alt":"Création de Sites"},{"url":"/wp-content/themes/edigital/assets/images/portfolio/blog-custom-app.png","alt":"Applications Spécifiques"},{"url":"/wp-content/themes/edigital/assets/images/portfolio/blog-ecommerce.png","alt":"E-commerce"}]} /-->
+
+<!-- wp:edigital/parallax-hero {"titreLigne1":"Créateurs d'expériences","titreLigne2":"digitales depuis 2003","backgroundUrl":"/wp-content/themes/edigital/assets/images/portfolio/createurs-bg.png"} /-->
+
+<!-- wp:edigital/actualites-grid {"titre":"ACTUALITÉS E-DIGITAL","nombre":4,"colonnes":"2","libelleCta":"Voir tous les projets","lienCta":"/nos-projets/","variante":"section"} /-->
+
+<!-- wp:edigital/services-accordion {"titre":"Services","alignement":"right"} -->
+	<!-- wp:edigital/accordion-item {"titre":"CRÉATION WEB"} -->
+		<!-- wp:paragraph --><p><strong>Sites Modernes :</strong> Nous développons des sites web modernes, réactifs et optimisés pour le SEO.</p><!-- /wp:paragraph -->
+		<!-- wp:paragraph --><p><strong>Visibilité :</strong> Améliorez votre présence en ligne et attirez plus de visiteurs.</p><!-- /wp:paragraph -->
+	<!-- /wp:edigital/accordion-item -->
+	<!-- wp:edigital/accordion-item {"titre":"APP MOBILE"} -->
+		<!-- wp:paragraph --><p><strong>Natives iOS &amp; Android :</strong> Nous concevons des applications mobiles natives offrant une expérience et des performances élevées.</p><!-- /wp:paragraph -->
+	<!-- /wp:edigital/accordion-item -->
+	<!-- wp:edigital/accordion-item {"titre":"APP MÉTIER"} -->
+		<!-- wp:paragraph --><p><strong>Sur Mesure :</strong> Nous développons des applications métiers sur mesure pour optimiser vos processus internes et améliorer la productivité de votre entreprise.</p><!-- /wp:paragraph -->
+	<!-- /wp:edigital/accordion-item -->
+	<!-- wp:edigital/accordion-item {"titre":"SMMA"} -->
+		<!-- wp:paragraph --><p><strong>Croissance :</strong> Faire des réseaux sociaux un levier de croissance pour votre business.</p><!-- /wp:paragraph -->
+		<!-- wp:paragraph --><p><strong>Stratégie :</strong> Création de contenu, Publicité (Media Buying) et gestion de communauté.</p><!-- /wp:paragraph -->
+	<!-- /wp:edigital/accordion-item -->
+	<!-- wp:edigital/accordion-item {"titre":"CONSULTING"} -->
+		<!-- wp:paragraph --><p>Une équipe dédiée de 8 collaborateurs pour un accompagnement de A à Z. Accédez à des applications pour CMS, CRM, ERP, PrestaShop avec un budget maîtrisé.</p><!-- /wp:paragraph -->
+	<!-- /wp:edigital/accordion-item -->
+<!-- /wp:edigital/services-accordion -->
+
+<!-- wp:edigital/pricing {"titre":"NOS TARIFS","ancre":"tarifs","extras":[{"libelle":"Référencement SEO","prix":"à partir de 500€ / mois"},{"libelle":"Maintenance & Support","prix":"à partir de 99€ / mois"}]} -->
+	<!-- wp:edigital/pricing-card {"titre":"Site Vitrine","sousTitre":"Idéal pour les TPE/PME et indépendants.","prix":"à partir de 1 200€","points":["Design Personnalisé","Optimisé SEO","Responsive Design"],"libelleCta":"Demander un Devis","lienCta":"/contact/","accent":false} /-->
+	<!-- wp:edigital/pricing-card {"titre":"Site E-commerce","sousTitre":"Votre boutique en ligne sur mesure.","prix":"à partir de 3 500€","points":["Paiement Sécurisé","Gestion des Stocks","PrestaShop / WooCommerce"],"libelleCta":"Demander un Devis","lienCta":"/contact/","accent":true} /-->
+	<!-- wp:edigital/pricing-card {"titre":"App Mobile","sousTitre":"Application Native iOS & Android.","prix":"à partir de 5 000€","points":["Haute Performance","UX / UI Premium","Notification Push"],"libelleCta":"Demander un Devis","lienCta":"/contact/","accent":false} /-->
+<!-- /wp:edigital/pricing -->
+
+<!-- wp:edigital/clients {"titreLigne1":"Ils nous font","titreLigne2":"confiance.","backgroundUrl":"/wp-content/themes/edigital/assets/images/clients/client-bg.webp"} -->
+	<!-- wp:edigital/client-logo {"libelle":"TOTAL CI","police":"cinzel","taille":38} /-->
+	<!-- wp:edigital/client-logo {"libelle":"Yves Rocher","police":"playfair","taille":40} /-->
+	<!-- wp:edigital/client-logo {"libelle":"Raufils Assurance","police":"caveat","taille":42} /-->
+	<!-- wp:edigital/client-logo {"libelle":"ORDISUD","police":"oswald","taille":44} /-->
+	<!-- wp:edigital/client-logo {"libelle":"Quitus Immobilier","police":"dancing","taille":34} /-->
+	<!-- wp:edigital/client-logo {"libelle":"ORDEA","police":"unbounded","taille":36} /-->
+	<!-- wp:edigital/client-logo {"libelle":"Cabinet Famchon","police":"montserrat","taille":34} /-->
+<!-- /wp:edigital/clients -->

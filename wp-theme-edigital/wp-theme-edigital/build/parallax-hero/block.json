@@ -1,0 +1,39 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "edigital/parallax-hero",
+  "version": "1.0.0",
+  "title": "E-Digital — Hero parallaxe",
+  "category": "edigital",
+  "icon": "format-image",
+  "description": "Bandeau plein écran avec image en parallaxe et titre.",
+  "keywords": [
+    "hero",
+    "parallaxe",
+    "bannière"
+  ],
+  "textdomain": "edigital",
+  "supports": {
+    "html": false,
+    "reusable": true
+  },
+  "attributes": {
+    "backgroundUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "backgroundId": {
+      "type": "number"
+    },
+    "titreLigne1": {
+      "type": "string",
+      "default": "Créateurs d'expériences"
+    },
+    "titreLigne2": {
+      "type": "string",
+      "default": "digitales depuis 2003"
+    }
+  },
+  "editorScript": "file:./index.js",
+  "render": "file:./render.php"
+}

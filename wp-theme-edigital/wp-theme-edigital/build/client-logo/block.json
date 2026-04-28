@@ -1,0 +1,43 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "edigital/client-logo",
+  "version": "1.0.0",
+  "title": "E-Digital — Logo client",
+  "category": "edigital",
+  "icon": "businessperson",
+  "parent": [
+    "edigital/clients"
+  ],
+  "description": "Nom de client affiché en typographie distinctive.",
+  "textdomain": "edigital",
+  "supports": {
+    "html": false,
+    "reusable": false
+  },
+  "attributes": {
+    "libelle": {
+      "type": "string",
+      "default": "Nom du client"
+    },
+    "police": {
+      "type": "string",
+      "default": "cinzel",
+      "enum": [
+        "cinzel",
+        "playfair",
+        "caveat",
+        "oswald",
+        "dancing",
+        "unbounded",
+        "montserrat"
+      ]
+    },
+    "taille": {
+      "type": "number",
+      "default": 38
+    }
+  },
+  "editorScript": "file:./index.js",
+  "render": "file:./render.php"
+}

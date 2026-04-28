@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "edigital/technos-grid",
+	"version": "1.0.0",
+	"title": "E-Digital — Grille Technologies",
+	"category": "edigital",
+	"icon": "screenoptions",
+	"description": "Grille des technologies maîtrisées (icône + libellé + description).",
+	"keywords": ["technologies", "stack", "outils"],
+	"textdomain": "edigital",
+	"supports": {
+		"html": false,
+		"reusable": true
+	},
+	"attributes": {
+		"items": {
+			"type": "array",
+			"default": []
+		}
+	},
+	"editorScript": "file:./index.js",
+	"render": "file:./render.php"
+}

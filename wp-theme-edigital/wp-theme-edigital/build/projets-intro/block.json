@@ -1,0 +1,49 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "edigital/projets-intro",
+  "version": "1.0.0",
+  "title": "E-Digital — Intro Projets (titre + filtres)",
+  "category": "edigital",
+  "icon": "filter",
+  "description": "Bloc d'intro de la page Nos Projets : titre, sous-titre et boutons de filtre (Tous / Design / Développement…).",
+  "keywords": [
+    "projets",
+    "filtres",
+    "portfolio"
+  ],
+  "textdomain": "edigital",
+  "supports": {
+    "html": false,
+    "reusable": true
+  },
+  "attributes": {
+    "titre": {
+      "type": "string",
+      "default": "Nos Projets"
+    },
+    "sousTitre": {
+      "type": "string",
+      "default": ""
+    },
+    "filtres": {
+      "type": "array",
+      "default": [
+        {
+          "label": "Tous",
+          "slug": "*"
+        },
+        {
+          "label": "Design",
+          "slug": "design"
+        },
+        {
+          "label": "Développement",
+          "slug": "developpement"
+        }
+      ]
+    }
+  },
+  "editorScript": "file:./index.js",
+  "render": "file:./render.php"
+}
