@@ -234,6 +234,81 @@ add_action( 'wp_enqueue_scripts', function () {
 	margin: 0 0 6px;
 }
 .edigital-office-card p { margin: 0; line-height: 1.6; }
+
+/* === Hero internal — conteneurs centrés (.ms-hc / .ms-hc--inner) === */
+.ms-hero-internal .ms-hc { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 320px; padding: 80px 0; }
+.ms-hero-internal .ms-hc--inner { width: 100%; max-width: 900px; text-align: center; margin: 0 auto; }
+
+/* === Carte contact (sidebar contact.html) === */
+.contact-info-col { width: 100%; }
+.contact-info-card {
+	background: #111;
+	color: #fff;
+	border-radius: 24px;
+	padding: 40px 32px;
+}
+.contact-info-card h3 {
+	color: #fff;
+	font-size: 1.4rem;
+	font-weight: 700;
+	margin: 0 0 28px;
+}
+.contact-info-card .contact-info-item {
+	display: flex;
+	align-items: flex-start;
+	gap: 16px;
+	margin-bottom: 22px;
+}
+.contact-info-card .cii-icon {
+	flex: 0 0 44px;
+	width: 44px; height: 44px;
+	border-radius: 50%;
+	background: rgba(255,255,255,0.08);
+	display: flex; align-items: center; justify-content: center;
+	color: #fff;
+	font-size: 16px;
+}
+.contact-info-card .cii-text { flex: 1; }
+.contact-info-card .cii-text p {
+	margin: 0 0 4px;
+	font-size: 0.78rem;
+	letter-spacing: 1.2px;
+	text-transform: uppercase;
+	color: rgba(255,255,255,0.55);
+}
+.contact-info-card .cii-text span {
+	font-size: 1rem;
+	font-weight: 600;
+	color: #fff;
+	display: block;
+}
+.contact-info-card .cii-text span a { color: #fff; text-decoration: none; }
+.contact-info-card .cii-text span a:hover { text-decoration: underline; }
+
+.contact-info-card .contact-social-row {
+	display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px;
+}
+.contact-info-card .contact-social-btn {
+	display: inline-flex; align-items: center; gap: 8px;
+	background: rgba(255,255,255,0.08);
+	color: #fff;
+	padding: 10px 18px;
+	border-radius: 30px;
+	font-size: 0.85rem;
+	font-weight: 600;
+	text-decoration: none;
+	transition: background 0.25s ease;
+}
+.contact-info-card .contact-social-btn:hover { background: #e31414; color: #fff; }
+
+/* Layout deux colonnes (formulaire / sidebar) */
+.contact-multistep-section .contact-layout,
+.wp-block-columns.contact-layout { display: flex; gap: 32px; flex-wrap: wrap; align-items: flex-start; }
+.wp-block-columns.contact-layout .wp-block-column.contact-form-col { flex: 1 1 60%; }
+.wp-block-columns.contact-layout .wp-block-column.contact-info-col { flex: 1 1 30%; min-width: 280px; }
+@media (max-width: 991px) {
+	.wp-block-columns.contact-layout { flex-direction: column; }
+}
 CSS;
 
 	wp_add_inline_style( 'edigital-style', $css );

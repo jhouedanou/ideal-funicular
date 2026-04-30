@@ -2,6 +2,8 @@
 /**
  * Render — edigital/text-ticker
  *
+ * Reproduit fidèlement <section class="project-area last"><div class="ms-text-ticker"><div class="ms-tt-wrap s-d is-inview"><ul class="ms-tt text-split scrollingText-two">…</ul></div></div></section>
+ *
  * @var array  $attributes
  * @var string $content
  */
@@ -19,15 +21,15 @@ $render_line = function ( $items, $sep_url, $extra_class, $scroll_class ) {
 	if ( empty( $items ) ) {
 		return;
 	}
+	$classes = trim( 'ms-tt ' . ( $extra_class ? $extra_class . ' ' : '' ) . 'text-split ' . $scroll_class );
 	?>
-	<ul class="ms-tt <?php echo esc_attr( $extra_class . ' ' . $scroll_class ); ?> text-split">
+	<ul class="<?php echo esc_attr( $classes ); ?>">
 		<?php foreach ( $items as $item ) :
 			$avant = isset( $item['avant'] ) ? $item['avant'] : '';
 			$mot   = isset( $item['mot'] ) ? $item['mot'] : '';
 			$apres = isset( $item['apres'] ) ? $item['apres'] : '';
 		?>
-		<li class="ms-tt__text">
-			<?php
+		<li class="ms-tt__text"><?php
 			echo esc_html( $avant );
 			if ( $mot ) {
 				echo $avant ? ' ' : '';
@@ -36,8 +38,8 @@ $render_line = function ( $items, $sep_url, $extra_class, $scroll_class ) {
 			if ( $apres ) {
 				echo ' ' . esc_html( $apres );
 			}
-			?>
-		</li>
+			echo '&nbsp;';
+		?></li>
 		<?php if ( $sep_url ) : ?>
 		<li class="ms-tt__text img">
 			<img src="<?php echo esc_url( $sep_url ); ?>" alt="" decoding="async" />
@@ -48,11 +50,13 @@ $render_line = function ( $items, $sep_url, $extra_class, $scroll_class ) {
 	<?php
 };
 
-$wrapper = get_block_wrapper_attributes( array( 'class' => 'ms-text-ticker' ) );
+$wrapper = get_block_wrapper_attributes( array( 'class' => 'project-area last' ) );
 ?>
-<div <?php echo $wrapper; ?>>
-	<div class="ms-tt-wrap s-d is-inview">
-		<?php $render_line( $ligne1, $sep, '', 'scrollingText-two' ); ?>
-		<?php $render_line( $ligne2, $sep, 'two', 'scrollingText-four' ); ?>
+<section <?php echo $wrapper; ?>>
+	<div class="ms-text-ticker">
+		<div class="ms-tt-wrap s-d is-inview">
+			<?php $render_line( $ligne1, $sep, '', 'scrollingText-two' ); ?>
+			<?php $render_line( $ligne2, $sep, 'two', 'scrollingText-four' ); ?>
+		</div>
 	</div>
-</div>
+</section>

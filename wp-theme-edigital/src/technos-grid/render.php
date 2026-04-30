@@ -11,9 +11,9 @@ if ( empty( $items ) ) {
 	return;
 }
 
-$wrapper = get_block_wrapper_attributes( array( 'class' => 'technos-grid section-padding' ) );
+$wrapper = get_block_wrapper_attributes( array( 'class' => 'services-area-2 pt-100 pb-100' ) );
 ?>
-<section <?php echo $wrapper; ?>>
+<div <?php echo $wrapper; ?>>
 	<div class="container">
 		<div class="row">
 			<?php foreach ( $items as $item ) :
@@ -21,22 +21,20 @@ $wrapper = get_block_wrapper_attributes( array( 'class' => 'technos-grid section
 				$desc  = isset( $item['description'] ) ? (string) $item['description'] : '';
 				$icon  = isset( $item['iconUrl'] ) ? (string) $item['iconUrl'] : '';
 			?>
-			<div class="col-md-3 col-sm-6 mb-4">
-				<article class="tech-card">
+			<div class="col-lg-4 col-md-6">
+				<div class="tech-card">
 					<?php if ( $icon ) : ?>
-						<figure class="tech-card-icon">
-							<img alt="<?php echo esc_attr( wp_strip_all_tags( $label ) ); ?>" src="<?php echo esc_url( $icon ); ?>" />
-						</figure>
+						<img alt="<?php echo esc_attr( wp_strip_all_tags( $label ) ); ?>" src="<?php echo esc_url( $icon ); ?>" />
 					<?php endif; ?>
 					<?php if ( $label ) : ?>
-						<h4 class="tech-card-title"><?php echo esc_html( $label ); ?></h4>
+						<h3><?php echo esc_html( $label ); ?></h3>
 					<?php endif; ?>
 					<?php if ( $desc ) : ?>
-						<p class="tech-card-desc"><?php echo wp_kses_post( $desc ); ?></p>
+						<p><?php echo wp_kses_post( $desc ); ?></p>
 					<?php endif; ?>
-				</article>
+				</div>
 			</div>
 			<?php endforeach; ?>
 		</div>
 	</div>
-</section>
+</div>
