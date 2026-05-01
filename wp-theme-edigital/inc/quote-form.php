@@ -37,86 +37,44 @@ function edigital_quote_services() {
 
 /**
  * Rendu du formulaire (HTML).
+ *
+ * Depuis la migration de la page Contact, le formulaire multi-étapes vit
+ * sur la page /contact/. Ce shortcode/fonction rend désormais un bloc CTA
+ * qui redirige l'utilisateur vers cette page.
+ *
+ * Le paramètre ?service=slug est transmis à la page contact afin de
+ * pré-sélectionner le service correspondant dans le formulaire.
  */
 function edigital_quote_form( $atts = array() ) {
 	$atts = wp_parse_args( $atts, array(
-		'titre' => __( 'Demander un devis', 'edigital' ),
+		'titre'    => __( 'Demander un devis', 'edigital' ),
+		'subtitle' => __( 'Remplissez notre formulaire en 3 étapes et recevez une étude personnalisée.', 'edigital' ),
 	) );
 
-	$services        = edigital_quote_services();
-	$preselect_slug  = isset( $_GET['service'] ) ? sanitize_title( wp_unslash( $_GET['service'] ) ) : '';
-	$preselect_label = isset( $services[ $preselect_slug ] ) ? $services[ $preselect_slug ] : '';
+	// Résolution de l'URL de la page contact.
+	$contact_page = get_page_by_path( 'contact' );
+	$contact_url  = $contact_page ? get_permalink( $contact_page ) : home_url( '/contact/' );
+
+	// Transmission du service pré-sélectionné si présent.
+	$preselect_slug = isset( $_GET['service'] ) ? sanitize_title( wp_unslash( $_GET['service'] ) ) : '';
+	if ( $preselect_slug ) {
+		$contact_url = add_query_arg( 'service', $preselect_slug, $contact_url );
+	}
 
 	ob_start();
 	?>
-	<form class="edigital-quote-form" data-edigital-quote>
+	<div class="edigital-devis-cta">
 		<?php if ( $atts['titre'] ) : ?>
-			<h3 class="edigital-quote-form__titre"><?php echo esc_html( $atts['titre'] ); ?></h3>
+		<h3 class="edigital-devis-cta__titre"><?php echo esc_html( $atts['titre'] ); ?></h3>
 		<?php endif; ?>
-
-		<?php if ( $preselect_label ) : ?>
-			<p class="edigital-quote-form__preselect">
-				<?php
-				printf(
-					/* translators: %s = nom du service présélectionné. */
-					esc_html__( 'Service présélectionné : %s', 'edigital' ),
-					'<strong>' . esc_html( $preselect_label ) . '</strong>'
-				);
-				?>
-			</p>
+		<?php if ( $atts['subtitle'] ) : ?>
+		<p class="edigital-devis-cta__sub"><?php echo esc_html( $atts['subtitle'] ); ?></p>
 		<?php endif; ?>
-
-		<input type="hidden" name="nonce" value="<?php echo esc_attr( wp_create_nonce( 'edigital_quote' ) ); ?>">
-
-		<p>
-			<label for="edigital-quote-service"><?php esc_html_e( 'Service souhaité', 'edigital' ); ?></label>
-			<select id="edigital-quote-service" name="service" required>
-				<option value=""><?php esc_html_e( '— Choisir —', 'edigital' ); ?></option>
-				<?php foreach ( $services as $slug => $label ) : ?>
-					<option value="<?php echo esc_attr( $slug ); ?>" <?php selected( $preselect_slug, $slug ); ?>>
-						<?php echo esc_html( $label ); ?>
-					</option>
-				<?php endforeach; ?>
-			</select>
-		</p>
-
-		<p>
-			<label for="edigital-quote-name"><?php esc_html_e( 'Nom complet', 'edigital' ); ?></label>
-			<input id="edigital-quote-name" type="text" name="name" required>
-		</p>
-
-		<p>
-			<label for="edigital-quote-email"><?php esc_html_e( 'Email', 'edigital' ); ?></label>
-			<input id="edigital-quote-email" type="email" name="email" required>
-		</p>
-
-		<p>
-			<label for="edigital-quote-phone"><?php esc_html_e( 'Téléphone', 'edigital' ); ?></label>
-			<input id="edigital-quote-phone" type="tel" name="phone">
-		</p>
-
-		<p>
-			<label for="edigital-quote-budget"><?php esc_html_e( 'Budget estimé', 'edigital' ); ?></label>
-			<select id="edigital-quote-budget" name="budget">
-				<option value=""><?php esc_html_e( '— Indicatif —', 'edigital' ); ?></option>
-				<option value="<5k"><?php esc_html_e( 'Moins de 5 000 €', 'edigital' ); ?></option>
-				<option value="5-15k">5 000 € – 15 000 €</option>
-				<option value="15-50k">15 000 € – 50 000 €</option>
-				<option value=">50k"><?php esc_html_e( 'Plus de 50 000 €', 'edigital' ); ?></option>
-			</select>
-		</p>
-
-		<p>
-			<label for="edigital-quote-message"><?php esc_html_e( 'Décrivez votre projet', 'edigital' ); ?></label>
-			<textarea id="edigital-quote-message" name="message" rows="5" required></textarea>
-		</p>
-
-		<p>
-			<button type="submit" class="btn btn-mokko btn--primary"><?php esc_html_e( 'Envoyer ma demande', 'edigital' ); ?></button>
-		</p>
-
-		<p class="edigital-quote-form__feedback" role="status" aria-live="polite"></p>
-	</form>
+		<a class="btn btn-mokko btn--lg btn--primary edigital-devis-cta__btn"
+			href="<?php echo esc_url( $contact_url ); ?>">
+			<div class="ms-btn__text"><?php esc_html_e( 'Accéder au formulaire →', 'edigital' ); ?></div>
+		</a>
+	</div>
 	<?php
 	return ob_get_clean();
 }
