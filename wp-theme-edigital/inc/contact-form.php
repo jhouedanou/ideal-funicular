@@ -455,24 +455,49 @@ function edigital_contact_handle_ajax() {
 	}
 
 	// Gestion du fichier PDF (cahier des charges, optionnel).
+	// Les clés string de l'array sont utilisées par PHPMailer comme nom
+	// d'affichage de la pièce jointe — sinon PHPMailer prend le basename
+	// du chemin temporaire (genre « phpXXXX »).
 	$attachment = array();
 	if ( ! empty( $_FILES['cahier_charges']['tmp_name'] ) ) {
 		$file = $_FILES['cahier_charges'];
-		// Limiter au type PDF uniquement.
+		if ( UPLOAD_ERR_OK !== (int) $file['error'] ) {
+			wp_send_json_error( array( 'message' => __( 'Échec de l\'upload du fichier.', 'edigital' ) ), 422 );
+		}
+		// Limiter au type PDF uniquement (extension + signature finfo).
 		$ftype = wp_check_filetype( basename( $file['name'] ), array( 'pdf' => 'application/pdf' ) );
 		if ( 'application/pdf' !== $ftype['type'] ) {
 			wp_send_json_error( array( 'message' => __( 'Seul le format PDF est accepté.', 'edigital' ) ), 422 );
+		}
+		if ( function_exists( 'finfo_file' ) ) {
+			$finfo = finfo_open( FILEINFO_MIME_TYPE );
+			$mime  = $finfo ? finfo_file( $finfo, $file['tmp_name'] ) : '';
+			if ( $finfo ) { finfo_close( $finfo ); }
+			if ( 'application/pdf' !== $mime ) {
+				wp_send_json_error( array( 'message' => __( 'Le contenu du fichier ne correspond pas à un PDF.', 'edigital' ) ), 422 );
+			}
 		}
 		// Taille max 5 Mo.
 		if ( $file['size'] > 5 * 1024 * 1024 ) {
 			wp_send_json_error( array( 'message' => __( 'Le fichier ne doit pas dépasser 5 Mo.', 'edigital' ) ), 422 );
 		}
-		$attachment = array( $file['tmp_name'] );
-		// Patch pour wp_mail : on doit passer le chemin + le nom.
-		add_filter( 'wp_mail', function ( $args ) use ( $file ) {
-			$args['attachments'] = array( $file['tmp_name'] );
-			return $args;
-		} );
+		// Nom d'affichage propre : on assainit le nom utilisateur.
+		$display_name = sanitize_file_name( basename( $file['name'] ) ) ?: 'cahier-des-charges.pdf';
+
+		// PHPMailer détecte le MIME via l'extension du chemin source ; le
+		// tmp_name PHP n'en a pas → on copie vers un fichier .pdf temporaire.
+		require_once ABSPATH . 'wp-admin/includes/file.php';
+		$tmp_pdf = wp_tempnam( $display_name );
+		if ( $tmp_pdf && @copy( $file['tmp_name'], $tmp_pdf ) ) {
+			$attachment = array( $display_name => $tmp_pdf );
+			// Cleanup une fois la requête terminée (réponse JSON déjà envoyée).
+			$shutdown_cleanup = function () use ( $tmp_pdf ) {
+				if ( file_exists( $tmp_pdf ) ) { @unlink( $tmp_pdf ); }
+			};
+			add_action( 'shutdown', $shutdown_cleanup );
+		} else {
+			$attachment = array( $display_name => $file['tmp_name'] );
+		}
 	}
 
 	$services_labels = array(
@@ -550,9 +575,24 @@ function edigital_contact_handle_ajax() {
 		'Cc: ' . $cc,
 	);
 
+	// Capture l'erreur PHPMailer pour la loguer (sinon échec silencieux).
+	$mail_error = '';
+	$err_capture = function ( $wp_err ) use ( &$mail_error ) {
+		if ( $wp_err instanceof WP_Error ) {
+			$mail_error = $wp_err->get_error_message();
+		}
+	};
+	add_action( 'wp_mail_failed', $err_capture );
+
 	$sent = wp_mail( $to, $subject, $body, $headers, $attachment );
 
+	remove_action( 'wp_mail_failed', $err_capture );
+
 	if ( ! $sent ) {
+		error_log( sprintf(
+			'[edigital_contact] wp_mail FAILED — to=%s subject=%s error=%s',
+			$to, $subject, $mail_error ?: 'unknown'
+		) );
 		wp_send_json_error( array( 'message' => __( 'Échec de l\'envoi. Réessayez plus tard.', 'edigital' ) ), 500 );
 	}
 

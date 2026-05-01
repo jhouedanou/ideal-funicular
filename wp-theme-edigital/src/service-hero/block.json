@@ -16,6 +16,7 @@
 	"attributes": {
 		"backgroundUrl": { "type": "string", "default": "" },
 		"backgroundId": { "type": "number" },
+		"useFeaturedImage": { "type": "boolean", "default": false },
 		"breadcrumb1Label": { "type": "string", "default": "Accueil" },
 		"breadcrumb1Url": { "type": "string", "default": "/" },
 		"breadcrumb2Label": { "type": "string", "default": "Services" },

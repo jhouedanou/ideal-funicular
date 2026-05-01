@@ -388,7 +388,7 @@ INSERT INTO wp_postmeta (post_id, meta_key, meta_value) VALUES (10010, '_wp_page
 -- Page : Nos Projets (nos-projets)
 INSERT INTO wp_posts (ID, post_author, post_date, post_date_gmt, post_content, post_title, post_excerpt, post_status, comment_status, ping_status, post_password, post_name, to_ping, pinged, post_modified, post_modified_gmt, post_content_filtered, post_parent, guid, menu_order, post_type, post_mime_type, comment_count) VALUES (
   10011, 1, NOW(), UTC_TIMESTAMP(),
-  '<!-- wp:edigital/service-hero {"breadcrumb1Label":"Accueil","breadcrumb1Url":"/","breadcrumb2Label":"","breadcrumb2Url":"","breadcrumbCurrent":"Nos Projets","titre":"Nos Projets","sousTitre":"Découvrez nos dernières réalisations et laissez-vous inspirer pour votre futur projet digital."} /-->
+  '<!-- wp:edigital/service-hero {"useFeaturedImage":true,"breadcrumb1Label":"Accueil","breadcrumb1Url":"/","breadcrumb2Label":"","breadcrumb2Url":"","breadcrumbCurrent":"Nos Projets","titre":"Nos Projets","sousTitre":"Découvrez nos dernières réalisations et laissez-vous inspirer pour votre futur projet digital."} /-->
 
 <!-- wp:edigital/projets-intro {"titre":"Agence digitale spécialisée dans la conception et le développement de solutions sur mesure.","sousTitre":"","filtres":[{"label":"Tous nos projets","slug":"*"},{"label":"Design","slug":"design"},{"label":"Développement","slug":"developpement"},{"label":"Portfolio","slug":"portfolio"}]} /-->
 

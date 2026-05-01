@@ -26,6 +26,10 @@
     "backgroundId": {
       "type": "number"
     },
+    "useFeaturedImage": {
+      "type": "boolean",
+      "default": false
+    },
     "breadcrumb1Label": {
       "type": "string",
       "default": "Accueil"
