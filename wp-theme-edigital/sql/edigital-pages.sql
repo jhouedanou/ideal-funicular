@@ -390,7 +390,9 @@ INSERT INTO wp_posts (ID, post_author, post_date, post_date_gmt, post_content, p
   10011, 1, NOW(), UTC_TIMESTAMP(),
   '<!-- wp:edigital/service-hero {"breadcrumb1Label":"Accueil","breadcrumb1Url":"/","breadcrumb2Label":"","breadcrumb2Url":"","breadcrumbCurrent":"Nos Projets","titre":"Nos Projets","sousTitre":"Découvrez nos dernières réalisations et laissez-vous inspirer pour votre futur projet digital."} /-->
 
-<!-- wp:edigital/projets-intro {"titre":"Agence digitale spécialisée dans la conception et le développement de solutions sur mesure.","sousTitre":"","filtres":[{"label":"Tous nos projets","slug":"*"},{"label":"Design","slug":"design"},{"label":"Développement","slug":"developpement"},{"label":"Portfolio","slug":"portfolio"}]} /-->',
+<!-- wp:edigital/projets-intro {"titre":"Agence digitale spécialisée dans la conception et le développement de solutions sur mesure.","sousTitre":"","filtres":[{"label":"Tous nos projets","slug":"*"},{"label":"Design","slug":"design"},{"label":"Développement","slug":"developpement"},{"label":"Portfolio","slug":"portfolio"}]} /-->
+
+<!-- wp:edigital/text-ticker {"separateurUrl":"/wp-content/themes/edigital/assets/images/portfolio/circle-mokko.svg","ligne1":[{"avant":"PORTFOLIO","mot":"SUR MESURE","apres":""},{"avant":"RÉALISATIONS","mot":"PREMIUM","apres":""},{"avant":"PROJETS","mot":"SIGNATURE","apres":""},{"avant":"CRÉATIONS","mot":"DIGITALES","apres":""}],"ligne2":[{"avant":"DESIGN","mot":"UNIQUE","apres":""},{"avant":"EXPÉRIENCE","mot":"UTILISATEUR","apres":""},{"avant":"INNOVATION","mot":"TECH","apres":""},{"avant":"PERFORMANCE","mot":"WEB","apres":""}]} /-->',
   'Nos Projets',
   'Découvrez nos dernières réalisations et laissez-vous inspirer pour votre futur projet digital.',
   'publish', 'closed', 'closed', '',

@@ -17,6 +17,8 @@ get_header();
 			the_content();
 		endwhile;
 		?>
+
+		<?php get_template_part( 'template-parts/newsletter-section' ); ?>
 	</div>
 </main>
 <?php

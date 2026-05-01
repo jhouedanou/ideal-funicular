@@ -2,23 +2,34 @@
 /**
  * Template des pages — Option A fidélité maximale.
  *
- * WordPress applique déjà _wp_page_template via son filtre template_include
- * AVANT d'arriver ici. Ce fichier sert donc de fallback ultime (pages sans
- * template assigné). Pour les pages E-Digital qui ont un template statique
- * dans templates/, WordPress les charge directement — page.php n'est pas
- * invoqué pour elles.
+ * Routage automatique : si la page courante a un template statique
+ * `templates/page-{slug}.php`, on y délègue. Sinon, fallback Gutenberg
+ * minimal (the_content()).
  *
- * Si malgré tout ce fichier est appelé pour une page qui a un template
- * statique assigné (edge-case : cache, multisite…), on délègue explicitement.
+ * NB : front-page.php et home.php sont déjà câblés explicitement (vers
+ * templates/page-accueil.php et templates/page-blog.php), donc ce
+ * routage couvre toutes les autres pages (services, contact, etc.).
  *
  * @package EDigital
  */
 
 if ( have_posts() ) {
 	the_post();
-	$tpl = get_post_meta( get_the_ID(), '_wp_page_template', true );
+	rewind_posts();
 
-	if ( $tpl && 'default' !== $tpl ) {
+	$slug = get_post_field( 'post_name', get_the_ID() );
+	if ( $slug ) {
+		$candidate = "templates/page-{$slug}";
+		if ( locate_template( $candidate . '.php' ) ) {
+			get_template_part( $candidate );
+			return;
+		}
+	}
+
+	// Compat : on respecte aussi un `_wp_page_template` explicite si la
+	// valeur pointe sur un fichier différent de page.php (sinon récursion).
+	$tpl = get_post_meta( get_the_ID(), '_wp_page_template', true );
+	if ( $tpl && 'default' !== $tpl && 'page.php' !== $tpl ) {
 		$tpl_path = locate_template( $tpl );
 		if ( $tpl_path ) {
 			load_template( $tpl_path, false );

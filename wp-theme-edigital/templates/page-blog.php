@@ -2,10 +2,10 @@
 /**
  * Template Name: E-Digital — Blog
  *
- * Migré vers les blocs Gutenberg (Phase 4 du plan de migration).
- * Le hero + l'intro sont édités via les blocs `edigital/*`. La grille
- * des articles reste dynamique : elle est rendue ci-dessous via la
- * boucle WordPress principale + paginate_links().
+ * Hero + intro édités via les blocs Gutenberg `edigital/*` (the_content()).
+ * La grille des articles + sidebar (« Les plus lus » + Catégories) sont
+ * rendus dynamiquement ci-dessous, en 2 colonnes (col-lg-4 + col-lg-8)
+ * pour reproduire fidèlement blog.html.
  */
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
@@ -17,19 +17,35 @@ $blog_q   = new WP_Query( array(
 	'posts_per_page' => 6,
 	'paged'          => $paged,
 ) );
+
+// Sur home.php (page des articles), la boucle principale itère sur les
+// posts, pas sur la page Blog. On récupère donc explicitement le contenu
+// (hero Gutenberg) de la page définie dans Réglages > Lecture.
+$blog_page_id = (int) get_option( 'page_for_posts' );
+$blog_page    = $blog_page_id ? get_post( $blog_page_id ) : null;
 ?>
 <main class="ms-main">
 	<div class="ms-page-content">
 		<?php
-		while ( have_posts() ) : the_post();
-			the_content();
-		endwhile;
+		if ( $blog_page && ! empty( $blog_page->post_content ) ) {
+			echo apply_filters( 'the_content', $blog_page->post_content );
+		} elseif ( is_page() ) {
+			while ( have_posts() ) : the_post();
+				the_content();
+			endwhile;
+		}
 		?>
 
-		<section class="blog-area pb-100">
+		<section class="blog-post-area pb-100">
 			<div class="container">
 				<div class="row">
-					<div class="col-lg-12">
+					<!-- Sidebar : Les plus lus + Catégories -->
+					<div class="col-lg-4">
+						<?php get_template_part( 'template-parts/blog-sidebar' ); ?>
+					</div>
+
+					<!-- Listing des articles -->
+					<div class="col-lg-8">
 						<div class="ms-posts--wrap">
 							<div class="row ms-posts--card">
 								<?php if ( $blog_q->have_posts() ) :
@@ -69,21 +85,30 @@ $blog_q   = new WP_Query( array(
 											</div>
 										</div>
 									</article>
-								<?php endwhile; wp_reset_postdata(); endif; ?>
+								<?php endwhile; wp_reset_postdata();
+								else : ?>
+									<p style="padding:60px 15px;color:#747474;">
+										<?php esc_html_e( 'Aucun article publié pour le moment. Revenez bientôt.', 'edigital' ); ?>
+									</p>
+								<?php endif; ?>
 							</div>
-							<nav aria-label="Pagination" class="pagination" style="margin-top:60px !important;">
-								<div class="pagination__list">
-									<?php echo paginate_links( array(
-										'total'   => $blog_q->max_num_pages,
-										'current' => $paged,
-									) ); ?>
-								</div>
-							</nav>
+							<?php if ( $blog_q->max_num_pages > 1 ) : ?>
+								<nav aria-label="Pagination" class="pagination" style="margin-top:60px !important;">
+									<div class="pagination__list">
+										<?php echo paginate_links( array(
+											'total'   => $blog_q->max_num_pages,
+											'current' => $paged,
+										) ); ?>
+									</div>
+								</nav>
+							<?php endif; ?>
 						</div>
 					</div>
 				</div>
 			</div>
 		</section>
+
+		<?php get_template_part( 'template-parts/newsletter-section' ); ?>
 	</div>
 </main>
 <?php

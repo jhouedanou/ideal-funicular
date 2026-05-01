@@ -116,16 +116,25 @@ foreach ( $articles as $idx => $art ) {
 			require_once ABSPATH . 'wp-admin/includes/image.php';
 			require_once ABSPATH . 'wp-admin/includes/media.php';
 
-			$att_id = media_handle_sideload( array(
-				'name'     => $filename,
-				'tmp_name' => $local_path,
-			), $post_id );
-
-			if ( is_wp_error( $att_id ) ) {
-				WP_CLI::warning( "  Impossible d'importer $filename : " . $att_id->get_error_message() );
+			// media_handle_sideload() déplace tmp_name -> uploads. On copie
+			// d'abord vers un fichier temporaire pour préserver la source.
+			$tmp_copy = wp_tempnam( $filename );
+			if ( ! $tmp_copy || ! @copy( $local_path, $tmp_copy ) ) {
+				WP_CLI::warning( "  Impossible de préparer une copie temporaire pour $filename" );
 				$att_id = 0;
 			} else {
-				WP_CLI::log( "  Image importée : $filename (ID $att_id)" );
+				$att_id = media_handle_sideload( array(
+					'name'     => $filename,
+					'tmp_name' => $tmp_copy,
+				), $post_id );
+
+				if ( is_wp_error( $att_id ) ) {
+					@unlink( $tmp_copy );
+					WP_CLI::warning( "  Impossible d'importer $filename : " . $att_id->get_error_message() );
+					$att_id = 0;
+				} else {
+					WP_CLI::log( "  Image importée : $filename (ID $att_id)" );
+				}
 			}
 		} else {
 			WP_CLI::warning( "  Fichier image introuvable : $local_path" );

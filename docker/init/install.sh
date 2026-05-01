@@ -84,6 +84,7 @@ fi
 # -----------------------------------------------------------------------------
 SLIDES_SCRIPT="/var/www/html/wp-content/themes/edigital/sql/seed/import-slides.php"
 ACTUALITES_SCRIPT="/var/www/html/wp-content/themes/edigital/sql/seed/import-actualites.php"
+MIGRATE_POSTS_SCRIPT="/var/www/html/wp-content/themes/edigital/sql/seed/migrate-actualites-to-posts.php"
 
 if [ -f "$SLIDES_SCRIPT" ]; then
   echo "[edigital] Seed des slides (CPT slide) ..."
@@ -97,6 +98,15 @@ if [ -f "$ACTUALITES_SCRIPT" ]; then
   wp eval-file "$ACTUALITES_SCRIPT" --path=/var/www/html || echo "[edigital]   !! seed actualités en erreur (on continue)"
 else
   echo "[edigital] Script import-actualites.php introuvable — skip."
+fi
+
+# Migration actualités → posts standards (alimente la page Blog + sidebar
+# « Les plus lus »). Idempotent : se contente d'enrichir si déjà migré.
+if [ -f "$MIGRATE_POSTS_SCRIPT" ]; then
+  echo "[edigital] Migration actualités → posts standards ..."
+  wp eval-file "$MIGRATE_POSTS_SCRIPT" --path=/var/www/html || echo "[edigital]   !! migration posts en erreur (on continue)"
+else
+  echo "[edigital] Script migrate-actualites-to-posts.php introuvable — skip."
 fi
 
 echo "[edigital] Application des permaliens jolis ..."

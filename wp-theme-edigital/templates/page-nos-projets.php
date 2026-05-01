@@ -11,14 +11,19 @@
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 get_header();
+
+// Sur l'archive du CPT `projet` (slug /nos-projets/), have_posts() boucle
+// sur les projets — pas sur la page WP. On charge donc explicitement la
+// page « nos-projets » pour exposer son contenu Gutenberg.
+$nos_projets_page = get_page_by_path( 'nos-projets' );
 ?>
 <main class="ms-main">
 	<div class="ms-page-content">
-		<?php
-		while ( have_posts() ) : the_post();
-			the_content();
-		endwhile;
-		?>
+		<?php if ( $nos_projets_page ) : ?>
+			<?php echo apply_filters( 'the_content', $nos_projets_page->post_content ); ?>
+		<?php else : ?>
+			<?php while ( have_posts() ) : the_post(); the_content(); endwhile; ?>
+		<?php endif; ?>
 
 		<section class="project-area portfolio-area portfolio-feed-area pb-100">
 			<div class="container">
@@ -66,6 +71,8 @@ get_header();
 				</div>
 			</div>
 		</section>
+
+		<?php get_template_part( 'template-parts/newsletter-section' ); ?>
 	</div>
 </main>
 <?php
