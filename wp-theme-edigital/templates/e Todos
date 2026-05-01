@@ -1,0 +1,25 @@
+e Todos
+
+Setup package.json + wp-scripts toolchain
+
+Create src/ structure for blocks (build with wp-scripts)
+
+Pilot block: edigital/intro source files
+
+Create simple blocks: marquee-images, text-ticker, parallax-hero
+
+Create container/InnerBlocks blocks: expertise-grid + expertise-card
+
+Create container/InnerBlocks blocks: services-accordion + accordion-item
+
+Create container/InnerBlocks blocks: pricing + pricing-card
+
+Create container/InnerBlocks blocks: clients + client-logo
+
+Rewrite page-accueil.php (the_content + keep CPT sections)
+
+Remove home page ACF fields from acf-registry.php
+
+Create initial home content (default block markup)
+
+Document home migration in GUIDE-ADMIN.md
