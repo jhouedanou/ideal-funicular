@@ -85,6 +85,7 @@ fi
 SLIDES_SCRIPT="/var/www/html/wp-content/themes/edigital/sql/seed/import-slides.php"
 ACTUALITES_SCRIPT="/var/www/html/wp-content/themes/edigital/sql/seed/import-actualites.php"
 MIGRATE_POSTS_SCRIPT="/var/www/html/wp-content/themes/edigital/sql/seed/migrate-actualites-to-posts.php"
+PROJETS_SCRIPT="/var/www/html/wp-content/themes/edigital/sql/seed/import-projets.php"
 
 if [ -f "$SLIDES_SCRIPT" ]; then
   echo "[edigital] Seed des slides (CPT slide) ..."
@@ -107,6 +108,13 @@ if [ -f "$MIGRATE_POSTS_SCRIPT" ]; then
   wp eval-file "$MIGRATE_POSTS_SCRIPT" --path=/var/www/html || echo "[edigital]   !! migration posts en erreur (on continue)"
 else
   echo "[edigital] Script migrate-actualites-to-posts.php introuvable — skip."
+fi
+
+if [ -f "$PROJETS_SCRIPT" ]; then
+  echo "[edigital] Seed des projets (CPT projet) ..."
+  wp eval-file "$PROJETS_SCRIPT" --path=/var/www/html || echo "[edigital]   !! seed projets en erreur (on continue)"
+else
+  echo "[edigital] Script import-projets.php introuvable — skip."
 fi
 
 echo "[edigital] Application des permaliens jolis ..."

@@ -54,7 +54,7 @@ services:
         define( 'WP_MAX_MEMORY_LIMIT', '512M' );
         define( 'AUTOMATIC_UPDATER_DISABLED', true );
         define( 'WP_AUTO_UPDATE_CORE', false );
-        define( 'DISALLOW_FILE_MODS', true );
+        # define( 'DISALLOW_FILE_MODS', true );   // décommenté en prod uniquement
         define( 'DISALLOW_FILE_EDIT', true );
         define( 'WP_REDIS_HOST', 'redis' );
         define( 'WP_REDIS_PORT', 6379 );
