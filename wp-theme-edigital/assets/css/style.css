@@ -24,6 +24,11 @@
   margin: 0;
 }
 
+.service-text-grid {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -14399,7 +14404,6 @@ Descr: Contact block w/ info about how to get in touch
 }
 
 .project-area {
-  padding-bottom: 17vh;
   padding-left: 40px;
   padding-right: 40px;
 }

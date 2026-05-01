@@ -36,9 +36,8 @@ if ( ! defined( 'AUTOMATIC_UPDATER_DISABLED' ) ) {
 if ( ! defined( 'WP_AUTO_UPDATE_CORE' ) ) {
 	define( 'WP_AUTO_UPDATE_CORE', false );
 }
-if ( ! defined( 'DISALLOW_FILE_MODS' ) ) {
-	define( 'DISALLOW_FILE_MODS', true );
-}
+// DISALLOW_FILE_MODS n'est PAS défini ici (environnement local/dev).
+// En production, le déclarer dans wp-config.php ou WORDPRESS_CONFIG_EXTRA.
 
 // Coupe les vérifications périodiques de version (core, plugins, thèmes, traductions).
 add_filter( 'pre_site_transient_update_core',    '__return_null', 1 );
@@ -46,11 +45,21 @@ add_filter( 'pre_site_transient_update_plugins', '__return_null', 1 );
 add_filter( 'pre_site_transient_update_themes',  '__return_null', 1 );
 add_filter( 'auto_update_translation',           '__return_false', 1 );
 add_filter( 'pre_http_request', function( $pre, $args, $url ) {
-	// Bloque tout appel HTTP vers les domaines wp.org (utile en environnement isolé).
-	if ( is_string( $url ) && preg_match( '#^https?://(api\.|downloads\.|translate\.)?wordpress\.org/#i', $url ) ) {
-		return new WP_Error( 'edigital_blocked_external', 'Requête wp.org bloquée par le mu-plugin E-Digital (environnement local).' );
+	// En local, on autorise les appels depuis l'admin (installation / recherche de plugins)
+	// et on bloque uniquement les vérifications périodiques automatiques de version
+	// (qui génèrent des warnings dans debug.log quand la connexion TLS échoue).
+	if ( ! is_string( $url ) ) {
+		return $pre;
 	}
-	return $pre;
+	if ( ! preg_match( '#^https?://(api\.|downloads\.|translate\.)?wordpress\.org/#i', $url ) ) {
+		return $pre;
+	}
+	// Autoriser : installation / recherche de plugins depuis l'admin WP.
+	if ( is_admin() && current_user_can( 'install_plugins' ) ) {
+		return $pre;
+	}
+	// Bloquer le reste (cron de mise à jour automatique, etc.)
+	return new WP_Error( 'edigital_blocked_external', 'Requête wp.org bloquée par le mu-plugin E-Digital (auto-update).' );
 }, 10, 3 );
 
 // Décharge les hooks responsables des cron updates.

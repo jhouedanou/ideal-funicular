@@ -195,6 +195,7 @@ add_shortcode( 'edigital_contact_form', 'edigital_contact_form_shortcode' );
  */
 require_once get_template_directory() . '/inc/acf-helpers.php';
 require_once get_template_directory() . '/inc/custom-post-types.php';
+require_once get_template_directory() . '/inc/slide-metabox.php';
 require_once get_template_directory() . '/inc/template-tags.php';
 if ( file_exists( get_template_directory() . '/inc/acf-registry.php' ) ) {
     require_once get_template_directory() . '/inc/acf-registry.php';
