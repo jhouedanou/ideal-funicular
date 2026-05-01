@@ -200,6 +200,7 @@ if ( file_exists( get_template_directory() . '/inc/acf-registry.php' ) ) {
     require_once get_template_directory() . '/inc/acf-registry.php';
 }
 require_once get_template_directory() . '/inc/newsletter-api.php';
+require_once get_template_directory() . '/inc/contact-form.php';
 require_once get_template_directory() . '/inc/quote-form.php';
 require_once get_template_directory() . '/inc/expertise-filter.php';
 require_once get_template_directory() . '/inc/loops.php';

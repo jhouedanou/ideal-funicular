@@ -52,6 +52,7 @@ services:
         @ini_set( 'display_errors', 0 );
         define( 'WP_MEMORY_LIMIT', '512M' );
         define( 'WP_MAX_MEMORY_LIMIT', '512M' );
+        define( 'FS_METHOD', 'direct' );
         define( 'AUTOMATIC_UPDATER_DISABLED', true );
         define( 'WP_AUTO_UPDATE_CORE', false );
         # define( 'DISALLOW_FILE_MODS', true );   // décommenté en prod uniquement

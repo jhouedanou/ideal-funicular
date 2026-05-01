@@ -200,3 +200,278 @@ function edigital_newsletter_inline_script() {
 	<?php
 }
 add_action( 'wp_footer', 'edigital_newsletter_inline_script' );
+
+// ===========================================================================
+// Mailchimp — inscription via l'API Marketing v3
+// ===========================================================================
+
+/**
+ * Récupère la clé API Mailchimp.
+ * Priorité : constante EDIGITAL_MC_API_KEY > option WordPress.
+ */
+function edigital_mc_get_api_key() {
+	if ( defined( 'EDIGITAL_MC_API_KEY' ) && EDIGITAL_MC_API_KEY ) {
+		return EDIGITAL_MC_API_KEY;
+	}
+	return get_option( 'edigital_mc_api_key', '' );
+}
+
+/**
+ * Récupère l'ID d'audience (liste) Mailchimp.
+ * Priorité : constante EDIGITAL_MC_LIST_ID > option WordPress.
+ */
+function edigital_mc_get_list_id() {
+	if ( defined( 'EDIGITAL_MC_LIST_ID' ) && EDIGITAL_MC_LIST_ID ) {
+		return EDIGITAL_MC_LIST_ID;
+	}
+	return get_option( 'edigital_mc_list_id', '' );
+}
+
+/**
+ * Récupère le fournisseur actif (brevo | mailchimp).
+ */
+function edigital_newsletter_get_provider() {
+	return get_option( 'edigital_newsletter_provider', 'brevo' );
+}
+
+/**
+ * Inscrit un email à l'audience Mailchimp.
+ *
+ * @param string $email  Adresse email.
+ * @param array  $merge  Merge fields optionnels (FNAME, LNAME…).
+ * @return true|WP_Error
+ */
+function edigital_newsletter_subscribe_mailchimp( $email, $merge = array() ) {
+	$api_key = edigital_mc_get_api_key();
+	$list_id = edigital_mc_get_list_id();
+
+	if ( ! $api_key ) {
+		return new WP_Error( 'edigital_mc_no_api_key', __( 'Clé API Mailchimp manquante.', 'edigital' ) );
+	}
+	if ( ! $list_id ) {
+		return new WP_Error( 'edigital_mc_no_list', __( "ID d'audience Mailchimp manquant.", 'edigital' ) );
+	}
+
+	// Le data-center est encodé dans la clé (ex : us21 pour une clé se terminant par -us21).
+	$parts = explode( '-', $api_key );
+	$dc    = end( $parts );
+	if ( ! $dc || $dc === $api_key ) {
+		return new WP_Error( 'edigital_mc_bad_key', __( 'Format de clé API Mailchimp invalide (datacenter manquant).', 'edigital' ) );
+	}
+
+	$url  = 'https://' . $dc . '.api.mailchimp.com/3.0/lists/' . $list_id . '/members/' . md5( strtolower( $email ) );
+	$body = array(
+		'email_address' => $email,
+		'status_if_new' => 'subscribed',
+		'status'        => 'subscribed',
+	);
+	if ( ! empty( $merge ) ) {
+		$body['merge_fields'] = $merge;
+	}
+
+	$response = wp_remote_request( $url, array(
+		'method'  => 'PUT',
+		'timeout' => 15,
+		'headers' => array(
+			'Authorization' => 'Basic ' . base64_encode( 'anystring:' . $api_key ),
+			'Content-Type'  => 'application/json',
+		),
+		'body'    => wp_json_encode( $body ),
+	) );
+
+	if ( is_wp_error( $response ) ) {
+		return $response;
+	}
+
+	$code = wp_remote_retrieve_response_code( $response );
+	if ( $code >= 200 && $code < 300 ) {
+		return true;
+	}
+
+	$json = json_decode( wp_remote_retrieve_body( $response ), true );
+	$msg  = isset( $json['detail'] ) ? $json['detail'] : __( 'Réponse Mailchimp inattendue.', 'edigital' );
+	return new WP_Error( 'edigital_mc_error', $msg, array( 'status' => $code ) );
+}
+
+// ---------------------------------------------------------------------------
+// Patch du gestionnaire AJAX : dispatch Brevo | Mailchimp
+// ---------------------------------------------------------------------------
+
+// On supprime l'ancien hook et on réenregistre avec la logique de dispatch.
+remove_action( 'wp_ajax_edigital_newsletter_subscribe',        'edigital_newsletter_handle_ajax' );
+remove_action( 'wp_ajax_nopriv_edigital_newsletter_subscribe', 'edigital_newsletter_handle_ajax' );
+
+function edigital_newsletter_handle_ajax_dispatched() {
+	check_ajax_referer( 'edigital_newsletter', 'nonce' );
+
+	$email = isset( $_POST['email'] ) ? sanitize_email( wp_unslash( $_POST['email'] ) ) : '';
+	if ( ! is_email( $email ) ) {
+		wp_send_json_error( array( 'message' => __( 'Adresse email invalide.', 'edigital' ) ), 400 );
+	}
+
+	$extra = array();
+	if ( ! empty( $_POST['firstname'] ) ) {
+		$extra['FIRSTNAME'] = sanitize_text_field( wp_unslash( $_POST['firstname'] ) );
+		$extra['FNAME']     = $extra['FIRSTNAME']; // Mailchimp merge field.
+	}
+
+	$provider = edigital_newsletter_get_provider();
+
+	if ( 'mailchimp' === $provider ) {
+		$merge  = array();
+		if ( isset( $extra['FNAME'] ) ) {
+			$merge['FNAME'] = $extra['FNAME'];
+		}
+		$result = edigital_newsletter_subscribe_mailchimp( $email, $merge );
+	} else {
+		$result = edigital_newsletter_subscribe_brevo( $email, $extra );
+	}
+
+	if ( is_wp_error( $result ) ) {
+		wp_send_json_error( array( 'message' => $result->get_error_message() ), 500 );
+	}
+
+	wp_send_json_success( array( 'message' => __( 'Merci ! Votre inscription est confirmée.', 'edigital' ) ) );
+}
+add_action( 'wp_ajax_edigital_newsletter_subscribe',        'edigital_newsletter_handle_ajax_dispatched' );
+add_action( 'wp_ajax_nopriv_edigital_newsletter_subscribe', 'edigital_newsletter_handle_ajax_dispatched' );
+
+// ===========================================================================
+// Page de réglages WP Admin — Newsletter E-Digital
+// ===========================================================================
+
+add_action( 'admin_menu', 'edigital_newsletter_add_settings_page' );
+
+function edigital_newsletter_add_settings_page() {
+	add_options_page(
+		__( 'Newsletter E-Digital', 'edigital' ),
+		__( 'Newsletter E-Digital', 'edigital' ),
+		'manage_options',
+		'edigital-newsletter',
+		'edigital_newsletter_render_settings_page'
+	);
+}
+
+add_action( 'admin_init', 'edigital_newsletter_register_settings' );
+
+function edigital_newsletter_register_settings() {
+	// ── Fournisseur actif ──────────────────────────────────────────────────
+	register_setting( 'edigital_newsletter_settings', 'edigital_newsletter_provider', array(
+		'type'              => 'string',
+		'sanitize_callback' => function ( $v ) { return in_array( $v, array( 'brevo', 'mailchimp' ), true ) ? $v : 'brevo'; },
+		'default'           => 'brevo',
+	) );
+
+	// ── Brevo ──────────────────────────────────────────────────────────────
+	register_setting( 'edigital_newsletter_settings', 'edigital_brevo_api_key', array(
+		'type'              => 'string',
+		'sanitize_callback' => 'sanitize_text_field',
+		'default'           => '',
+	) );
+	register_setting( 'edigital_newsletter_settings', 'edigital_brevo_list_id', array(
+		'type'              => 'integer',
+		'sanitize_callback' => 'absint',
+		'default'           => 0,
+	) );
+
+	// ── Mailchimp ──────────────────────────────────────────────────────────
+	register_setting( 'edigital_newsletter_settings', 'edigital_mc_api_key', array(
+		'type'              => 'string',
+		'sanitize_callback' => 'sanitize_text_field',
+		'default'           => '',
+	) );
+	register_setting( 'edigital_newsletter_settings', 'edigital_mc_list_id', array(
+		'type'              => 'string',
+		'sanitize_callback' => 'sanitize_text_field',
+		'default'           => '',
+	) );
+
+	// ── Section fournisseur ────────────────────────────────────────────────
+	add_settings_section( 'edigital_nl_provider', __( 'Fournisseur actif', 'edigital' ), '__return_false', 'edigital-newsletter' );
+	add_settings_field( 'edigital_newsletter_provider', __( 'Fournisseur', 'edigital' ), 'edigital_nl_field_provider', 'edigital-newsletter', 'edigital_nl_provider' );
+
+	// ── Section Brevo ──────────────────────────────────────────────────────
+	add_settings_section( 'edigital_nl_brevo', __( 'Brevo (ex-Sendinblue)', 'edigital' ), '__return_false', 'edigital-newsletter' );
+	add_settings_field( 'edigital_brevo_api_key', __( 'Clé API Brevo', 'edigital' ),   'edigital_nl_field_brevo_key',    'edigital-newsletter', 'edigital_nl_brevo' );
+	add_settings_field( 'edigital_brevo_list_id', __( 'ID de liste Brevo', 'edigital' ), 'edigital_nl_field_brevo_list', 'edigital-newsletter', 'edigital_nl_brevo' );
+
+	// ── Section Mailchimp ──────────────────────────────────────────────────
+	add_settings_section( 'edigital_nl_mc', __( 'Mailchimp', 'edigital' ), '__return_false', 'edigital-newsletter' );
+	add_settings_field( 'edigital_mc_api_key',  __( 'Clé API Mailchimp', 'edigital' ),   'edigital_nl_field_mc_key',  'edigital-newsletter', 'edigital_nl_mc' );
+	add_settings_field( 'edigital_mc_list_id',  __( "ID d'audience (List ID)", 'edigital' ), 'edigital_nl_field_mc_list', 'edigital-newsletter', 'edigital_nl_mc' );
+}
+
+// Champs -----------------------------------------------------------------------
+
+function edigital_nl_field_provider() {
+	$val = edigital_newsletter_get_provider();
+	?>
+	<select name="edigital_newsletter_provider">
+		<option value="brevo"     <?php selected( $val, 'brevo' ); ?>>Brevo (Sendinblue)</option>
+		<option value="mailchimp" <?php selected( $val, 'mailchimp' ); ?>>Mailchimp</option>
+	</select>
+	<p class="description"><?php esc_html_e( 'Choisissez le service auquel les inscriptions newsletter seront envoyées.', 'edigital' ); ?></p>
+	<?php
+}
+
+function edigital_nl_field_brevo_key() {
+	$val = esc_attr( get_option( 'edigital_brevo_api_key', '' ) );
+	echo '<input type="text" name="edigital_brevo_api_key" value="' . $val . '" class="regular-text" placeholder="xkeysib-xxxxxxxx">';
+	echo '<p class="description">' . esc_html__( 'Trouvez votre clé dans Brevo → Compte → SMTP & API.', 'edigital' ) . '</p>';
+}
+
+function edigital_nl_field_brevo_list() {
+	$val = absint( get_option( 'edigital_brevo_list_id', 0 ) );
+	echo '<input type="number" name="edigital_brevo_list_id" value="' . $val . '" class="small-text" min="0">';
+	echo '<p class="description">' . esc_html__( 'Identifiant numérique de la liste cible dans Brevo.', 'edigital' ) . '</p>';
+}
+
+function edigital_nl_field_mc_key() {
+	$val = esc_attr( get_option( 'edigital_mc_api_key', '' ) );
+	echo '<input type="text" name="edigital_mc_api_key" value="' . $val . '" class="regular-text" placeholder="xxxxxxxxxxxxxxxxxxxxxxxx-us21">';
+	echo '<p class="description">' . esc_html__( 'Clé API Mailchimp (Account → Extras → API keys). Le data-center est inclus dans la clé (ex : -us21).', 'edigital' ) . '</p>';
+}
+
+function edigital_nl_field_mc_list() {
+	$val = esc_attr( get_option( 'edigital_mc_list_id', '' ) );
+	echo '<input type="text" name="edigital_mc_list_id" value="' . $val . '" class="regular-text" placeholder="abc123def4">';
+	echo '<p class="description">' . esc_html__( "ID d'audience Mailchimp (Audience → Settings → Audience name and defaults → Audience ID).", 'edigital' ) . '</p>';
+}
+
+// Page de rendu ---------------------------------------------------------------
+
+function edigital_newsletter_render_settings_page() {
+	if ( ! current_user_can( 'manage_options' ) ) {
+		return;
+	}
+	if ( isset( $_GET['settings-updated'] ) ) {
+		add_settings_error( 'edigital_newsletter_messages', 'edigital_nl_saved', __( 'Réglages sauvegardés.', 'edigital' ), 'updated' );
+	}
+	settings_errors( 'edigital_newsletter_messages' );
+	?>
+	<div class="wrap">
+		<h1><?php esc_html_e( 'Newsletter E-Digital', 'edigital' ); ?></h1>
+		<p><?php esc_html_e( "Configurez le fournisseur d'email pour les inscriptions newsletter du site.", 'edigital' ); ?></p>
+		<form method="post" action="options.php">
+			<?php
+			settings_fields( 'edigital_newsletter_settings' );
+			do_settings_sections( 'edigital-newsletter' );
+			submit_button( __( 'Enregistrer', 'edigital' ) );
+			?>
+		</form>
+		<hr>
+		<h2><?php esc_html_e( 'Configuration rapide (wp-config.php)', 'edigital' ); ?></h2>
+		<p><?php esc_html_e( "Les constantes ci-dessous ont la priorité sur les options ci-dessus :", 'edigital' ); ?></p>
+		<pre style="background:#f1f1f1;padding:15px;border-left:4px solid #ff0000;overflow-x:auto;">
+// Mailchimp
+define( 'EDIGITAL_MC_API_KEY',  'xxxxxxxxxxxxxxxxxxxxxxxx-us21' );
+define( 'EDIGITAL_MC_LIST_ID',  'abc123def4' );
+
+// Brevo
+define( 'EDIGITAL_BREVO_API_KEY', 'xkeysib-xxxxxxxx' );
+define( 'EDIGITAL_BREVO_LIST_ID', 3 );
+		</pre>
+	</div>
+	<?php
+}
+
