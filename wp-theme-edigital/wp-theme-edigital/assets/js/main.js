@@ -661,49 +661,20 @@
   
   }
   // Justified Gallery
-$(document).ready(function () {
-    var $scope = $('#galleryContainer');
-});
-
 function ms_lightbox($scope) {
-  $(document).ready(function () {
-    if ($('#galleryContainer').length > 0) {
-        console.log('#galleryContainer is found, initializing gallery...');
-        var $scope = $('#galleryContainer');
-
-        if ($scope.length === 0) {
-            console.error('No elements found for #galleryContainer');
-        } else {
-            console.log('Scope found:', $scope);
-            ms_lightbox($scope);
-        }
-    } else {
-        console.log('#galleryContainer not found on this page.');
-    }
-  });
-
-  function ms_lightbox($scope) {
       if (!$scope || !$scope.find) {
-          console.error('Invalid $scope provided');
           return;
       }
-
-      console.log('Scope is valid:', $scope);
 
       var $el = $scope.find('.blockgallery');
       var $justified = $scope.find('.justified-gallery');
 
       if ($justified.length === 0) {
-          console.error('No .justified-gallery elements found');
           return;
-      } else {
-          console.log('.justified-gallery found:', $justified);
       }
 
       var m = $justified.data('margins');
       var h = $justified.data('row-height');
-
-      console.log('Margins:', m, 'Row Height:', h);
 
       $justified.justifiedGallery({
           rowHeight: h,
@@ -714,10 +685,7 @@ function ms_lightbox($scope) {
       });
 
       if ($el.length === 0) {
-          console.error('No .blockgallery elements found');
           return;
-      } else {
-          console.log('.blockgallery found:', $el);
       }
 
       $el.magnificPopup({
@@ -762,7 +730,6 @@ function ms_lightbox($scope) {
               }
           }
       });
-  }
 }
 
     function gsapScrollingText () {
