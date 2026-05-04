@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Guide d'administration — E-Digital</title>
+<style>
+@page { size: A4; margin: 18mm 16mm; }
+* { box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: #1f2933;
+  font-size: 11pt;
+  line-height: 1.55;
+  margin: 0;
+}
+h1, h2, h3, h4 { color: #0b3d91; font-weight: 700; line-height: 1.25; }
+h1 { font-size: 26pt; margin: 0 0 0.4em; border-bottom: 3px solid #0b3d91; padding-bottom: 0.3em; }
+h2 { font-size: 17pt; margin-top: 1.6em; border-bottom: 1px solid #d0d7de; padding-bottom: 0.2em; page-break-after: avoid; }
+h3 { font-size: 13pt; margin-top: 1.3em; color: #1f4fb6; page-break-after: avoid; }
+h4 { font-size: 11.5pt; margin-top: 1.1em; }
+p { margin: 0.5em 0; }
+ul, ol { margin: 0.5em 0 0.7em 1.4em; padding: 0; }
+li { margin: 0.25em 0; }
+a { color: #0b65c2; text-decoration: none; }
+a:hover { text-decoration: underline; }
+code {
+  background: #f3f5f8;
+  border: 1px solid #e1e6ec;
+  padding: 0.05em 0.4em;
+  border-radius: 3px;
+  font-family: "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.92em;
+}
+pre {
+  background: #0f172a;
+  color: #e2e8f0;
+  padding: 12px 14px;
+  border-radius: 6px;
+  overflow-x: auto;
+  font-size: 0.88em;
+}
+pre code { background: transparent; border: 0; padding: 0; color: inherit; }
+blockquote {
+  margin: 0.8em 0;
+  padding: 0.6em 1em;
+  border-left: 4px solid #f5a623;
+  background: #fff8e7;
+  color: #4a3a00;
+  border-radius: 0 4px 4px 0;
+}
+blockquote p { margin: 0.2em 0; }
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1em 0;
+  font-size: 0.95em;
+  page-break-inside: avoid;
+}
+th, td {
+  border: 1px solid #d0d7de;
+  padding: 7px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+th { background: #0b3d91; color: #fff; font-weight: 600; }
+tr:nth-child(even) td { background: #f6f8fb; }
+hr { border: 0; border-top: 1px solid #d0d7de; margin: 1.6em 0; }
+strong { color: #0b3d91; }
+.cover {
+  text-align: center;
+  padding: 30mm 0 14mm;
+  border-bottom: 4px solid #0b3d91;
+  margin-bottom: 18mm;
+}
+.cover .badge {
+  display: inline-block;
+  background: #0b3d91;
+  color: #fff;
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-size: 9pt;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+.cover h1 { border: 0; margin: 0 0 0.2em; font-size: 30pt; }
+.cover .subtitle { color: #4a5568; font-size: 13pt; margin-top: 8px; }
+.cover .meta { color: #6b7280; font-size: 10pt; margin-top: 24px; }
+@media print {
+  h2 { page-break-before: auto; }
+  table, pre, blockquote { page-break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+<div class="cover">
+  <span class="badge">Documentation</span>
+  <h1>Guide d'administration</h1>
+  <div class="subtitle">Mettre à jour le site avec Gutenberg, éditer les pages et créer des articles de blog</div>
+  <div class="meta">Site E-Digital — version 1.0</div>
+</div>
+<h1 id="guide-dadministration-du-site-e-digital">Guide d'administration du site E-Digital</h1>
+<h2 id="mise-a-jour-du-site-avec-gutenberg-edition-des-pages-et-creation-darticles-de-blog">Mise à jour du site avec Gutenberg, édition des pages et création d'articles de blog</h2>
+<hr />
+<p><strong>Public visé :</strong> administrateurs et éditeurs du site
+<strong>Pré-requis :</strong> disposer d'un compte WordPress avec le rôle <em>Administrateur</em> ou <em>Éditeur</em>
+<strong>URL d'administration :</strong> <code>https://votre-domaine.com/wp-admin</code></p>
+<hr />
+<h2 id="sommaire">Sommaire</h2>
+<ol>
+<li><a href="#1-se-connecter-à-ladministration">Se connecter à l'administration</a></li>
+<li><a href="#2-découvrir-léditeur-gutenberg">Découvrir l'éditeur Gutenberg</a></li>
+<li><a href="#3-mettre-à-jour-une-page-existante">Mettre à jour une page existante</a></li>
+<li><a href="#4-travailler-avec-les-blocs-e-digital">Travailler avec les blocs E-Digital</a></li>
+<li><a href="#5-gérer-les-médias">Gérer les médias (images, vidéos, PDF)</a></li>
+<li><a href="#6-créer-un-article-de-blog">Créer un article de blog</a></li>
+<li><a href="#7-catégories-étiquettes-et-image-à-la-une">Catégories, étiquettes et image à la une</a></li>
+<li><a href="#8-publier-planifier-ou-mettre-en-brouillon">Publier, planifier ou mettre en brouillon</a></li>
+<li><a href="#9-bonnes-pratiques-seo-et-accessibilité">Bonnes pratiques SEO et accessibilité</a></li>
+<li><a href="#10-dépannage-et-questions-fréquentes">Dépannage et questions fréquentes</a></li>
+</ol>
+<hr />
+<h2 id="1-se-connecter-a-ladministration">1. Se connecter à l'administration</h2>
+<ol>
+<li>Ouvrir un navigateur (Chrome, Firefox, Edge, Safari).</li>
+<li>Se rendre sur <code>https://votre-domaine.com/wp-admin</code>.</li>
+<li>Saisir l'<strong>identifiant</strong> et le <strong>mot de passe</strong> fournis.</li>
+<li>Cliquer sur <strong>Se connecter</strong>.</li>
+</ol>
+<p>Vous arrivez sur le <strong>Tableau de bord</strong>. Le menu de gauche regroupe toutes les sections : Articles, Médias, Pages, Slider Hero, Actualités, Apparence, etc.</p>
+<blockquote>
+<p><strong>Conseil sécurité.</strong> Ne partagez jamais votre mot de passe. En cas de doute, demandez à l'administrateur principal de réinitialiser vos accès.</p>
+</blockquote>
+<hr />
+<h2 id="2-decouvrir-lediteur-gutenberg">2. Découvrir l'éditeur Gutenberg</h2>
+<p>Gutenberg est l'éditeur de contenu officiel de WordPress. Il fonctionne par <strong>blocs</strong> : chaque élément (titre, paragraphe, image, bouton, galerie...) est un bloc indépendant que l'on peut déplacer, dupliquer ou supprimer.</p>
+<h3 id="anatomie-de-lecran">Anatomie de l'écran</h3>
+<ul>
+<li><strong>Barre supérieure</strong> : boutons <em>Enregistrer</em>, <em>Publier</em>, <em>Aperçu</em>, <em>Annuler/Refaire</em>.</li>
+<li><strong>Zone centrale</strong> : la page ou l'article en cours d'édition.</li>
+<li><strong>Panneau de droite</strong> : réglages du document (catégories, image à la une, extrait...) ou réglages du bloc sélectionné.</li>
+<li><strong>Inserter (icône <code>+</code> en haut à gauche)</strong> : permet d'ajouter un nouveau bloc.</li>
+</ul>
+<h3 id="ajouter-un-bloc">Ajouter un bloc</h3>
+<ol>
+<li>Cliquer sur le bouton <strong>+</strong> dans la barre d'outils ou directement dans la zone d'édition.</li>
+<li>Taper le nom du bloc recherché (ex. <em>Paragraphe</em>, <em>Image</em>, <em>Bouton</em>, <em>Colonnes</em>).</li>
+<li>Cliquer sur le bloc pour l'insérer.</li>
+</ol>
+<h3 id="deplacer-dupliquer-supprimer-un-bloc">Déplacer, dupliquer, supprimer un bloc</h3>
+<p>Sélectionnez le bloc puis utilisez la mini-barre d'outils qui apparaît au-dessus :</p>
+<ul>
+<li><strong>Flèches haut/bas</strong> : déplacer le bloc.</li>
+<li><strong>Icône ⋮ (Options)</strong> : <em>Dupliquer</em>, <em>Insérer avant/après</em>, <em>Supprimer le bloc</em>, <em>Éditer en HTML</em>.</li>
+<li><strong>Glisser-déposer</strong> : maintenir l'icône à six points pour déplacer le bloc à la souris.</li>
+</ul>
+<h3 id="sauvegarder">Sauvegarder</h3>
+<ul>
+<li><strong>Enregistrer le brouillon</strong> : sauvegarde sans publier.</li>
+<li><strong>Aperçu</strong> : prévisualisation dans un nouvel onglet.</li>
+<li><strong>Publier / Mettre à jour</strong> : rend les changements visibles en ligne.</li>
+</ul>
+<blockquote>
+<p><strong>Astuce.</strong> WordPress enregistre automatiquement votre travail toutes les minutes (révisions). En cas d'erreur, ouvrez le panneau de droite → <em>Document</em> → <em>Révisions</em> pour revenir en arrière.</p>
+</blockquote>
+<hr />
+<h2 id="3-mettre-a-jour-une-page-existante">3. Mettre à jour une page existante</h2>
+<h3 id="31-ouvrir-la-page">3.1. Ouvrir la page</h3>
+<ol>
+<li>Dans le menu de gauche, cliquer sur <strong>Pages</strong>.</li>
+<li>La liste affiche toutes les pages du site (Accueil, Services, Contact, etc.).</li>
+<li>Survoler la page à modifier puis cliquer sur <strong>Modifier</strong>.</li>
+</ol>
+<h3 id="32-modifier-du-texte">3.2. Modifier du texte</h3>
+<ul>
+<li>Cliquer dans le bloc concerné, le contenu devient éditable.</li>
+<li>La barre flottante au-dessus du bloc permet de mettre en <strong>gras</strong>, <em>italique</em>, d'ajouter un <strong>lien</strong> (icône chaîne), de changer l'alignement, etc.</li>
+</ul>
+<h3 id="33-remplacer-une-image">3.3. Remplacer une image</h3>
+<ol>
+<li>Cliquer sur l'image concernée.</li>
+<li>Dans la barre d'outils du bloc, choisir <strong>Remplacer</strong>.</li>
+<li>Sélectionner une image existante dans la <strong>Bibliothèque de médias</strong> ou en téléverser une nouvelle.</li>
+<li>Renseigner le <strong>Texte alternatif</strong> (important pour l'accessibilité et le SEO) dans le panneau de droite.</li>
+</ol>
+<h3 id="34-ajouter-un-bouton-ou-un-lien">3.4. Ajouter un bouton ou un lien</h3>
+<ul>
+<li><strong>Lien sur du texte</strong> : sélectionner le texte → cliquer sur l'icône chaîne → coller l'URL → <em>Entrée</em>.</li>
+<li><strong>Nouveau bouton</strong> : Inserter <code>+</code> → <em>Bouton</em> → saisir le libellé → définir l'URL.</li>
+</ul>
+<h3 id="35-enregistrer-les-modifications">3.5. Enregistrer les modifications</h3>
+<p>Cliquer sur <strong>Mettre à jour</strong> (en haut à droite). Les changements sont immédiatement publiés.</p>
+<blockquote>
+<p><strong>Bon réflexe.</strong> Toujours utiliser <strong>Aperçu</strong> avant de cliquer sur <em>Mettre à jour</em> afin de vérifier le rendu sur grand écran et sur mobile (icônes en bas de l'aperçu).</p>
+</blockquote>
+<hr />
+<h2 id="4-travailler-avec-les-blocs-e-digital">4. Travailler avec les blocs E-Digital</h2>
+<p>La page d'accueil et certaines pages internes utilisent des <strong>blocs personnalisés</strong> spécifiques au thème, regroupés dans la catégorie <strong>« E-Digital »</strong> de l'inserter.</p>
+<h3 id="liste-des-blocs-disponibles">Liste des blocs disponibles</h3>
+<table>
+<thead>
+<tr>
+<th>Bloc</th>
+<th>Utilité</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>E-Digital — Intro</td>
+<td>Titre principal de section avec ancre</td>
+</tr>
+<tr>
+<td>E-Digital — Bande défilante (images)</td>
+<td>Marquee de logos / images</td>
+</tr>
+<tr>
+<td>E-Digital — Bande défilante (texte)</td>
+<td>Ticker mots-clés</td>
+</tr>
+<tr>
+<td>E-Digital — Notre Expertise (grille)</td>
+<td>Grille de cartes d'expertise</td>
+</tr>
+<tr>
+<td>E-Digital — Carte expertise</td>
+<td>Une carte (image + titre + catégorie)</td>
+</tr>
+<tr>
+<td>E-Digital — Accordéon services</td>
+<td>Section services dépliable</td>
+</tr>
+<tr>
+<td>E-Digital — Item d'accordéon</td>
+<td>Une entrée d'accordéon</td>
+</tr>
+<tr>
+<td>E-Digital — Section Tarifs</td>
+<td>Bloc tarifs (3 cartes)</td>
+</tr>
+<tr>
+<td>E-Digital — Carte tarif</td>
+<td>Une offre tarifaire</td>
+</tr>
+<tr>
+<td>E-Digital — Hero parallaxe</td>
+<td>Bandeau plein écran image + titre</td>
+</tr>
+<tr>
+<td>E-Digital — Ils nous font confiance</td>
+<td>Section logos clients</td>
+</tr>
+<tr>
+<td>E-Digital — Logo client</td>
+<td>Un logo ou nom client stylisé</td>
+</tr>
+</tbody>
+</table>
+<h3 id="inserer-un-bloc-e-digital">Insérer un bloc E-Digital</h3>
+<ol>
+<li>Placer le curseur à l'endroit voulu.</li>
+<li>Cliquer sur <strong>+</strong> → onglet <strong>Blocs</strong> → catégorie <strong>E-Digital</strong>.</li>
+<li>Sélectionner le bloc souhaité.</li>
+<li>Renseigner les champs proposés (titre, image, texte, lien...).</li>
+<li>Pour les blocs « parents » (grille, accordéon, tarifs), ajouter les <strong>sous-blocs</strong> via le bouton <strong>+</strong> à l'intérieur du bloc parent.</li>
+</ol>
+<h3 id="reglages-de-bloc">Réglages de bloc</h3>
+<p>Dans le panneau de droite, l'onglet <strong>Bloc</strong> affiche les options spécifiques : couleur, espacement, ancre HTML, classes CSS additionnelles. Modifier avec parcimonie pour préserver la cohérence graphique.</p>
+<blockquote>
+<p><strong>Important.</strong> Les éléments dynamiques (Slider Hero, Actualités récentes, formulaire newsletter) ne sont pas des blocs. Ils se gèrent dans des menus dédiés (voir section dédiée du guide technique <code>GUIDE-ADMIN.md</code>).</p>
+</blockquote>
+<hr />
+<h2 id="5-gerer-les-medias">5. Gérer les médias</h2>
+<h3 id="bibliotheque-centrale">Bibliothèque centrale</h3>
+<p><strong>Médias → Bibliothèque</strong> : toutes les images, vidéos et fichiers téléversés.</p>
+<h3 id="televerser-un-nouveau-fichier">Téléverser un nouveau fichier</h3>
+<ol>
+<li><strong>Médias → Ajouter</strong>.</li>
+<li>Glisser-déposer le fichier ou cliquer sur <strong>Sélectionner des fichiers</strong>.</li>
+<li>Une fois envoyé, cliquer sur le fichier pour renseigner :
+   - <strong>Titre</strong> : nom interne.
+   - <strong>Texte alternatif</strong> : description courte (obligatoire pour les images de contenu).
+   - <strong>Légende</strong> / <strong>Description</strong> : facultatif.</li>
+</ol>
+<h3 id="recommandations">Recommandations</h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Format</th>
+<th>Poids max conseillé</th>
+<th>Dimensions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Photo de contenu</td>
+<td>JPG ou WebP</td>
+<td>300 Ko</td>
+<td>1600 px de large</td>
+</tr>
+<tr>
+<td>Logo / icône</td>
+<td>SVG ou PNG transparent</td>
+<td>100 Ko</td>
+<td>400 × 400 px</td>
+</tr>
+<tr>
+<td>Image Hero / bandeau</td>
+<td>JPG ou WebP</td>
+<td>500 Ko</td>
+<td>1920 × 1080 px</td>
+</tr>
+<tr>
+<td>Vidéo de fond</td>
+<td>MP4 (H.264)</td>
+<td>5 Mo</td>
+<td>1280 × 720 px, &lt; 15 s</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Optimisation.</strong> Compressez vos images avant import (TinyPNG, Squoosh) pour préserver les performances du site.</p>
+</blockquote>
+<hr />
+<h2 id="6-creer-un-article-de-blog">6. Créer un article de blog</h2>
+<p>Les articles s'affichent sur la page <strong>Blog</strong> et alimentent les listes d'actualités.</p>
+<h3 id="61-nouvel-article">6.1. Nouvel article</h3>
+<ol>
+<li>Menu <strong>Articles → Ajouter</strong>.</li>
+<li>Saisir le <strong>Titre</strong> dans la zone supérieure.</li>
+<li>Cliquer en dessous pour commencer à rédiger : un bloc <em>Paragraphe</em> est créé automatiquement.</li>
+</ol>
+<h3 id="62-structurer-larticle">6.2. Structurer l'article</h3>
+<ul>
+<li>Utilisez les <strong>blocs Titre</strong> (H2, H3) pour découper l'article : meilleur pour la lecture et le référencement.</li>
+<li>Aérer avec des <strong>paragraphes courts</strong>, des <strong>listes</strong> et des <strong>citations</strong>.</li>
+<li>Insérer des images via le bloc <strong>Image</strong> ou <strong>Galerie</strong>.</li>
+<li>Pour mettre en avant une phrase, utiliser le bloc <strong>Citation</strong> ou <strong>Encadré (Pullquote)</strong>.</li>
+</ul>
+<h3 id="63-ajouter-un-extrait">6.3. Ajouter un extrait</h3>
+<p>Dans le panneau de droite, onglet <strong>Article → Extrait</strong> : saisir 1 à 2 phrases qui résument l'article. Cet extrait s'affiche dans les listes (page Blog, accueil, partages sociaux).</p>
+<h3 id="64-image-a-la-une">6.4. Image à la une</h3>
+<p>Panneau de droite → <strong>Image mise en avant</strong> → <strong>Définir l'image mise en avant</strong>. Choisir une image au format <strong>paysage 16:9</strong>, minimum <strong>1200 × 675 px</strong>.</p>
+<blockquote>
+<p>Cette image apparaît dans les vignettes du blog et dans les partages sur les réseaux sociaux.</p>
+</blockquote>
+<hr />
+<h2 id="7-categories-etiquettes-et-image-a-la-une">7. Catégories, étiquettes et image à la une</h2>
+<h3 id="categories">Catégories</h3>
+<ul>
+<li>Définissent la <strong>rubrique principale</strong> de l'article (ex. <em>Actualités</em>, <em>Tutoriels</em>, <em>Études de cas</em>).</li>
+<li>Un article peut appartenir à <strong>plusieurs catégories</strong>, mais privilégiez-en une principale.</li>
+<li>Pour créer une catégorie : panneau de droite → <strong>Catégories</strong> → <strong>Ajouter une nouvelle catégorie</strong>.</li>
+</ul>
+<h3 id="etiquettes-tags">Étiquettes (tags)</h3>
+<ul>
+<li>Mots-clés transversaux (ex. <em>SEO</em>, <em>WordPress</em>, <em>Mobile</em>).</li>
+<li>Permettent aux lecteurs de trouver des articles connexes.</li>
+<li>3 à 6 étiquettes pertinentes par article suffisent.</li>
+</ul>
+<h3 id="auteur">Auteur</h3>
+<p>Par défaut, l'auteur est l'utilisateur connecté. Modifiable dans le panneau de droite si besoin.</p>
+<hr />
+<h2 id="8-publier-planifier-ou-mettre-en-brouillon">8. Publier, planifier ou mettre en brouillon</h2>
+<p>En haut à droite de l'éditeur, plusieurs options :</p>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>Effet</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Enregistrer le brouillon</strong></td>
+<td>L'article est sauvegardé mais pas en ligne</td>
+</tr>
+<tr>
+<td><strong>Aperçu</strong></td>
+<td>Ouvre une prévisualisation dans un nouvel onglet</td>
+</tr>
+<tr>
+<td><strong>Publier</strong></td>
+<td>Met l'article en ligne immédiatement</td>
+</tr>
+<tr>
+<td><strong>Planifier</strong></td>
+<td>Avant publication, cliquer sur la date dans le panneau <em>Article</em> → choisir une date future. Le bouton <em>Publier</em> devient <em>Planifier</em></td>
+</tr>
+<tr>
+<td><strong>Visibilité : privé</strong></td>
+<td>Réservé aux utilisateurs connectés ayant les droits</td>
+</tr>
+<tr>
+<td><strong>Mettre à la corbeille</strong></td>
+<td>Archive l'article (récupérable 30 jours)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="modifier-un-article-deja-publie">Modifier un article déjà publié</h3>
+<ol>
+<li><strong>Articles → Tous les articles</strong>.</li>
+<li>Survoler l'article → <strong>Modifier</strong>.</li>
+<li>Apporter les changements puis cliquer sur <strong>Mettre à jour</strong>.</li>
+</ol>
+<hr />
+<h2 id="9-bonnes-pratiques-seo-et-accessibilite">9. Bonnes pratiques SEO et accessibilité</h2>
+<ul>
+<li><strong>Titres</strong> : utiliser un seul <strong>H1</strong> (le titre de l'article ou de la page) puis hiérarchiser avec H2, H3.</li>
+<li><strong>Texte alternatif</strong> : décrire toutes les images de contenu en une phrase claire.</li>
+<li><strong>Liens</strong> : libellés explicites (« Voir nos services » plutôt que « cliquez ici »).</li>
+<li><strong>URL (slug)</strong> : garder court, en minuscules, avec des tirets — modifiable dans le panneau <em>Article → Permalien</em>.</li>
+<li><strong>Méta-description</strong> : si le plugin SEO est activé, renseigner un résumé de 150-160 caractères.</li>
+<li><strong>Mobile</strong> : prévisualiser systématiquement en mode mobile.</li>
+<li><strong>Performances</strong> : éviter les images &gt; 500 Ko et les vidéos auto-hébergées trop lourdes.</li>
+</ul>
+<hr />
+<h2 id="10-depannage-et-questions-frequentes">10. Dépannage et questions fréquentes</h2>
+<p><strong>Mes modifications ne sont pas visibles sur le site.</strong>
+→ Vérifier que vous avez bien cliqué sur <strong>Mettre à jour</strong> / <strong>Publier</strong>. Vider le cache du navigateur (Ctrl+F5). Si un cache serveur est actif, demander à l'administrateur de le purger.</p>
+<p><strong>Le bloc E-Digital n'apparaît plus dans l'inserter.</strong>
+→ Aller dans <strong>Apparence → Thèmes</strong> et vérifier que le thème <em>E-Digital</em> est bien activé. Si besoin, contacter le développeur (build à relancer).</p>
+<p><strong>J'ai cassé la mise en page d'un bloc.</strong>
+→ Panneau de droite → <strong>Révisions</strong> → restaurer une version antérieure.</p>
+<p><strong>Une image est trop lourde et le site rame.</strong>
+→ Compresser via <a href="https://tinypng.com">tinypng.com</a> ou <a href="https://squoosh.app">squoosh.app</a> puis remplacer le fichier.</p>
+<p><strong>Mon article ne s'affiche pas dans la liste publique.</strong>
+→ Vérifier le <strong>statut</strong> (doit être <em>Publié</em>), la <strong>date de publication</strong> (pas dans le futur), la <strong>visibilité</strong> (<em>Public</em>) et qu'au moins une <strong>catégorie</strong> est cochée.</p>
+<p><strong>Je n'arrive pas à modifier un élément du site (slider, footer, menu).</strong>
+→ Ces éléments ne sont pas dans Gutenberg : voir le guide technique <code>GUIDE-ADMIN.md</code> (Slider Hero, ACF, menus...) ou contacter l'équipe technique.</p>
+<hr />
+<h2 id="ressources-complementaires">Ressources complémentaires</h2>
+<ul>
+<li>Guide technique détaillé : <code>GUIDE-ADMIN.md</code> (à la racine du projet)</li>
+<li>Plan de migration Gutenberg : <code>PLAN-MIGRATION-GUTENBERG.md</code></li>
+<li>Documentation officielle WordPress : <a href="https://wordpress.org/documentation/">https://wordpress.org/documentation/</a></li>
+<li>Documentation Gutenberg : <a href="https://fr.wordpress.org/support/article/wordpress-editor/">https://fr.wordpress.org/support/article/wordpress-editor/</a></li>
+</ul>
+<hr />
+<p><em>Document préparé pour les administrateurs du site E-Digital — version 1.0</em></p>
+</body>
+</html>
