@@ -154,9 +154,9 @@ Dans le panneau de droite, l'onglet **Bloc** affiche les options spécifiques : 
 1. **Médias → Ajouter**.
 2. Glisser-déposer le fichier ou cliquer sur **Sélectionner des fichiers**.
 3. Une fois envoyé, cliquer sur le fichier pour renseigner :
-   - **Titre** : nom interne.
-   - **Texte alternatif** : description courte (obligatoire pour les images de contenu).
-   - **Légende** / **Description** : facultatif.
+    - **Titre** : nom interne.
+    - **Texte alternatif** : description courte (obligatoire pour les images de contenu).
+    - **Légende** / **Description** : facultatif.
 
 ### Recommandations
 

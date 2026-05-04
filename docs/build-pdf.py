@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Convertit docs/guide-admin-gutenberg.md en PDF via Chromium headless."""
+import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -10,6 +11,26 @@ ROOT = Path(__file__).resolve().parent.parent
 MD_FILE = ROOT / "docs" / "guide-admin-gutenberg.md"
 HTML_FILE = ROOT / "docs" / "guide-admin-gutenberg.html"
 PDF_FILE = ROOT / "docs" / "guide-admin-gutenberg.pdf"
+
+# Common Chromium / Chrome executable names across platforms.
+BROWSER_CANDIDATES = (
+    "chromium",
+    "chromium-browser",
+    "google-chrome",
+    "google-chrome-stable",
+    "chrome",
+)
+
+
+def find_browser() -> str:
+    for name in BROWSER_CANDIDATES:
+        path = shutil.which(name)
+        if path:
+            return path
+    raise RuntimeError(
+        "Chromium/Chrome introuvable. Installez l'un de : "
+        + ", ".join(BROWSER_CANDIDATES)
+    )
 
 CSS = """
 @page { size: A4; margin: 18mm 16mm; }
@@ -129,7 +150,7 @@ def main() -> int:
     HTML_FILE.write_text(HTML_TMPL.format(css=CSS, body=body), encoding="utf-8")
 
     cmd = [
-        "chromium",
+        find_browser(),
         "--headless=new",
         "--no-sandbox",
         "--disable-gpu",
